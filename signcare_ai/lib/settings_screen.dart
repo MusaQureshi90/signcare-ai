@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
 import 'api_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function(Locale, String) onLocaleChange;
@@ -27,6 +28,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String selectedLayout = 'List';
   late ThemeMode selectedTheme;
   String userPhone = '';
+  String userName = '';
+  String userAge = '';
+  String userGender = '';
+  String userPass = '';
 
   @override
   void initState() {
@@ -42,6 +47,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       selectedLayout = prefs.getString('home_layout') ?? 'List';
       userPhone = prefs.getString('logged_phone') ?? '';
+      userName = prefs.getString('reg_name_$userPhone') ?? '';
+      userAge = prefs.getString('reg_age_$userPhone') ?? '';
+      userGender = prefs.getString('reg_gender_$userPhone') ?? '';
+      userPass = prefs.getString('reg_pass_$userPhone') ?? '';
     });
 
     if (userPhone.isNotEmpty) {
@@ -62,6 +71,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     
     await ApiService.savePreferences(
       userPhone,
+      userName,
+      userAge,
+      userGender,
+      userPass,
       selectedLanguage,
       themeStr,
       selectedLayout,
@@ -242,7 +255,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text('Appearance (Theme Mode)', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
+            const Text('Appearance (Theme Mode)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
             const SizedBox(height: 10),
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -270,7 +283,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text('Home Screen Layout Style', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
+            const Text('Home Screen Layout Style', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
             const SizedBox(height: 10),
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -321,14 +334,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(isUrdu ? 'ایپ کی معلومات' : 'App Information', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
+            Text(isUrdu ? 'ڈویلپر سے رابطہ کریں اور معلومات' : 'Developer & App Info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
             const SizedBox(height: 10),
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: ListTile(
-                leading: const Icon(Icons.info, color: Colors.teal),
-                title: Text(isUrdu ? 'سائن کیئر اے آئی ورژن' : 'SignCare AI Version'),
-                subtitle: const Text('1.0.0+1 (Production Ready)'),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.email, color: Colors.teal),
+                    title: const Text('Contact Developer'),
+                    subtitle: const Text('mformusa11@gmail.com'),
+                    onTap: () async {
+                      final Uri emailUri = Uri(scheme: 'mailto', path: 'mformusa11@gmail.com');
+                      if (await canLaunchUrl(emailUri)) {
+                        await launchUrl(emailUri);
+                      }
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.web, color: Colors.teal),
+                    title: const Text('Developer Portfolio'),
+                    subtitle: const Text('musaqureshi.pythonanywhere.com'),
+                    onTap: () async {
+                      final Uri webUri = Uri.parse('https://musaqureshi.pythonanywhere.com');
+                      if (await canLaunchUrl(webUri)) {
+                        await launchUrl(webUri, mode: LaunchMode.externalApplication);
+                      }
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.info, color: Colors.teal),
+                    title: Text(isUrdu ? 'سائن کیئر اے آئی ورژن' : 'SignCare AI Version'),
+                    subtitle: const Text('1.0.0+1 (Production Ready)'),
+                  ),
+                ],
               ),
             ),
           ],

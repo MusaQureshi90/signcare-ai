@@ -37,6 +37,10 @@ class ApiService {
 
   static Future<void> savePreferences(
     String phone,
+    String name,
+    String age,
+    String gender,
+    String password,
     String language,
     String theme,
     String layout,
@@ -47,6 +51,10 @@ class ApiService {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'phone_number': phone,
+          'name': name,
+          'age': age,
+          'gender': gender,
+          'password': password,
           'language': language,
           'theme_mode': theme,
           'home_layout': layout,

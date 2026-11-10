@@ -3,7 +3,6 @@ import 'login_screen.dart';
 import 'otp_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -210,11 +209,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    // Navigate to OTP Screen before final save
+    // Navigate to OTP Screen with all details
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => OtpScreen(phone: phone, password: password, name: name),
+        builder: (context) => OtpScreen(
+          phone: phone,
+          password: password,
+          name: name,
+          age: age,
+          gender: selectedGender!,
+        ),
       ),
     );
   }

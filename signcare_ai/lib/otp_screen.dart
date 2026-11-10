@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
-import 'api_service.dart'; // ApiService import kiya hai
+import 'api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
   final String password;
   final String name;
+  final String age;
+  final String gender;
 
-  const OtpScreen({super.key, required this.phone, required this.password, required this.name});
+  const OtpScreen({
+    super.key,
+    required this.phone,
+    required this.password,
+    required this.name,
+    required this.age,
+    required this.gender,
+  });
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -16,7 +25,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController otpController = TextEditingController();
-  final String simulatedOtp = "1234"; // Fixed demo OTP for simulation
+  final String simulatedOtp = "1234";
 
   void verifyOtp() async {
     if (otpController.text.trim() == simulatedOtp) {
@@ -26,12 +35,16 @@ class _OtpScreenState extends State<OtpScreen> {
       await prefs.setString('reg_pass_${widget.phone}', widget.password);
       await prefs.setString('reg_name_${widget.phone}', widget.name);
 
-      // 2. Django Backend par bhejne ke liye ApiService call karein
+      // 2. Django Backend par saari details ke sath save karein
       await ApiService.savePreferences(
         widget.phone,
-        'English',     // Default language
-        'Light',       // Default theme
-        'Default',     // Default layout
+        widget.name,
+        widget.age,
+        widget.gender,
+        widget.password,
+        'English',
+        'Light',
+        'Default',
       );
 
       if (!mounted) return;
@@ -39,7 +52,7 @@ class _OtpScreenState extends State<OtpScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Success'),
-          content: const Text('Phone number verified & account registered successfully on server!'),
+          content: const Text('Account registered successfully on server with all details!'),
           actions: [
             TextButton(
               onPressed: () {
