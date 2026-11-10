@@ -1,8 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import HttpResponse
 from .models import UserPreference
 from .serializers import UserPreferenceSerializer
+
+def home(request):
+    return HttpResponse("Welcome to SignCare AI Backend!")
 
 class UserPreferenceView(APIView):
     def get(self, request, phone=None):
