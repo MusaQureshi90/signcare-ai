@@ -5,7 +5,9 @@ from .models import UserPreference
 from .serializers import UserPreferenceSerializer
 
 class UserPreferenceView(APIView):
-    def get(self, request, phone):
+    def get(self, request, phone=None):
+        if not phone:
+            return Response({'error': 'Phone number is required in URL'}, status=status.HTTP_400_BAD_REQUEST)
         try:
             pref = UserPreference.objects.get(phone_number=phone)
             serializer = UserPreferenceSerializer(pref)
