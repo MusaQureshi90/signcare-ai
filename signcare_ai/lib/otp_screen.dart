@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'api_service.dart'; // ApiService import kiya hai
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -19,17 +20,26 @@ class _OtpScreenState extends State<OtpScreen> {
 
   void verifyOtp() async {
     if (otpController.text.trim() == simulatedOtp) {
+      // 1. Local SharedPreferences mein save karein
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('reg_phone_${widget.phone}', widget.phone);
       await prefs.setString('reg_pass_${widget.phone}', widget.password);
       await prefs.setString('reg_name_${widget.phone}', widget.name);
+
+      // 2. Django Backend par bhejne ke liye ApiService call karein
+      await ApiService.savePreferences(
+        widget.phone,
+        'English',     // Default language
+        'Light',       // Default theme
+        'Default',     // Default layout
+      );
 
       if (!mounted) return;
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Success'),
-          content: const Text('Phone number verified & account registered successfully!'),
+          content: const Text('Phone number verified & account registered successfully on server!'),
           actions: [
             TextButton(
               onPressed: () {
