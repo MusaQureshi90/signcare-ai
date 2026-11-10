@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.2.2:8000/api';
+  static const String baseUrl = 'https://signcare-ai.onrender.com/api';
 
   static Future<bool> sendRequest(String category, String message) async {
     try {
