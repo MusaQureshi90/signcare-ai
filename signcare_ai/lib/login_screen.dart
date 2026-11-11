@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'register_screen.dart';
 import 'forgot_password_screen.dart';
+import 'api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool rememberMe = true; // Default true taake session expire na ho
+  bool rememberMe = true;
   bool _obscurePassword = true;
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -34,6 +35,50 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    // 1. Pehle Render Backend se check karein
+    final backendPrefs = await ApiService.getPreferences(phone);
+
+    if (backendPrefs != null) {
+      String serverPassword = backendPrefs['password'] ?? '';
+      String serverName = backendPrefs['name'] ?? 'User';
+
+      if (serverPassword == password) {
+        // Backend se password match ho gaya! Local storage mein save kar lein taake offline bhi chale
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('reg_pass_$phone', password);
+        await prefs.setString('reg_name_$phone', serverName);
+        await prefs.setBool('is_logged_in', true);
+        await prefs.setString('logged_phone', phone);
+        await prefs.setString('logged_name', serverName);
+
+        if (!mounted) return;
+        String savedLang = prefs.getString('app_language') ?? 'English';
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(
+              userName: serverName,
+              currentLang: savedLang,
+              onLocaleChange: (locale, langName) {},
+            ),
+          ),
+        );
+        return;
+      } else {
+        if (!mounted) return;
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Incorrect Password'),
+            content: const Text('The password you entered is incorrect. Please try again.'),
+            actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+          ),
+        );
+        return;
+      }
+    }
+
+    // 2. Agar backend par na mile, toh offline local storage check karein (Fallback)
     final prefs = await SharedPreferences.getInstance();
     String? savedPass = prefs.getString('reg_pass_$phone');
     String? savedName = prefs.getString('reg_name_$phone');
@@ -44,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Account Not Found'),
-          content: const Text('This phone number is not registered. Please register first.'),
+          content: const Text('This phone number is not registered on server or device. Please register first.'),
           actions: [
             TextButton(
               onPressed: () {
@@ -72,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    // Hamesha session save ho ga
     await prefs.setBool('is_logged_in', true);
     await prefs.setString('logged_phone', phone);
     await prefs.setString('logged_name', savedName ?? 'User');

@@ -165,6 +165,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   // Developer Portfolio Dialog Pop-up
+  // Developer Portfolio Dialog Pop-up (Updated without text link)
   void _showPortfolioDialog(BuildContext context) {
     const String portfolioUrl = 'https://musaqureshi.pythonanywhere.com';
     showDialog(
@@ -178,25 +179,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Text('Developer Portfolio'),
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Check out the official developer portfolio website:'),
-            const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: const Text(
-                portfolioUrl,
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 14),
-              ),
-            ),
-          ],
+        content: const Text(
+          'Click the button below to visit the official developer portfolio website on your browser.',
+          style: TextStyle(fontSize: 15),
         ),
         actions: [
           TextButton(
@@ -207,13 +192,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
             onPressed: () async {
               final Uri webUri = Uri.parse(portfolioUrl);
+              // Pop-up close karne se pehle URL launch karein
               if (await canLaunchUrl(webUri)) {
                 await launchUrl(webUri, mode: LaunchMode.externalApplication);
               }
               if (context.mounted) Navigator.pop(context);
             },
             icon: const Icon(Icons.open_in_new, size: 18),
-            label: const Text('Visit Site'),
+            label: const Text('Visit Website'),
           ),
         ],
       ),
