@@ -34,6 +34,8 @@ class _OtpScreenState extends State<OtpScreen> {
       await prefs.setString('reg_phone_${widget.phone}', widget.phone);
       await prefs.setString('reg_pass_${widget.phone}', widget.password);
       await prefs.setString('reg_name_${widget.phone}', widget.name);
+      await prefs.setString('reg_age_${widget.phone}', widget.age);
+      await prefs.setString('reg_gender_${widget.phone}', widget.gender);
 
       // 2. Django Backend par saari details ke sath save karein
       await ApiService.savePreferences(

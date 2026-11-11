@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
 import 'api_service.dart';
@@ -99,6 +100,124 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
     widget.onThemeChange(themeMode);
     await _syncToBackend();
+  }
+
+  // Developer Contact Dialog Pop-up
+  void _showContactDeveloperDialog(BuildContext context) {
+    const String developerEmail = 'mformusa11@gmail.com';
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Row(
+          children: [
+            Icon(Icons.email, color: Colors.teal),
+            SizedBox(width: 10),
+            Text('Contact Developer'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('For bugs, feedback, or support, reach out to us at:'),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: const Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      developerEmail,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
+            onPressed: () {
+              Clipboard.setData(const ClipboardData(text: developerEmail));
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Email copied to clipboard!')),
+              );
+            },
+            icon: const Icon(Icons.copy, size: 18),
+            label: const Text('Copy Email'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Developer Portfolio Dialog Pop-up
+  void _showPortfolioDialog(BuildContext context) {
+    const String portfolioUrl = 'https://musaqureshi.pythonanywhere.com';
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Row(
+          children: [
+            Icon(Icons.web, color: Colors.teal),
+            SizedBox(width: 10),
+            Text('Developer Portfolio'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Check out the official developer portfolio website:'),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: const Text(
+                portfolioUrl,
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 14),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
+            onPressed: () async {
+              final Uri webUri = Uri.parse(portfolioUrl);
+              if (await canLaunchUrl(webUri)) {
+                await launchUrl(webUri, mode: LaunchMode.externalApplication);
+              }
+              if (context.mounted) Navigator.pop(context);
+            },
+            icon: const Icon(Icons.open_in_new, size: 18),
+            label: const Text('Visit Site'),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<bool> _onWillPop() async {
@@ -344,24 +463,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     leading: const Icon(Icons.email, color: Colors.teal),
                     title: const Text('Contact Developer'),
                     subtitle: const Text('mformusa11@gmail.com'),
-                    onTap: () async {
-                      final Uri emailUri = Uri(scheme: 'mailto', path: 'mformusa11@gmail.com');
-                      if (await canLaunchUrl(emailUri)) {
-                        await launchUrl(emailUri);
-                      }
-                    },
+                    onTap: () => _showContactDeveloperDialog(context),
                   ),
                   const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.web, color: Colors.teal),
                     title: const Text('Developer Portfolio'),
                     subtitle: const Text('musaqureshi.pythonanywhere.com'),
-                    onTap: () async {
-                      final Uri webUri = Uri.parse('https://musaqureshi.pythonanywhere.com');
-                      if (await canLaunchUrl(webUri)) {
-                        await launchUrl(webUri, mode: LaunchMode.externalApplication);
-                      }
-                    },
+                    onTap: () => _showPortfolioDialog(context),
                   ),
                   const Divider(height: 1),
                   ListTile(
