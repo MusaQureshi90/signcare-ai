@@ -27,6 +27,10 @@ class UserPreferenceView(APIView):
         pref, created = UserPreference.objects.update_or_create(
             phone_number=phone,
             defaults={
+                'name': request.data.get('name'),
+                'age': request.data.get('age'),
+                'gender': request.data.get('gender'),
+                'password': request.data.get('password'),
                 'language': request.data.get('language', 'English'),
                 'theme_mode': request.data.get('theme_mode', 'light'),
                 'home_layout': request.data.get('home_layout', 'List'),
