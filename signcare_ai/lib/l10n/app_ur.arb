@@ -14,5 +14,31 @@
   "no": "نہیں",
   "navHome": "ہوم",
   "navMessages": "پیغامات",
-  "navProfile": "پروفائل"
+  "navProfile": "پروفائل",
+
+  "settings": "سیٹنگز",
+  "welcomeUser": "خوش آمدید، {name}",
+  "helloUser": "ہیلو، {name} 👋",
+  "homeSubtitle": "آج ہم آپ کی کیا مدد کر سکتے ہیں؟",
+
+  "menuCardsTitle": "مواصلاتی کارڈز",
+  "menuCardsSubtitle": "پیغام بنانے کے لیے کارڈز منتخب کریں",
+  "menuTypeTitle": "پیغام لکھیں",
+  "menuTypeSubtitle": "اپنا پیغام لکھیں اور بلند آواز میں سنائیں",
+  "menuSymptomsTitle": "علامات اور درد",
+  "menuSymptomsSubtitle": "اپنی علامات اور درد کی شدت بتائیں",
+  "menuEmotionsTitle": "جذبات اور احساسات",
+  "menuEmotionsSubtitle": "بتائیں کہ آپ کیسا محسوس کر رہے ہیں",
+  "menuSummaryTitle": "میرا خلاصہ",
+  "menuSummarySubtitle": "جو کچھ منتخب کیا اسے دیکھیں اور شیئر کریں",
+  "menuEmergencyTitle": "ہنگامی مدد",
+  "menuEmergencySubtitle": "فوری مدد کے لیے الرٹ",
+  "menuSpeechTitle": "آواز سے تحریر",
+  "menuSpeechSubtitle": "بولے گئے الفاظ کو تحریر میں بدلیں",
+  "menuBodyTitle": "جسم کا نقشہ",
+  "menuBodySubtitle": "بتائیں کہ درد کہاں ہے",
+
+  "exitTitle": "ایپ بند کریں",
+  "exitMessage": "کیا آپ واقعی SignCare AI بند کرنا چاہتے ہیں؟",
+  "exitAction": "بند کریں"
 }

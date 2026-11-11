@@ -52,4 +52,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navProfile => 'Profile';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String welcomeUser(String name) {
+    return 'Welcome, $name';
+  }
+
+  @override
+  String helloUser(String name) {
+    return 'Hello, $name 👋';
+  }
+
+  @override
+  String get homeSubtitle => 'How can we help you today?';
+
+  @override
+  String get menuCardsTitle => 'Communication Cards';
+
+  @override
+  String get menuCardsSubtitle => 'Select cards to create a message';
+
+  @override
+  String get menuTypeTitle => 'Type Message';
+
+  @override
+  String get menuTypeSubtitle => 'Write your message and speak it aloud';
+
+  @override
+  String get menuSymptomsTitle => 'Symptoms & Pain';
+
+  @override
+  String get menuSymptomsSubtitle =>
+      'Tell us about your symptoms and pain level';
+
+  @override
+  String get menuEmotionsTitle => 'Emotions & Feelings';
+
+  @override
+  String get menuEmotionsSubtitle => 'Share how you feel';
+
+  @override
+  String get menuSummaryTitle => 'My Summary';
+
+  @override
+  String get menuSummarySubtitle =>
+      'Review everything you selected and share it';
+
+  @override
+  String get menuEmergencyTitle => 'Emergency Help';
+
+  @override
+  String get menuEmergencySubtitle => 'Instant alert for urgent help';
+
+  @override
+  String get menuSpeechTitle => 'Speech to Text';
+
+  @override
+  String get menuSpeechSubtitle => 'Turn spoken words into text';
+
+  @override
+  String get menuBodyTitle => 'Body Diagram';
+
+  @override
+  String get menuBodySubtitle => 'Point to where it hurts';
+
+  @override
+  String get exitTitle => 'Exit App';
+
+  @override
+  String get exitMessage => 'Are you sure you want to exit SignCare AI?';
+
+  @override
+  String get exitAction => 'Exit';
 }

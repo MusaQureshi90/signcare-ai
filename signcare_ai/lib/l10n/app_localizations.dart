@@ -187,6 +187,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get navProfile;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @welcomeUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome, {name}'**
+  String welcomeUser(String name);
+
+  /// No description provided for @helloUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {name} 👋'**
+  String helloUser(String name);
+
+  /// No description provided for @homeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How can we help you today?'**
+  String get homeSubtitle;
+
+  /// No description provided for @menuCardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication Cards'**
+  String get menuCardsTitle;
+
+  /// No description provided for @menuCardsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select cards to create a message'**
+  String get menuCardsSubtitle;
+
+  /// No description provided for @menuTypeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Type Message'**
+  String get menuTypeTitle;
+
+  /// No description provided for @menuTypeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your message and speak it aloud'**
+  String get menuTypeSubtitle;
+
+  /// No description provided for @menuSymptomsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms & Pain'**
+  String get menuSymptomsTitle;
+
+  /// No description provided for @menuSymptomsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about your symptoms and pain level'**
+  String get menuSymptomsSubtitle;
+
+  /// No description provided for @menuEmotionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions & Feelings'**
+  String get menuEmotionsTitle;
+
+  /// No description provided for @menuEmotionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share how you feel'**
+  String get menuEmotionsSubtitle;
+
+  /// No description provided for @menuSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Summary'**
+  String get menuSummaryTitle;
+
+  /// No description provided for @menuSummarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review everything you selected and share it'**
+  String get menuSummarySubtitle;
+
+  /// No description provided for @menuEmergencyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Help'**
+  String get menuEmergencyTitle;
+
+  /// No description provided for @menuEmergencySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Instant alert for urgent help'**
+  String get menuEmergencySubtitle;
+
+  /// No description provided for @menuSpeechTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Speech to Text'**
+  String get menuSpeechTitle;
+
+  /// No description provided for @menuSpeechSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn spoken words into text'**
+  String get menuSpeechSubtitle;
+
+  /// No description provided for @menuBodyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Diagram'**
+  String get menuBodyTitle;
+
+  /// No description provided for @menuBodySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Point to where it hurts'**
+  String get menuBodySubtitle;
+
+  /// No description provided for @exitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get exitTitle;
+
+  /// No description provided for @exitMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit SignCare AI?'**
+  String get exitMessage;
+
+  /// No description provided for @exitAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exitAction;
 }
 
 class _AppLocalizationsDelegate
