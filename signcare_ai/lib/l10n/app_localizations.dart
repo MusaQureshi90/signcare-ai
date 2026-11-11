@@ -325,6 +325,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exit'**
   String get exitAction;
+
+  /// No description provided for @setLanguageSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get setLanguageSection;
+
+  /// No description provided for @setAppearanceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get setAppearanceSection;
+
+  /// No description provided for @setThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow system'**
+  String get setThemeSystem;
+
+  /// No description provided for @setThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light mode'**
+  String get setThemeLight;
+
+  /// No description provided for @setThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark mode'**
+  String get setThemeDark;
+
+  /// No description provided for @setLayoutSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Home screen layout'**
+  String get setLayoutSection;
+
+  /// No description provided for @setLayoutList.
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get setLayoutList;
+
+  /// No description provided for @setLayoutGrid.
+  ///
+  /// In en, this message translates to:
+  /// **'Grid'**
+  String get setLayoutGrid;
+
+  /// No description provided for @setAccountSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get setAccountSection;
+
+  /// No description provided for @setLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get setLogout;
+
+  /// No description provided for @setLogoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out from this device'**
+  String get setLogoutSubtitle;
+
+  /// No description provided for @setLogoutConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get setLogoutConfirmTitle;
+
+  /// No description provided for @setLogoutConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out of your account?'**
+  String get setLogoutConfirmMessage;
+
+  /// No description provided for @setDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account data'**
+  String get setDeleteAccount;
+
+  /// No description provided for @setDeleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove your account data from this device'**
+  String get setDeleteSubtitle;
+
+  /// No description provided for @setDeleteConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account data?'**
+  String get setDeleteConfirmTitle;
+
+  /// No description provided for @setDeleteConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'All your data on this device will be removed permanently. This cannot be undone.'**
+  String get setDeleteConfirmMessage;
+
+  /// No description provided for @setAboutSection.
+  ///
+  /// In en, this message translates to:
+  /// **'About & support'**
+  String get setAboutSection;
+
+  /// No description provided for @setContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get setContactTitle;
+
+  /// No description provided for @setContactMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'For bugs, feedback or support, write to us at:'**
+  String get setContactMessage;
+
+  /// No description provided for @setCopyEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy email'**
+  String get setCopyEmail;
+
+  /// No description provided for @setEmailCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Email copied'**
+  String get setEmailCopied;
+
+  /// No description provided for @setPortfolioTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Developer portfolio'**
+  String get setPortfolioTitle;
+
+  /// No description provided for @setPortfolioMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the developer website in your browser?'**
+  String get setPortfolioMessage;
+
+  /// No description provided for @setVisitWebsite.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit website'**
+  String get setVisitWebsite;
+
+  /// No description provided for @setVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'App version'**
+  String get setVersion;
+
+  /// No description provided for @setNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Important note'**
+  String get setNoteTitle;
+
+  /// No description provided for @setNoteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services.'**
+  String get setNoteBody;
 }
 
 class _AppLocalizationsDelegate

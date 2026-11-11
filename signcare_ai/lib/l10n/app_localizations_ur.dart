@@ -125,4 +125,93 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get exitAction => 'بند کریں';
+
+  @override
+  String get setLanguageSection => 'زبان';
+
+  @override
+  String get setAppearanceSection => 'ظاہری شکل';
+
+  @override
+  String get setThemeSystem => 'سسٹم کے مطابق';
+
+  @override
+  String get setThemeLight => 'لائٹ موڈ';
+
+  @override
+  String get setThemeDark => 'ڈارک موڈ';
+
+  @override
+  String get setLayoutSection => 'ہوم اسکرین کا انداز';
+
+  @override
+  String get setLayoutList => 'فہرست';
+
+  @override
+  String get setLayoutGrid => 'گرڈ';
+
+  @override
+  String get setAccountSection => 'اکاؤنٹ';
+
+  @override
+  String get setLogout => 'لاگ آؤٹ';
+
+  @override
+  String get setLogoutSubtitle => 'اس ڈیوائس سے سائن آؤٹ کریں';
+
+  @override
+  String get setLogoutConfirmTitle => 'لاگ آؤٹ کریں؟';
+
+  @override
+  String get setLogoutConfirmMessage =>
+      'کیا آپ واقعی اپنے اکاؤنٹ سے لاگ آؤٹ کرنا چاہتے ہیں؟';
+
+  @override
+  String get setDeleteAccount => 'اکاؤنٹ ڈیٹا حذف کریں';
+
+  @override
+  String get setDeleteSubtitle => 'اس ڈیوائس سے اپنا اکاؤنٹ ڈیٹا ہٹائیں';
+
+  @override
+  String get setDeleteConfirmTitle => 'اکاؤنٹ ڈیٹا حذف کریں؟';
+
+  @override
+  String get setDeleteConfirmMessage =>
+      'اس ڈیوائس پر آپ کا تمام ڈیٹا مستقل طور پر ہٹا دیا جائے گا۔ یہ عمل واپس نہیں ہو سکتا۔';
+
+  @override
+  String get setAboutSection => 'معلومات اور معاونت';
+
+  @override
+  String get setContactTitle => 'معاونت سے رابطہ';
+
+  @override
+  String get setContactMessage =>
+      'خرابیوں، رائے یا مدد کے لیے ہمیں اس پتے پر لکھیں:';
+
+  @override
+  String get setCopyEmail => 'ای میل کاپی کریں';
+
+  @override
+  String get setEmailCopied => 'ای میل کاپی ہو گئی';
+
+  @override
+  String get setPortfolioTitle => 'ڈویلپر پورٹ فولیو';
+
+  @override
+  String get setPortfolioMessage =>
+      'کیا ڈویلپر کی ویب سائٹ براؤزر میں کھولنی ہے؟';
+
+  @override
+  String get setVisitWebsite => 'ویب سائٹ کھولیں';
+
+  @override
+  String get setVersion => 'ایپ ورژن';
+
+  @override
+  String get setNoteTitle => 'اہم نوٹ';
+
+  @override
+  String get setNoteBody =>
+      'SignCare AI آپ کو بات چیت میں مدد دیتی ہے۔ یہ طبی مشورہ نہیں دیتی اور نہ ہی ڈاکٹر یا ہنگامی خدمات کا متبادل ہے۔';
 }

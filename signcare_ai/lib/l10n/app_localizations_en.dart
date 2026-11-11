@@ -127,4 +127,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exitAction => 'Exit';
+
+  @override
+  String get setLanguageSection => 'Language';
+
+  @override
+  String get setAppearanceSection => 'Appearance';
+
+  @override
+  String get setThemeSystem => 'Follow system';
+
+  @override
+  String get setThemeLight => 'Light mode';
+
+  @override
+  String get setThemeDark => 'Dark mode';
+
+  @override
+  String get setLayoutSection => 'Home screen layout';
+
+  @override
+  String get setLayoutList => 'List';
+
+  @override
+  String get setLayoutGrid => 'Grid';
+
+  @override
+  String get setAccountSection => 'Account';
+
+  @override
+  String get setLogout => 'Log out';
+
+  @override
+  String get setLogoutSubtitle => 'Sign out from this device';
+
+  @override
+  String get setLogoutConfirmTitle => 'Log out?';
+
+  @override
+  String get setLogoutConfirmMessage =>
+      'Are you sure you want to log out of your account?';
+
+  @override
+  String get setDeleteAccount => 'Delete account data';
+
+  @override
+  String get setDeleteSubtitle => 'Remove your account data from this device';
+
+  @override
+  String get setDeleteConfirmTitle => 'Delete account data?';
+
+  @override
+  String get setDeleteConfirmMessage =>
+      'All your data on this device will be removed permanently. This cannot be undone.';
+
+  @override
+  String get setAboutSection => 'About & support';
+
+  @override
+  String get setContactTitle => 'Contact support';
+
+  @override
+  String get setContactMessage =>
+      'For bugs, feedback or support, write to us at:';
+
+  @override
+  String get setCopyEmail => 'Copy email';
+
+  @override
+  String get setEmailCopied => 'Email copied';
+
+  @override
+  String get setPortfolioTitle => 'Developer portfolio';
+
+  @override
+  String get setPortfolioMessage =>
+      'Open the developer website in your browser?';
+
+  @override
+  String get setVisitWebsite => 'Visit website';
+
+  @override
+  String get setVersion => 'App version';
+
+  @override
+  String get setNoteTitle => 'Important note';
+
+  @override
+  String get setNoteBody =>
+      'SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services.';
 }

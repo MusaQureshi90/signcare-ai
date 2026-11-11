@@ -1,475 +1,481 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'login_screen.dart';
-import 'api_service.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'api_service.dart';
+import 'app_settings.dart';
+import 'app_theme.dart';
+import 'consultation_manager.dart';
+import 'l10n_ext.dart';
+import 'login_screen.dart';
 
-class SettingsScreen extends StatefulWidget {
-  final Function(Locale, String) onLocaleChange;
-  final Function(ThemeMode) onThemeChange;
-  final String currentLanguage;
-  final ThemeMode currentThemeMode;
+const String _supportEmail = 'mformusa11@gmail.com';
+const String _portfolioUrl = 'https://musaqureshi.pythonanywhere.com';
 
-  const SettingsScreen({
-    super.key,
-    required this.onLocaleChange,
-    required this.onThemeChange,
-    required this.currentLanguage,
-    required this.currentThemeMode,
-  });
+// pubspec.yaml ke version se match rakho. Baad mein package_info_plus lagayenge.
+const String _appVersion = '1.0.0 (1)';
 
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  late String selectedLanguage;
-  late String initialLanguage;
-  String selectedLayout = 'List';
-  late ThemeMode selectedTheme;
-  String userPhone = '';
-  String userName = '';
-  String userAge = '';
-  String userGender = '';
-  String userPass = '';
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
-  void initState() {
-    super.initState();
-    selectedLanguage = widget.currentLanguage;
-    initialLanguage = widget.currentLanguage;
-    selectedTheme = widget.currentThemeMode;
-    _loadPreferences();
-  }
+  Widget build(BuildContext context) {
+    final settings = AppSettings.instance;
 
-  Future<void> _loadPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      selectedLayout = prefs.getString('home_layout') ?? 'List';
-      userPhone = prefs.getString('logged_phone') ?? '';
-      userName = prefs.getString('reg_name_$userPhone') ?? '';
-      userAge = prefs.getString('reg_age_$userPhone') ?? '';
-      userGender = prefs.getString('reg_gender_$userPhone') ?? '';
-      userPass = prefs.getString('reg_pass_$userPhone') ?? '';
-    });
+    return ListenableBuilder(
+      listenable: settings,
+      builder: (context, _) {
+        final l10n = context.l10n;
+        final colors = context.colors;
 
-    if (userPhone.isNotEmpty) {
-      final backendPrefs = await ApiService.getPreferences(userPhone);
-      if (backendPrefs != null) {
-        setState(() {
-          if (backendPrefs['home_layout'] != null) {
-            selectedLayout = backendPrefs['home_layout'];
-          }
-        });
-      }
-    }
-  }
+        return Scaffold(
+          appBar: AppBar(title: Text(l10n.settings)),
+          body: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              // ---------------- Language ----------------
+              _SectionTitle(l10n.setLanguageSection),
+              Card(
+                child: Column(
+                  children: [
+                    _ChoiceTile(
+                      title: 'English',
+                      selected: !settings.isUrdu,
+                      onTap: () => _changeLanguage('English'),
+                    ),
+                    const Divider(height: 1),
+                    _ChoiceTile(
+                      title: 'اردو',
+                      selected: settings.isUrdu,
+                      onTap: () => _changeLanguage('Urdu'),
+                    ),
+                  ],
+                ),
+              ),
 
-  Future<void> _syncToBackend() async {
-    if (userPhone.isEmpty) return;
-    String themeStr = selectedTheme == ThemeMode.dark ? 'dark' : (selectedTheme == ThemeMode.light ? 'light' : 'system');
-    
-    await ApiService.savePreferences(
-      userPhone,
-      userName,
-      userAge,
-      userGender,
-      userPass,
-      selectedLanguage,
-      themeStr,
-      selectedLayout,
+              // ---------------- Appearance ----------------
+              _SectionTitle(l10n.setAppearanceSection),
+              Card(
+                child: Column(
+                  children: [
+                    _ChoiceTile(
+                      title: l10n.setThemeSystem,
+                      selected: settings.themeMode == ThemeMode.system,
+                      onTap: () => _changeTheme(ThemeMode.system),
+                    ),
+                    const Divider(height: 1),
+                    _ChoiceTile(
+                      title: l10n.setThemeLight,
+                      selected: settings.themeMode == ThemeMode.light,
+                      onTap: () => _changeTheme(ThemeMode.light),
+                    ),
+                    const Divider(height: 1),
+                    _ChoiceTile(
+                      title: l10n.setThemeDark,
+                      selected: settings.themeMode == ThemeMode.dark,
+                      onTap: () => _changeTheme(ThemeMode.dark),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ---------------- Home layout ----------------
+              _SectionTitle(l10n.setLayoutSection),
+              Card(
+                child: Column(
+                  children: [
+                    _ChoiceTile(
+                      title: l10n.setLayoutList,
+                      selected: settings.homeLayout == 'List',
+                      onTap: () => _changeLayout('List'),
+                    ),
+                    const Divider(height: 1),
+                    _ChoiceTile(
+                      title: l10n.setLayoutGrid,
+                      selected: settings.homeLayout == 'Grid',
+                      onTap: () => _changeLayout('Grid'),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ---------------- Account ----------------
+              _SectionTitle(l10n.setAccountSection),
+              Card(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.logout, color: Colors.orange),
+                      title: Text(
+                        l10n.setLogout,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(l10n.setLogoutSubtitle),
+                      onTap: () => _confirmLogout(context),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: Icon(Icons.delete_forever, color: colors.error),
+                      title: Text(
+                        l10n.setDeleteAccount,
+                        style: TextStyle(
+                          color: colors.error,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(l10n.setDeleteSubtitle),
+                      onTap: () => _confirmDelete(context),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ---------------- About & support ----------------
+              _SectionTitle(l10n.setAboutSection),
+              Card(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.email_outlined, color: colors.primary),
+                      title: Text(l10n.setContactTitle),
+                      subtitle: const Text(_supportEmail),
+                      onTap: () => _showContactDialog(context),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: Icon(Icons.language, color: colors.primary),
+                      title: Text(l10n.setPortfolioTitle),
+                      subtitle: const Text('musaqureshi.pythonanywhere.com'),
+                      onTap: () => _showPortfolioDialog(context),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: Icon(Icons.info_outline, color: colors.primary),
+                      title: Text(l10n.setVersion),
+                      subtitle: const Text(_appVersion),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Card(
+                color: colors.primaryContainer,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.health_and_safety_outlined,
+                          color: colors.onPrimaryContainer),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.setNoteTitle,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: colors.onPrimaryContainer,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              l10n.setNoteBody,
+                              style: TextStyle(
+                                color: colors.onPrimaryContainer,
+                                height: 1.4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Future<void> _saveLayoutPreference(String layout) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('home_layout', layout);
-    setState(() {
-      selectedLayout = layout;
-    });
-    await _syncToBackend();
+  // ---------------- Badlav (turant apply) ----------------
+  Future<void> _changeLanguage(String name) async {
+    await AppSettings.instance.setLanguageName(name);
+    unawaited(_syncToBackend());
   }
 
-  Future<void> _saveThemePreference(ThemeMode themeMode) async {
-    final prefs = await SharedPreferences.getInstance();
-    String themeStr = themeMode == ThemeMode.dark ? 'dark' : (themeMode == ThemeMode.light ? 'light' : 'system');
-    await prefs.setString('app_theme', themeStr);
-    setState(() {
-      selectedTheme = themeMode;
-    });
-    widget.onThemeChange(themeMode);
-    await _syncToBackend();
+  Future<void> _changeTheme(ThemeMode mode) async {
+    await AppSettings.instance.setThemeMode(mode);
+    unawaited(_syncToBackend());
   }
 
-  // Developer Contact Dialog Pop-up
-  void _showContactDeveloperDialog(BuildContext context) {
-    const String developerEmail = 'mformusa11@gmail.com';
-    showDialog(
+  Future<void> _changeLayout(String layout) async {
+    await AppSettings.instance.setHomeLayout(layout);
+    unawaited(_syncToBackend());
+  }
+
+  static String _themeName(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.dark:
+        return 'dark';
+      case ThemeMode.system:
+        return 'system';
+      case ThemeMode.light:
+        return 'light';
+    }
+  }
+
+  /// Server par settings bhejta hai. Server ka purana data khali string se
+  /// overwrite NAHI hone deta (doosre device wala bug).
+  Future<void> _syncToBackend() async {
+    final prefs = await SharedPreferences.getInstance();
+    final phone = prefs.getString('logged_phone') ?? '';
+    if (phone.isEmpty) return;
+
+    // Server se parh ne mein fail ho to sync mat karo (warna khali data likh dega)
+    final server = await ApiService.getPreferences(phone);
+    if (server == null) return;
+
+    Future<String> pick(String localKey, String serverKey) async {
+      final local = prefs.getString(localKey) ?? '';
+      if (local.isNotEmpty) return local;
+      final fromServer = server[serverKey]?.toString() ?? '';
+      if (fromServer.isNotEmpty) {
+        await prefs.setString(localKey, fromServer); // is device pe bhi save
+      }
+      return fromServer;
+    }
+
+    final settings = AppSettings.instance;
+    await ApiService.savePreferences(
+      phone,
+      await pick('reg_name_$phone', 'name'),
+      await pick('reg_age_$phone', 'age'),
+      await pick('reg_gender_$phone', 'gender'),
+      await pick('reg_pass_$phone', 'password'),
+      settings.languageName,
+      _themeName(settings.themeMode),
+      settings.homeLayout,
+    );
+  }
+
+  // ---------------- Logout ----------------
+  Future<void> _confirmLogout(BuildContext context) async {
+    final l10n = context.l10n;
+    final bool? confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Row(
-          children: [
-            Icon(Icons.email, color: Colors.teal),
-            SizedBox(width: 10),
-            Text('Contact Developer'),
-          ],
-        ),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.setLogoutConfirmTitle),
+        content: Text(l10n.setLogoutConfirmMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(
+              l10n.setLogout,
+              style: TextStyle(color: dialogContext.colors.error),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('is_logged_in', false);
+    await prefs.remove('logged_phone');
+    await prefs.remove('logged_name');
+    ConsultationManager.clear(); // agla user pichle ka data na dekhe
+
+    if (!context.mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (route) => false,
+    );
+  }
+
+  // ---------------- Delete (sirf is device ka data) ----------------
+  Future<void> _confirmDelete(BuildContext context) async {
+    final l10n = context.l10n;
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.setDeleteConfirmTitle),
+        content: Text(l10n.setDeleteConfirmMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(
+              l10n.delete,
+              style: TextStyle(color: dialogContext.colors.error),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    // Language / theme / layout bacha ke baqi sab user data hata do
+    const keep = {'app_language', 'app_theme', 'home_layout'};
+    for (final key in prefs.getKeys().toList()) {
+      if (!keep.contains(key)) {
+        await prefs.remove(key);
+      }
+    }
+    ConsultationManager.clear();
+
+    if (!context.mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (route) => false,
+    );
+  }
+
+  // ---------------- Contact dialog ----------------
+  void _showContactDialog(BuildContext context) {
+    final l10n = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.setContactTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('For bugs, feedback, or support, reach out to us at:'),
+            Text(l10n.setContactMessage),
             const SizedBox(height: 12),
             Container(
-              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: dialogContext.colors.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
               ),
-              child: const Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      developerEmail,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                  ),
-                ],
+              child: const SelectableText(
+                _supportEmail,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
           ],
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.close),
           ),
           ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
-            onPressed: () {
-              Clipboard.setData(const ClipboardData(text: developerEmail));
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Email copied to clipboard!')),
+            onPressed: () async {
+              await Clipboard.setData(const ClipboardData(text: _supportEmail));
+              if (dialogContext.mounted) Navigator.pop(dialogContext);
+              messenger.showSnackBar(
+                SnackBar(content: Text(l10n.setEmailCopied)),
               );
             },
             icon: const Icon(Icons.copy, size: 18),
-            label: const Text('Copy Email'),
+            label: Text(l10n.setCopyEmail),
           ),
         ],
       ),
     );
   }
 
-  // Developer Portfolio Dialog Pop-up
-  // Developer Portfolio Dialog Pop-up (Updated without text link)
+  // ---------------- Portfolio dialog ----------------
   void _showPortfolioDialog(BuildContext context) {
-    const String portfolioUrl = 'https://musaqureshi.pythonanywhere.com';
-    showDialog(
+    final l10n = context.l10n;
+
+    showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Row(
-          children: [
-            Icon(Icons.web, color: Colors.teal),
-            SizedBox(width: 10),
-            Text('Developer Portfolio'),
-          ],
-        ),
-        content: const Text(
-          'Click the button below to visit the official developer portfolio website on your browser.',
-          style: TextStyle(fontSize: 15),
-        ),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.setPortfolioTitle),
+        content: Text(l10n.setPortfolioMessage),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
             onPressed: () async {
-              final Uri webUri = Uri.parse(portfolioUrl);
-              // Pop-up close karne se pehle URL launch karein
-              if (await canLaunchUrl(webUri)) {
-                await launchUrl(webUri, mode: LaunchMode.externalApplication);
+              Navigator.pop(dialogContext);
+              final uri = Uri.parse(_portfolioUrl);
+              if (await canLaunchUrl(uri)) {
+                await launchUrl(uri, mode: LaunchMode.externalApplication);
               }
-              if (context.mounted) Navigator.pop(context);
             },
             icon: const Icon(Icons.open_in_new, size: 18),
-            label: const Text('Visit Website'),
+            label: Text(l10n.setVisitWebsite),
           ),
         ],
       ),
     );
   }
+}
 
-  Future<bool> _onWillPop() async {
-    if (selectedLanguage != initialLanguage) {
-      bool? shouldSave = await showDialog<bool>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Unsaved Changes'),
-          content: const Text('Do you want to save language changes or discard them?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('Discard', style: TextStyle(color: Colors.red)),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
-              onPressed: () => Navigator.pop(context, true),
-              child: const Text('Save Changes'),
-            ),
-          ],
-        ),
-      );
-
-      if (shouldSave == true) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('app_language', selectedLanguage);
-
-        if (selectedLanguage == 'Urdu') {
-          widget.onLocaleChange(const Locale('ur', 'PK'), 'Urdu');
-        } else {
-          widget.onLocaleChange(const Locale('en', 'US'), 'English');
-        }
-        await _syncToBackend();
-      } else {
-        selectedLanguage = initialLanguage;
-      }
-    }
-    return true;
-  }
-
-  void _confirmLogout(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Logout Confirmation'),
-        content: const Text('Are you sure you want to logout from your account?'),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          TextButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              await prefs.setBool('is_logged_in', false);
-              await prefs.remove('logged_phone');
-              await prefs.remove('logged_name');
-              if (!context.mounted) return;
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-                (route) => false,
-              );
-            },
-            child: const Text('Logout', style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _confirmDeleteAccount(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Delete Account Data'),
-        content: const Text('Do you really want to delete your data and account? This action cannot be undone.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              await prefs.clear();
-              if (!context.mounted) return;
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-                (route) => false,
-              );
-            },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
-    );
-  }
+/// Section ka heading (Language, Appearance, ...)
+class _SectionTitle extends StatelessWidget {
+  final String text;
+  const _SectionTitle(this.text);
 
   @override
   Widget build(BuildContext context) {
-    bool isUrdu = selectedLanguage == 'Urdu';
-
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (didPop) return;
-        await _onWillPop();
-        if (context.mounted) {
-          Navigator.pop(context, selectedLanguage);
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(isUrdu ? 'ایپ کی سیٹنگز' : 'App Settings'),
-          backgroundColor: Colors.teal,
-          foregroundColor: Colors.white,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () async {
-              await _onWillPop();
-              if (context.mounted) {
-                Navigator.pop(context, selectedLanguage);
-              }
-            },
-          ),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Text(isUrdu ? 'زبان کی ترجیحات' : 'Language Preferences', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
-            const SizedBox(height: 10),
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                children: [
-                  RadioListTile<String>(
-                    title: const Text('English'),
-                    subtitle: const Text('Default app language'),
-                    value: 'English',
-                    groupValue: selectedLanguage,
-                    onChanged: (val) {
-                      setState(() => selectedLanguage = val!);
-                    },
-                  ),
-                  RadioListTile<String>(
-                    title: const Text('Urdu (اردو)'),
-                    subtitle: const Text('Switch app to Urdu'),
-                    value: 'Urdu',
-                    groupValue: selectedLanguage,
-                    onChanged: (val) {
-                      setState(() => selectedLanguage = val!);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text('Appearance (Theme Mode)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
-            const SizedBox(height: 10),
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                children: [
-                  RadioListTile<ThemeMode>(
-                    title: const Text('Light Mode'),
-                    subtitle: const Text('Bright and clean interface'),
-                    value: ThemeMode.light,
-                    groupValue: selectedTheme,
-                    onChanged: (val) {
-                      _saveThemePreference(val!);
-                    },
-                  ),
-                  RadioListTile<ThemeMode>(
-                    title: const Text('Dark Mode'),
-                    subtitle: const Text('Easy on the eyes in low light'),
-                    value: ThemeMode.dark,
-                    groupValue: selectedTheme,
-                    onChanged: (val) {
-                      _saveThemePreference(val!);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text('Home Screen Layout Style', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
-            const SizedBox(height: 10),
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                children: [
-                  RadioListTile<String>(
-                    title: const Text('Vertical List Cards'),
-                    subtitle: const Text('Standard clean list layout'),
-                    value: 'List',
-                    groupValue: selectedLayout,
-                    onChanged: (val) {
-                      _saveLayoutPreference(val!);
-                    },
-                  ),
-                  RadioListTile<String>(
-                    title: const Text('Grid Boxes'),
-                    subtitle: const Text('Modern 2-column box layout'),
-                    value: 'Grid',
-                    groupValue: selectedLayout,
-                    onChanged: (val) {
-                      _saveLayoutPreference(val!);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(isUrdu ? 'اکاؤنٹ کی کارروائیاں' : 'Account Actions', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
-            const SizedBox(height: 10),
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.logout, color: Colors.orange),
-                    title: Text(isUrdu ? 'لاگ آؤٹ' : 'Logout', style: const TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(isUrdu ? 'اس ڈیوائس سے سائن آؤٹ کریں' : 'Sign out from this device'),
-                    onTap: () => _confirmLogout(context),
-                  ),
-                  const Divider(height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.delete_forever, color: Colors.red),
-                    title: Text(isUrdu ? 'اکاؤنٹ اور ڈیٹا حذف کریں' : 'Delete Account & Data', style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-                    subtitle: Text(isUrdu ? 'اپنا مقامی اکاؤنٹ ڈیٹا مستقل طور پر ہٹائیں' : 'Permanently remove your local account data'),
-                    onTap: () => _confirmDeleteAccount(context),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(isUrdu ? 'ڈویلپر سے رابطہ کریں اور معلومات' : 'Developer & App Info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal)),
-            const SizedBox(height: 10),
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.email, color: Colors.teal),
-                    title: const Text('Contact Developer'),
-                    subtitle: const Text('mformusa11@gmail.com'),
-                    onTap: () => _showContactDeveloperDialog(context),
-                  ),
-                  const Divider(height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.web, color: Colors.teal),
-                    title: const Text('Developer Portfolio'),
-                    subtitle: const Text('musaqureshi.pythonanywhere.com'),
-                    onTap: () => _showPortfolioDialog(context),
-                  ),
-                  const Divider(height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.info, color: Colors.teal),
-                    title: Text(isUrdu ? 'سائن کیئر اے آئی ورژن' : 'SignCare AI Version'),
-                    subtitle: const Text('1.0.0+1 (Production Ready)'),
-                  ),
-                ],
-              ),
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 4, top: 20, bottom: 8),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: context.colors.primary,
         ),
       ),
+    );
+  }
+}
+
+/// Ek option jo select ho sakta hai (tick ke saath)
+class _ChoiceTile extends StatelessWidget {
+  final String title;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _ChoiceTile({
+    required this.title,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    return ListTile(
+      selected: selected,
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+      trailing: Icon(
+        selected ? Icons.check_circle : Icons.radio_button_unchecked,
+        color: selected ? colors.primary : colors.outline,
+      ),
+      onTap: onTap,
     );
   }
 }

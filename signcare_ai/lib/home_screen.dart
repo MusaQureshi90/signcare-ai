@@ -254,25 +254,11 @@ class HomeScreen extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
   }
 
-  Future<void> _openSettings(BuildContext context) async {
-    final settings = AppSettings.instance;
-    await Navigator.push(
+    void _openSettings(BuildContext context) {
+    Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => SettingsScreen(
-          currentLanguage: settings.languageName,
-          currentThemeMode: settings.themeMode,
-          onLocaleChange: (locale, langName) {
-            settings.setLanguageName(langName);
-          },
-          onThemeChange: (themeMode) {
-            settings.setThemeMode(themeMode);
-          },
-        ),
-      ),
+      MaterialPageRoute(builder: (_) => const SettingsScreen()),
     );
-    // Settings screen ne jo save kiya (layout waghera) wo dobara parh lo
-    await settings.load();
   }
 
   Future<void> _confirmExit(BuildContext context) async {
