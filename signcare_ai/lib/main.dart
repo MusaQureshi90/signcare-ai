@@ -1,83 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'app_settings.dart';
+import 'app_theme.dart';
+import 'l10n/app_localizations.dart';
 import 'splash_screen.dart';
 import 'common_needs_screen.dart';
 import 'symptoms_screen.dart';
 import 'emergency_screen.dart';
 import 'custom_message_screen.dart';
 import 'consultation_summary_screen.dart';
-import 'doctor_response_screen.dart';
 import 'speech_to_text_screen.dart';
 import 'body_diagram_screen.dart';
 import 'emotion_screen.dart';
 import 'settings_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  String savedLang = prefs.getString('app_language') ?? 'English';
-  String savedTheme = prefs.getString('app_theme') ?? 'light';
-  
-  ThemeMode initialTheme = ThemeMode.light;
-  if (savedTheme == 'dark') {
-    initialTheme = ThemeMode.dark;
-  }
-
-  runApp(SignCareApp(initialLang: savedLang, initialTheme: initialTheme));
+  await AppSettings.instance.load();
+  runApp(const SignCareApp());
 }
 
-class SignCareApp extends StatefulWidget {
-  final String initialLang;
-  final ThemeMode initialTheme;
-  const SignCareApp({super.key, required this.initialLang, required this.initialTheme});
+class SignCareApp extends StatelessWidget {
+  const SignCareApp({super.key});
 
   @override
-  State<SignCareApp> createState() => _SignCareAppState();
-}
-
-class _SignCareAppState extends State<SignCareApp> {
-  late Locale _locale;
-  late String _currentLangName;
-  late ThemeMode _themeMode;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentLangName = widget.initialLang;
-    _locale = _currentLangName == 'Urdu' ? const Locale('ur', 'PK') : const Locale('en', 'US');
-    _themeMode = widget.initialTheme;
-  }
-
-  void setLocale(Locale locale, String langName) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('app_language', langName);
-    setState(() {
-      _locale = locale;
-      _currentLangName = langName;
-    });
-  }
-
-  void setThemeMode(ThemeMode themeMode) {
-    setState(() {
-      _themeMode = themeMode;
-    });
-  }
-
-    @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SignCare AI',
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: _themeMode,
-      locale: _locale,
-      home: SplashScreen(
-        currentLang: _currentLangName,
-        onLocaleChange: setLocale,
-      ),
-      debugShowCheckedModeBanner: false,
+    // Jab bhi AppSettings badlegi (language/theme), poori app khud rebuild hogi.
+    return ListenableBuilder(
+      listenable: AppSettings.instance,
+      builder: (context, _) {
+        final settings = AppSettings.instance;
+        return MaterialApp(
+          title: 'SignCare AI',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: settings.themeMode,
+          locale: settings.locale,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: SplashScreen(
+            currentLang: settings.languageName,
+            onLocaleChange: (locale, langName) {
+              settings.setLanguageName(langName);
+            },
+          ),
+        );
+      },
     );
   }
 }
@@ -99,25 +68,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late String activeLang;
-  String currentLayout = 'List';
-  ThemeMode currentTheme = ThemeMode.light;
-
-  @override
-  void initState() {
-    super.initState();
-    activeLang = widget.currentLang;
-    _loadPreferences();
-  }
-
-  Future<void> _loadPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    String themeStr = prefs.getString('app_theme') ?? 'light';
-    setState(() {
-      currentLayout = prefs.getString('home_layout') ?? 'List';
-      currentTheme = themeStr == 'dark' ? ThemeMode.dark : ThemeMode.light;
-    });
-  }
+  final AppSettings settings = AppSettings.instance;
 
   Future<bool> _onWillPop(BuildContext context) async {
     bool? exitConfirmed = await showDialog(
@@ -142,8 +93,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isUrdu = activeLang == 'Urdu';
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    // Settings badlen to Home khud update ho jaye
+    return ListenableBuilder(
+      listenable: settings,
+      builder: (context, _) => _buildHome(context),
+    );
+  }
+
+  Widget _buildHome(BuildContext context) {
+    final bool isUrdu = settings.isUrdu;
+    final String currentLayout = settings.homeLayout;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     final List menuItems = [
       {
@@ -174,13 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'color': Colors.purple,
         'screen': const EmotionScreen(),
       },
-      {
-        'title': isUrdu ? 'ڈاکٹر کی ہدایات' : 'Doctor Instructions & Response',
-        'subtitle': isUrdu ? 'ڈاکٹر کے جوابات اور ہدایات پڑھیں' : 'Read responses and instructions from doctor',
-        'icon': Icons.announcement_outlined,
-        'color': Colors.indigo,
-        'screen': const DoctorResponseScreen(),
-      },
+      
       {
         'title': isUrdu ? 'رپورٹ کا خلاصہ دیکھیں' : 'View Report Summary',
         'subtitle': isUrdu ? 'طبی خلاصہ کا جائزہ لیں اور جمع کروائیں' : 'Review and submit compiled medical summary',
@@ -235,28 +189,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SettingsScreen(
-                      currentLanguage: activeLang,
-                      currentThemeMode: currentTheme,
+                      currentLanguage: settings.languageName,
+                      currentThemeMode: settings.themeMode,
                       onLocaleChange: (locale, langName) {
-                        widget.onLocaleChange(locale, langName);
+                        settings.setLanguageName(langName);
                       },
                       onThemeChange: (themeMode) {
-                        final appState = context.findAncestorStateOfType<_SignCareAppState>();
-                        appState?.setThemeMode(themeMode);
+                        settings.setThemeMode(themeMode);
                       },
                     ),
                   ),
                 );
-
-                final prefs = await SharedPreferences.getInstance();
-                String savedLang = prefs.getString('app_language') ?? 'English';
-                String savedLayout = prefs.getString('home_layout') ?? 'List';
-                String themeStr = prefs.getString('app_theme') ?? 'light';
-                setState(() {
-                  activeLang = savedLang;
-                  currentLayout = savedLayout;
-                  currentTheme = themeStr == 'dark' ? ThemeMode.dark : ThemeMode.light;
-                });
+                // Settings screen ne jo save kiya (layout waghera), wo dobara parh lo
+                await settings.load();
               },
             ),
           ],
