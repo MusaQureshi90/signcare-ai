@@ -12,6 +12,7 @@ import 'body_diagram_screen.dart';
 import 'emotion_screen.dart';
 import 'settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,35 +65,12 @@ class _SignCareAppState extends State<SignCareApp> {
     });
   }
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SignCare AI',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        useMaterial3: true,
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.grey[100],
-        cardColor: Colors.white,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.teal,
-        useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        cardColor: const Color(0xFF1E1E1E),
-        dialogBackgroundColor: const Color(0xFF1E1E1E),
-        colorScheme: const ColorScheme.dark(
-          primary: Colors.teal,
-          surface: Color(0xFF1E1E1E),
-          onSurface: Colors.white,
-        ),
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white70),
-          titleLarge: TextStyle(color: Colors.white),
-        ),
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       themeMode: _themeMode,
       locale: _locale,
       home: SplashScreen(

@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "appName": "SignCare AI",
+  "tagline": "Your Voice. Our Care.",
+  "ok": "OK",
+  "cancel": "Cancel",
+  "back": "Back",
+  "next": "Next",
+  "save": "Save",
+  "delete": "Delete",
+  "close": "Close",
+  "retry": "Try again",
+  "yes": "Yes",
+  "no": "No",
+  "navHome": "Home",
+  "navMessages": "Messages",
+  "navProfile": "Profile"
+}
