@@ -4,7 +4,6 @@ import 'app_settings.dart';
 import 'app_theme.dart';
 import 'l10n_ext.dart';
 import 'user_profile.dart';
-import 'profile_screen.dart';
 import 'common_needs_screen.dart';
 import 'custom_message_screen.dart';
 import 'symptoms_screen.dart';
@@ -85,11 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               actions: [
-                IconButton(
-                  tooltip: l10n.profileTitle,
-                  icon: Icon(Icons.person_outline, color: colors.primary),
-                  onPressed: () => _open(context, const ProfileScreen()),
-                ),
+                
                 IconButton(
                   tooltip: l10n.settings,
                   icon: Icon(Icons.settings, color: colors.primary),

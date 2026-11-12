@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
@@ -74,14 +75,14 @@ class UserProfile extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// true  = server par bhi save ho gaya
-  /// false = sirf is device par save hua (internet nahi tha)
-  Future<bool> save({
+  /// Pehle is device par save (foran). Server par bhejna background mein hota
+  /// hai, isliye ye function kabhi atakta nahi.
+  Future<void> save({
     required String newName,
     required DateTime dob,
     required String newGender,
   }) async {
-    if (phone.isEmpty) return false;
+    if (phone.isEmpty) return;
 
     final dd = dob.day.toString().padLeft(2, '0');
     final mm = dob.month.toString().padLeft(2, '0');
@@ -97,13 +98,13 @@ class UserProfile extends ChangeNotifier {
     await prefs.setString('reg_gender_$phone', gender);
     notifyListeners();
 
-    return _syncToServer(prefs);
+    unawaited(_syncToServer(prefs));
   }
 
-  Future<bool> _syncToServer(SharedPreferences prefs) async {
+  Future<void> _syncToServer(SharedPreferences prefs) async {
     // Pehle server se parho. Na parh sako to khali data likhne se bacho.
     final server = await ApiService.getPreferences(phone);
-    if (server == null) return false;
+    if (server == null) return;
 
     String password = prefs.getString('reg_pass_$phone') ?? '';
     if (password.isEmpty) {
@@ -125,6 +126,5 @@ class UserProfile extends ChangeNotifier {
       themeName,
       s.homeLayout,
     );
-    return true;
   }
 }

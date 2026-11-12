@@ -109,5 +109,11 @@
   "profileSavedLocalOnly": "Saved on this device. Could not reach the server.",
   "profileNameError": "Please enter your name (at least 2 letters).",
   "profileDobError": "Please select your date of birth.",
-  "profileGenderError": "Please select your gender."
+  "profileGenderError": "Please select your gender.",
+
+  "dobDialogTitle": "Select date of birth",
+  "dobYear": "Year",
+  "dobMonth": "Month",
+  "dobDay": "Day",
+  "dobConfirm": "Confirm"
 }

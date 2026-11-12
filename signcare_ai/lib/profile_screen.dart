@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_theme.dart';
+import 'dob_picker.dart';
 import 'l10n_ext.dart';
 import 'user_profile.dart';
 
@@ -42,13 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _pickDob() async {
-    final now = DateTime.now();
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: _dob ?? DateTime(now.year - 20, 1, 1),
-      firstDate: DateTime(now.year - 110),
-      lastDate: now,
-    );
+    final picked = await showDobPicker(context, initial: _dob);
     if (picked != null && mounted) {
       setState(() {
         _dob = picked;
@@ -79,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     setState(() => _saving = true);
-    final bool savedOnServer = await profile.save(
+    await profile.save(
       newName: name,
       dob: _dob!,
       newGender: _gender,
@@ -87,13 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (!mounted) return;
     setState(() => _saving = false);
 
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          savedOnServer ? l10n.profileSaved : l10n.profileSavedLocalOnly,
-        ),
-      ),
-    );
+    messenger.showSnackBar(SnackBar(content: Text(l10n.profileSaved)));
     navigator.pop();
   }
 

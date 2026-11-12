@@ -601,6 +601,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please select your gender.'**
   String get profileGenderError;
+
+  /// No description provided for @dobDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select date of birth'**
+  String get dobDialogTitle;
+
+  /// No description provided for @dobYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get dobYear;
+
+  /// No description provided for @dobMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get dobMonth;
+
+  /// No description provided for @dobDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get dobDay;
+
+  /// No description provided for @dobConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get dobConfirm;
 }
 
 class _AppLocalizationsDelegate

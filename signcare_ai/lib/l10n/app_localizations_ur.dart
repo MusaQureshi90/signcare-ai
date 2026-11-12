@@ -272,4 +272,19 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get profileGenderError => 'براہ کرم اپنی جنس منتخب کریں۔';
+
+  @override
+  String get dobDialogTitle => 'تاریخ پیدائش منتخب کریں';
+
+  @override
+  String get dobYear => 'سال';
+
+  @override
+  String get dobMonth => 'مہینہ';
+
+  @override
+  String get dobDay => 'دن';
+
+  @override
+  String get dobConfirm => 'تصدیق کریں';
 }

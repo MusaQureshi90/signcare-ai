@@ -88,5 +88,11 @@
   "profileSavedLocalOnly": "اس ڈیوائس پر محفوظ ہو گئی، سرور سے رابطہ نہیں ہو سکا۔",
   "profileNameError": "براہ کرم اپنا نام لکھیں (کم از کم 2 حروف)۔",
   "profileDobError": "براہ کرم تاریخ پیدائش منتخب کریں۔",
-  "profileGenderError": "براہ کرم اپنی جنس منتخب کریں۔"
+  "profileGenderError": "براہ کرم اپنی جنس منتخب کریں۔",
+
+  "dobDialogTitle": "تاریخ پیدائش منتخب کریں",
+  "dobYear": "سال",
+  "dobMonth": "مہینہ",
+  "dobDay": "دن",
+  "dobConfirm": "تصدیق کریں"
 }

@@ -273,4 +273,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileGenderError => 'Please select your gender.';
+
+  @override
+  String get dobDialogTitle => 'Select date of birth';
+
+  @override
+  String get dobYear => 'Year';
+
+  @override
+  String get dobMonth => 'Month';
+
+  @override
+  String get dobDay => 'Day';
+
+  @override
+  String get dobConfirm => 'Confirm';
 }
