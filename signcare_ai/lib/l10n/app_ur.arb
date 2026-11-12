@@ -94,5 +94,18 @@
   "dobYear": "سال",
   "dobMonth": "مہینہ",
   "dobDay": "دن",
-  "dobConfirm": "تصدیق کریں"
+  "dobConfirm": "تصدیق کریں",
+
+  "typeTitle": "لکھیں اور سنائیں",
+  "typeInstruction": "جو بات ڈاکٹر یا مددگار کو بتانی ہے وہ لکھیں:",
+  "typeHint": "اپنا پیغام یہاں لکھیں...",
+  "typeSpeak": "بلند آواز میں سنائیں",
+  "typeStop": "روکیں",
+  "typeAddToSummary": "میرے خلاصے میں شامل کریں",
+  "typeClear": "صاف کریں",
+  "typeEmptyError": "براہ کرم پہلے پیغام لکھیں۔",
+  "typeAdded": "آپ کے خلاصے میں شامل ہو گیا",
+  "ttsVoiceMissingTitle": "اردو آواز انسٹال نہیں ہے",
+  "ttsVoiceMissingBody": "آپ کے فون میں ٹیکسٹ ٹو اسپیچ کے لیے اردو آواز موجود نہیں۔ فون کی سیٹنگز میں Text-to-speech output تلاش کریں، Google Speech Services چنیں اور اردو وائس ڈیٹا انسٹال کریں۔ پھر دوبارہ کوشش کریں۔",
+  "ttsError": "ابھی آواز نہیں چل سکی۔ براہ کرم دوبارہ کوشش کریں۔"
 }

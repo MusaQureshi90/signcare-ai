@@ -287,4 +287,41 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get dobConfirm => 'تصدیق کریں';
+
+  @override
+  String get typeTitle => 'لکھیں اور سنائیں';
+
+  @override
+  String get typeInstruction => 'جو بات ڈاکٹر یا مددگار کو بتانی ہے وہ لکھیں:';
+
+  @override
+  String get typeHint => 'اپنا پیغام یہاں لکھیں...';
+
+  @override
+  String get typeSpeak => 'بلند آواز میں سنائیں';
+
+  @override
+  String get typeStop => 'روکیں';
+
+  @override
+  String get typeAddToSummary => 'میرے خلاصے میں شامل کریں';
+
+  @override
+  String get typeClear => 'صاف کریں';
+
+  @override
+  String get typeEmptyError => 'براہ کرم پہلے پیغام لکھیں۔';
+
+  @override
+  String get typeAdded => 'آپ کے خلاصے میں شامل ہو گیا';
+
+  @override
+  String get ttsVoiceMissingTitle => 'اردو آواز انسٹال نہیں ہے';
+
+  @override
+  String get ttsVoiceMissingBody =>
+      'آپ کے فون میں ٹیکسٹ ٹو اسپیچ کے لیے اردو آواز موجود نہیں۔ فون کی سیٹنگز میں Text-to-speech output تلاش کریں، Google Speech Services چنیں اور اردو وائس ڈیٹا انسٹال کریں۔ پھر دوبارہ کوشش کریں۔';
+
+  @override
+  String get ttsError => 'ابھی آواز نہیں چل سکی۔ براہ کرم دوبارہ کوشش کریں۔';
 }

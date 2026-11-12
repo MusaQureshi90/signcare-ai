@@ -288,4 +288,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dobConfirm => 'Confirm';
+
+  @override
+  String get typeTitle => 'Type & Speak';
+
+  @override
+  String get typeInstruction =>
+      'Type what you want to tell the doctor or helper:';
+
+  @override
+  String get typeHint => 'Type your message here...';
+
+  @override
+  String get typeSpeak => 'Speak aloud';
+
+  @override
+  String get typeStop => 'Stop';
+
+  @override
+  String get typeAddToSummary => 'Add to my summary';
+
+  @override
+  String get typeClear => 'Clear';
+
+  @override
+  String get typeEmptyError => 'Please type a message first.';
+
+  @override
+  String get typeAdded => 'Added to your summary';
+
+  @override
+  String get ttsVoiceMissingTitle => 'Urdu voice not installed';
+
+  @override
+  String get ttsVoiceMissingBody =>
+      'Your phone has no Urdu voice for text-to-speech. Open phone Settings, search for Text-to-speech output, choose Google Speech Services, and install the Urdu voice data. Then try again.';
+
+  @override
+  String get ttsError => 'Could not speak right now. Please try again.';
 }

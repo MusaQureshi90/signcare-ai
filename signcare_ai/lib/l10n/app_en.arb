@@ -115,5 +115,18 @@
   "dobYear": "Year",
   "dobMonth": "Month",
   "dobDay": "Day",
-  "dobConfirm": "Confirm"
+  "dobConfirm": "Confirm",
+
+  "typeTitle": "Type & Speak",
+  "typeInstruction": "Type what you want to tell the doctor or helper:",
+  "typeHint": "Type your message here...",
+  "typeSpeak": "Speak aloud",
+  "typeStop": "Stop",
+  "typeAddToSummary": "Add to my summary",
+  "typeClear": "Clear",
+  "typeEmptyError": "Please type a message first.",
+  "typeAdded": "Added to your summary",
+  "ttsVoiceMissingTitle": "Urdu voice not installed",
+  "ttsVoiceMissingBody": "Your phone has no Urdu voice for text-to-speech. Open phone Settings, search for Text-to-speech output, choose Google Speech Services, and install the Urdu voice data. Then try again.",
+  "ttsError": "Could not speak right now. Please try again."
 }

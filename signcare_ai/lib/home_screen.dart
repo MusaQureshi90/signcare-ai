@@ -65,26 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Scaffold(
             appBar: AppBar(
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.appName,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: colors.primary,
-                    ),
-                  ),
-                  Text(
-                    l10n.welcomeUser(displayName),
-                    style: context.text.bodySmall
-                        ?.copyWith(color: colors.onSurfaceVariant),
-                  ),
-                ],
+              title: Text(
+                l10n.appName,
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: colors.primary,
+                ),
               ),
               actions: [
-                
                 IconButton(
                   tooltip: l10n.settings,
                   icon: Icon(Icons.settings, color: colors.primary),
@@ -109,6 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ?.copyWith(color: colors.onSurfaceVariant),
                   ),
                   const SizedBox(height: 16),
+                  _buildEmergencyBanner(context),
+                  const SizedBox(height: 16),
                   Expanded(
                     child: isGrid
                         ? _buildGrid(context, items)
@@ -123,7 +114,62 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ---------------- Menu ki list ----------------
+  // ---------------- Emergency banner (hamesha sabse upar) ----------------
+  Widget _buildEmergencyBanner(BuildContext context) {
+    final l10n = context.l10n;
+    final colors = context.colors;
+    return Card(
+      color: colors.errorContainer,
+      clipBehavior: Clip.antiAlias,
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        onTap: () => _open(context, const EmergencyScreen()),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(
+                Icons.warning_amber_rounded,
+                size: 36,
+                color: colors.onErrorContainer,
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.menuEmergencyTitle,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: colors.onErrorContainer,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      l10n.menuEmergencySubtitle,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: colors.onErrorContainer,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: colors.onErrorContainer,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ---------------- Menu ki list (naya order) ----------------
   List<_MenuItem> _menuItems(BuildContext context) {
     final l10n = context.l10n;
     return [
@@ -142,11 +188,25 @@ class _HomeScreenState extends State<HomeScreen> {
         screen: const CustomMessageScreen(),
       ),
       _MenuItem(
+        title: l10n.menuSpeechTitle,
+        subtitle: l10n.menuSpeechSubtitle,
+        icon: Icons.mic,
+        color: Colors.cyan,
+        screen: const SpeechToTextScreen(),
+      ),
+      _MenuItem(
         title: l10n.menuSymptomsTitle,
         subtitle: l10n.menuSymptomsSubtitle,
         icon: Icons.sick_outlined,
         color: Colors.orange,
         screen: const SymptomsScreen(),
+      ),
+      _MenuItem(
+        title: l10n.menuBodyTitle,
+        subtitle: l10n.menuBodySubtitle,
+        icon: Icons.accessibility_new,
+        color: Colors.pink,
+        screen: const BodyDiagramScreen(),
       ),
       _MenuItem(
         title: l10n.menuEmotionsTitle,
@@ -161,27 +221,6 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: Icons.assignment_outlined,
         color: Colors.green,
         screen: const ConsultationSummaryScreen(),
-      ),
-      _MenuItem(
-        title: l10n.menuEmergencyTitle,
-        subtitle: l10n.menuEmergencySubtitle,
-        icon: Icons.warning_amber_rounded,
-        color: Colors.red,
-        screen: const EmergencyScreen(),
-      ),
-      _MenuItem(
-        title: l10n.menuSpeechTitle,
-        subtitle: l10n.menuSpeechSubtitle,
-        icon: Icons.mic,
-        color: Colors.cyan,
-        screen: const SpeechToTextScreen(),
-      ),
-      _MenuItem(
-        title: l10n.menuBodyTitle,
-        subtitle: l10n.menuBodySubtitle,
-        icon: Icons.accessibility_new,
-        color: Colors.pink,
-        screen: const BodyDiagramScreen(),
       ),
     ];
   }

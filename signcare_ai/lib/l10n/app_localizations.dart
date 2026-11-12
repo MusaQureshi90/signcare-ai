@@ -631,6 +631,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm'**
   String get dobConfirm;
+
+  /// No description provided for @typeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Type & Speak'**
+  String get typeTitle;
+
+  /// No description provided for @typeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Type what you want to tell the doctor or helper:'**
+  String get typeInstruction;
+
+  /// No description provided for @typeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your message here...'**
+  String get typeHint;
+
+  /// No description provided for @typeSpeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak aloud'**
+  String get typeSpeak;
+
+  /// No description provided for @typeStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get typeStop;
+
+  /// No description provided for @typeAddToSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to my summary'**
+  String get typeAddToSummary;
+
+  /// No description provided for @typeClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get typeClear;
+
+  /// No description provided for @typeEmptyError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please type a message first.'**
+  String get typeEmptyError;
+
+  /// No description provided for @typeAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to your summary'**
+  String get typeAdded;
+
+  /// No description provided for @ttsVoiceMissingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Urdu voice not installed'**
+  String get ttsVoiceMissingTitle;
+
+  /// No description provided for @ttsVoiceMissingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your phone has no Urdu voice for text-to-speech. Open phone Settings, search for Text-to-speech output, choose Google Speech Services, and install the Urdu voice data. Then try again.'**
+  String get ttsVoiceMissingBody;
+
+  /// No description provided for @ttsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not speak right now. Please try again.'**
+  String get ttsError;
 }
 
 class _AppLocalizationsDelegate
