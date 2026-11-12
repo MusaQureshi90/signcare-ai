@@ -216,4 +216,61 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get setNoteBody =>
       'SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services.';
+
+  @override
+  String get profileTitle => 'My profile';
+
+  @override
+  String get profileEditHint => 'Edit your name, date of birth and gender';
+
+  @override
+  String get profileName => 'Full name';
+
+  @override
+  String get profilePhoneNote => 'Your phone number cannot be changed.';
+
+  @override
+  String get profileDob => 'Date of birth';
+
+  @override
+  String get profileDobHint => 'Select date';
+
+  @override
+  String profileAge(int years) {
+    return 'Age: $years';
+  }
+
+  @override
+  String get profileGender => 'Gender';
+
+  @override
+  String get genderMale => 'Male';
+
+  @override
+  String get genderFemale => 'Female';
+
+  @override
+  String get genderOther => 'Other';
+
+  @override
+  String get profileGenderNote => 'Your body diagram is shown based on this.';
+
+  @override
+  String get profileSave => 'Save changes';
+
+  @override
+  String get profileSaved => 'Profile saved';
+
+  @override
+  String get profileSavedLocalOnly =>
+      'Saved on this device. Could not reach the server.';
+
+  @override
+  String get profileNameError => 'Please enter your name (at least 2 letters).';
+
+  @override
+  String get profileDobError => 'Please select your date of birth.';
+
+  @override
+  String get profileGenderError => 'Please select your gender.';
 }

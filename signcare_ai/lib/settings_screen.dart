@@ -9,6 +9,7 @@ import 'app_theme.dart';
 import 'consultation_manager.dart';
 import 'l10n_ext.dart';
 import 'login_screen.dart';
+import 'profile_screen.dart';
 
 const String _supportEmail = 'mformusa11@gmail.com';
 const String _portfolioUrl = 'https://musaqureshi.pythonanywhere.com';
@@ -34,6 +35,26 @@ class SettingsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
+                            // ---------------- Profile ----------------
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.person_outline, color: colors.primary),
+                  title: Text(
+                    l10n.profileTitle,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(l10n.profileEditHint),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: colors.onSurfaceVariant,
+                  ),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                  ),
+                ),
+              ),
               // ---------------- Language ----------------
               _SectionTitle(l10n.setLanguageSection),
               Card(

@@ -214,4 +214,62 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get setNoteBody =>
       'SignCare AI آپ کو بات چیت میں مدد دیتی ہے۔ یہ طبی مشورہ نہیں دیتی اور نہ ہی ڈاکٹر یا ہنگامی خدمات کا متبادل ہے۔';
+
+  @override
+  String get profileTitle => 'میری پروفائل';
+
+  @override
+  String get profileEditHint => 'اپنا نام، تاریخ پیدائش اور جنس تبدیل کریں';
+
+  @override
+  String get profileName => 'پورا نام';
+
+  @override
+  String get profilePhoneNote => 'آپ کا فون نمبر تبدیل نہیں ہو سکتا۔';
+
+  @override
+  String get profileDob => 'تاریخ پیدائش';
+
+  @override
+  String get profileDobHint => 'تاریخ منتخب کریں';
+
+  @override
+  String profileAge(int years) {
+    return 'عمر: $years سال';
+  }
+
+  @override
+  String get profileGender => 'جنس';
+
+  @override
+  String get genderMale => 'مرد';
+
+  @override
+  String get genderFemale => 'عورت';
+
+  @override
+  String get genderOther => 'دیگر';
+
+  @override
+  String get profileGenderNote =>
+      'آپ کا جسمانی نقشہ اسی کے مطابق دکھایا جاتا ہے۔';
+
+  @override
+  String get profileSave => 'تبدیلیاں محفوظ کریں';
+
+  @override
+  String get profileSaved => 'پروفائل محفوظ ہو گئی';
+
+  @override
+  String get profileSavedLocalOnly =>
+      'اس ڈیوائس پر محفوظ ہو گئی، سرور سے رابطہ نہیں ہو سکا۔';
+
+  @override
+  String get profileNameError => 'براہ کرم اپنا نام لکھیں (کم از کم 2 حروف)۔';
+
+  @override
+  String get profileDobError => 'براہ کرم تاریخ پیدائش منتخب کریں۔';
+
+  @override
+  String get profileGenderError => 'براہ کرم اپنی جنس منتخب کریں۔';
 }

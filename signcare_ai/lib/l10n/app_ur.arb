@@ -69,5 +69,24 @@
   "setVisitWebsite": "ویب سائٹ کھولیں",
   "setVersion": "ایپ ورژن",
   "setNoteTitle": "اہم نوٹ",
-  "setNoteBody": "SignCare AI آپ کو بات چیت میں مدد دیتی ہے۔ یہ طبی مشورہ نہیں دیتی اور نہ ہی ڈاکٹر یا ہنگامی خدمات کا متبادل ہے۔"
+  "setNoteBody": "SignCare AI آپ کو بات چیت میں مدد دیتی ہے۔ یہ طبی مشورہ نہیں دیتی اور نہ ہی ڈاکٹر یا ہنگامی خدمات کا متبادل ہے۔",
+
+  "profileTitle": "میری پروفائل",
+  "profileEditHint": "اپنا نام، تاریخ پیدائش اور جنس تبدیل کریں",
+  "profileName": "پورا نام",
+  "profilePhoneNote": "آپ کا فون نمبر تبدیل نہیں ہو سکتا۔",
+  "profileDob": "تاریخ پیدائش",
+  "profileDobHint": "تاریخ منتخب کریں",
+  "profileAge": "عمر: {years} سال",
+  "profileGender": "جنس",
+  "genderMale": "مرد",
+  "genderFemale": "عورت",
+  "genderOther": "دیگر",
+  "profileGenderNote": "آپ کا جسمانی نقشہ اسی کے مطابق دکھایا جاتا ہے۔",
+  "profileSave": "تبدیلیاں محفوظ کریں",
+  "profileSaved": "پروفائل محفوظ ہو گئی",
+  "profileSavedLocalOnly": "اس ڈیوائس پر محفوظ ہو گئی، سرور سے رابطہ نہیں ہو سکا۔",
+  "profileNameError": "براہ کرم اپنا نام لکھیں (کم از کم 2 حروف)۔",
+  "profileDobError": "براہ کرم تاریخ پیدائش منتخب کریں۔",
+  "profileGenderError": "براہ کرم اپنی جنس منتخب کریں۔"
 }

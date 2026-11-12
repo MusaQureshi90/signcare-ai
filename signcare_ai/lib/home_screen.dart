@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'app_settings.dart';
 import 'app_theme.dart';
 import 'l10n_ext.dart';
+import 'user_profile.dart';
+import 'profile_screen.dart';
 import 'common_needs_screen.dart';
 import 'custom_message_screen.dart';
 import 'symptoms_screen.dart';
@@ -13,7 +15,7 @@ import 'speech_to_text_screen.dart';
 import 'body_diagram_screen.dart';
 import 'settings_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final String userName;
 
   // Purani screens (splash / login / otp) ye dono abhi bhi bhejti hain.
@@ -29,17 +31,32 @@ class HomeScreen extends StatelessWidget {
   });
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Login ke baad is user ka profile load karo
+    UserProfile.instance.load();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final settings = AppSettings.instance;
+    final profile = UserProfile.instance;
 
-    // Language / layout badle to Home khud update ho jaye
+    // Settings ya profile badle to Home khud update ho jaye
     return ListenableBuilder(
-      listenable: settings,
+      listenable: Listenable.merge([settings, profile]),
       builder: (context, _) {
         final l10n = context.l10n;
         final colors = context.colors;
         final items = _menuItems(context);
         final bool isGrid = settings.homeLayout == 'Grid';
+        final String displayName =
+            profile.name.isNotEmpty ? profile.name : widget.userName;
 
         return PopScope(
           canPop: false,
@@ -61,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    l10n.welcomeUser(userName),
+                    l10n.welcomeUser(displayName),
                     style: context.text.bodySmall
                         ?.copyWith(color: colors.onSurfaceVariant),
                   ),
@@ -69,9 +86,14 @@ class HomeScreen extends StatelessWidget {
               ),
               actions: [
                 IconButton(
+                  tooltip: l10n.profileTitle,
+                  icon: Icon(Icons.person_outline, color: colors.primary),
+                  onPressed: () => _open(context, const ProfileScreen()),
+                ),
+                IconButton(
                   tooltip: l10n.settings,
                   icon: Icon(Icons.settings, color: colors.primary),
-                  onPressed: () => _openSettings(context),
+                  onPressed: () => _open(context, const SettingsScreen()),
                 ),
               ],
             ),
@@ -81,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.helloUser(userName),
+                    l10n.helloUser(displayName),
                     style: context.text.headlineSmall
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -252,13 +274,6 @@ class HomeScreen extends StatelessWidget {
   // ---------------- Actions ----------------
   void _open(BuildContext context, Widget screen) {
     Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
-  }
-
-    void _openSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const SettingsScreen()),
-    );
   }
 
   Future<void> _confirmExit(BuildContext context) async {

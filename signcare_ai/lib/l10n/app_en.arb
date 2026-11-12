@@ -83,5 +83,31 @@
   "setVisitWebsite": "Visit website",
   "setVersion": "App version",
   "setNoteTitle": "Important note",
-  "setNoteBody": "SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services."
+  "setNoteBody": "SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services.",
+
+  "profileTitle": "My profile",
+  "profileEditHint": "Edit your name, date of birth and gender",
+  "profileName": "Full name",
+  "profilePhoneNote": "Your phone number cannot be changed.",
+  "profileDob": "Date of birth",
+  "profileDobHint": "Select date",
+  "profileAge": "Age: {years}",
+  "@profileAge": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "profileGender": "Gender",
+  "genderMale": "Male",
+  "genderFemale": "Female",
+  "genderOther": "Other",
+  "profileGenderNote": "Your body diagram is shown based on this.",
+  "profileSave": "Save changes",
+  "profileSaved": "Profile saved",
+  "profileSavedLocalOnly": "Saved on this device. Could not reach the server.",
+  "profileNameError": "Please enter your name (at least 2 letters).",
+  "profileDobError": "Please select your date of birth.",
+  "profileGenderError": "Please select your gender."
 }

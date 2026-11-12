@@ -493,6 +493,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services.'**
   String get setNoteBody;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My profile'**
+  String get profileTitle;
+
+  /// No description provided for @profileEditHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit your name, date of birth and gender'**
+  String get profileEditHint;
+
+  /// No description provided for @profileName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get profileName;
+
+  /// No description provided for @profilePhoneNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your phone number cannot be changed.'**
+  String get profilePhoneNote;
+
+  /// No description provided for @profileDob.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of birth'**
+  String get profileDob;
+
+  /// No description provided for @profileDobHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select date'**
+  String get profileDobHint;
+
+  /// No description provided for @profileAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Age: {years}'**
+  String profileAge(int years);
+
+  /// No description provided for @profileGender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get profileGender;
+
+  /// No description provided for @genderMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get genderMale;
+
+  /// No description provided for @genderFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get genderFemale;
+
+  /// No description provided for @genderOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get genderOther;
+
+  /// No description provided for @profileGenderNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your body diagram is shown based on this.'**
+  String get profileGenderNote;
+
+  /// No description provided for @profileSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profileSave;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile saved'**
+  String get profileSaved;
+
+  /// No description provided for @profileSavedLocalOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this device. Could not reach the server.'**
+  String get profileSavedLocalOnly;
+
+  /// No description provided for @profileNameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your name (at least 2 letters).'**
+  String get profileNameError;
+
+  /// No description provided for @profileDobError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select your date of birth.'**
+  String get profileDobError;
+
+  /// No description provided for @profileGenderError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select your gender.'**
+  String get profileGenderError;
 }
 
 class _AppLocalizationsDelegate
