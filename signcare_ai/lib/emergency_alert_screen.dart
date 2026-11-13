@@ -22,7 +22,7 @@ class _EmergencyAlertScreenState extends State<EmergencyAlertScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _blink = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 700),
+    duration: const Duration(milliseconds: 500),
   )..repeat(reverse: true);
 
   Timer? _speechTimer;
@@ -45,7 +45,7 @@ class _EmergencyAlertScreenState extends State<EmergencyAlertScreen>
 
     _speak();
     _speechTimer =
-        Timer.periodic(const Duration(seconds: 8), (_) => _speak());
+        Timer.periodic(const Duration(seconds: 6), (_) => _speak());
     _hapticTimer = Timer.periodic(
       const Duration(milliseconds: 1000),
       (_) => HapticFeedback.heavyImpact(),

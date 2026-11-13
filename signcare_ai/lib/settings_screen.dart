@@ -167,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
                     ListTile(
                       leading: Icon(Icons.language, color: colors.primary),
                       title: Text(l10n.setPortfolioTitle),
-                      subtitle: const Text('Profile'),
+                      subtitle: const Text(''),
                       onTap: () => _showPortfolioDialog(context),
                     ),
                     const Divider(height: 1),
