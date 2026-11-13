@@ -326,4 +326,119 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ttsError => 'Could not speak right now. Please try again.';
+
+  @override
+  String get sumTitle => 'My summary';
+
+  @override
+  String get sumHistory => 'History';
+
+  @override
+  String get sumEmptyTitle => 'Nothing added yet';
+
+  @override
+  String get sumEmptyBody =>
+      'Cards, symptoms, emotions and messages you add will appear here as one clear summary for the doctor.';
+
+  @override
+  String get sumReportTitle => 'Patient summary';
+
+  @override
+  String get sumDisclaimer => 'Patient-reported information. Not a diagnosis.';
+
+  @override
+  String get sumCreatedWith => 'Created with SignCare AI';
+
+  @override
+  String sumCreated(String date) {
+    return 'Created $date';
+  }
+
+  @override
+  String get catCards => 'Communication cards';
+
+  @override
+  String get catTyped => 'Typed messages';
+
+  @override
+  String get catSymptom => 'Symptoms and pain';
+
+  @override
+  String get catBody => 'Body diagram';
+
+  @override
+  String get catEmotion => 'Emotions';
+
+  @override
+  String get catEmergency => 'Emergency';
+
+  @override
+  String get catSpeech => 'Conversation';
+
+  @override
+  String get catNote => 'Notes';
+
+  @override
+  String get catOther => 'Other';
+
+  @override
+  String get sumShowMode => 'Show to doctor';
+
+  @override
+  String get sumShare => 'Share';
+
+  @override
+  String get sumShareImage => 'Share as image';
+
+  @override
+  String get sumShareText => 'Share as text';
+
+  @override
+  String get sumSaveHistory => 'Save to history';
+
+  @override
+  String get sumSaved => 'Saved to history';
+
+  @override
+  String get sumClear => 'Clear all';
+
+  @override
+  String get sumClearTitle => 'Clear summary?';
+
+  @override
+  String get sumClearBody => 'All items in this summary will be removed.';
+
+  @override
+  String get sumAddNote => 'Add a note';
+
+  @override
+  String get sumNoteHint => 'Write a note for the doctor...';
+
+  @override
+  String get sumShareFailed => 'Could not share right now. Please try again.';
+
+  @override
+  String get sumHistoryTitle => 'Saved summaries';
+
+  @override
+  String get sumHistoryEmpty =>
+      'No saved summaries yet. Tap Save to history on your summary.';
+
+  @override
+  String sumHistoryCount(int count) {
+    return '$count items';
+  }
+
+  @override
+  String get sumDeleteReportTitle => 'Delete this summary?';
+
+  @override
+  String get sumDeleteReportBody =>
+      'This saved summary will be removed from this device.';
+
+  @override
+  String get sumReadAloud => 'Read aloud';
+
+  @override
+  String get sumRemoveItem => 'Remove';
 }

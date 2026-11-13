@@ -1,27 +1,16 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'summary_store.dart';
 
+/// Purani screens ke liye bridge. Naya code seedha SummaryStore use kare.
 class ConsultationManager {
-  // Using ValueNotifier for real-time reactive UI updates
-  static final ValueNotifier<List<Map<String, String>>> itemsNotifier = ValueNotifier([]);
-
-  static List<Map<String, String>> get items => itemsNotifier.value;
-
   static void addItem(String category, String description) {
-    final updatedList = List<Map<String, String>>.from(itemsNotifier.value);
-    updatedList.add({
-      'category': category,
-      'description': description,
-    });
-    itemsNotifier.value = updatedList;
+    unawaited(
+      SummaryStore.instance.add(SummaryCategory.fromLegacy(category), description),
+    );
   }
 
-  static void removeItem(int index) {
-    final updatedList = List<Map<String, String>>.from(itemsNotifier.value);
-    updatedList.removeAt(index);
-    itemsNotifier.value = updatedList;
-  }
-
+  /// Logout par memory saaf (saved data phone mein rehta hai)
   static void clear() {
-    itemsNotifier.value = [];
+    SummaryStore.instance.unload();
   }
 }

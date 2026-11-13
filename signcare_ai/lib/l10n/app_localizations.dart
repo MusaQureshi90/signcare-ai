@@ -703,6 +703,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not speak right now. Please try again.'**
   String get ttsError;
+
+  /// No description provided for @sumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My summary'**
+  String get sumTitle;
+
+  /// No description provided for @sumHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get sumHistory;
+
+  /// No description provided for @sumEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing added yet'**
+  String get sumEmptyTitle;
+
+  /// No description provided for @sumEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards, symptoms, emotions and messages you add will appear here as one clear summary for the doctor.'**
+  String get sumEmptyBody;
+
+  /// No description provided for @sumReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient summary'**
+  String get sumReportTitle;
+
+  /// No description provided for @sumDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient-reported information. Not a diagnosis.'**
+  String get sumDisclaimer;
+
+  /// No description provided for @sumCreatedWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Created with SignCare AI'**
+  String get sumCreatedWith;
+
+  /// No description provided for @sumCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created {date}'**
+  String sumCreated(String date);
+
+  /// No description provided for @catCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication cards'**
+  String get catCards;
+
+  /// No description provided for @catTyped.
+  ///
+  /// In en, this message translates to:
+  /// **'Typed messages'**
+  String get catTyped;
+
+  /// No description provided for @catSymptom.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms and pain'**
+  String get catSymptom;
+
+  /// No description provided for @catBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Body diagram'**
+  String get catBody;
+
+  /// No description provided for @catEmotion.
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions'**
+  String get catEmotion;
+
+  /// No description provided for @catEmergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency'**
+  String get catEmergency;
+
+  /// No description provided for @catSpeech.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation'**
+  String get catSpeech;
+
+  /// No description provided for @catNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get catNote;
+
+  /// No description provided for @catOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get catOther;
+
+  /// No description provided for @sumShowMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Show to doctor'**
+  String get sumShowMode;
+
+  /// No description provided for @sumShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get sumShare;
+
+  /// No description provided for @sumShareImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share as image'**
+  String get sumShareImage;
+
+  /// No description provided for @sumShareText.
+  ///
+  /// In en, this message translates to:
+  /// **'Share as text'**
+  String get sumShareText;
+
+  /// No description provided for @sumSaveHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to history'**
+  String get sumSaveHistory;
+
+  /// No description provided for @sumSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to history'**
+  String get sumSaved;
+
+  /// No description provided for @sumClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get sumClear;
+
+  /// No description provided for @sumClearTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear summary?'**
+  String get sumClearTitle;
+
+  /// No description provided for @sumClearBody.
+  ///
+  /// In en, this message translates to:
+  /// **'All items in this summary will be removed.'**
+  String get sumClearBody;
+
+  /// No description provided for @sumAddNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note'**
+  String get sumAddNote;
+
+  /// No description provided for @sumNoteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a note for the doctor...'**
+  String get sumNoteHint;
+
+  /// No description provided for @sumShareFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not share right now. Please try again.'**
+  String get sumShareFailed;
+
+  /// No description provided for @sumHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved summaries'**
+  String get sumHistoryTitle;
+
+  /// No description provided for @sumHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved summaries yet. Tap Save to history on your summary.'**
+  String get sumHistoryEmpty;
+
+  /// No description provided for @sumHistoryCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items'**
+  String sumHistoryCount(int count);
+
+  /// No description provided for @sumDeleteReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this summary?'**
+  String get sumDeleteReportTitle;
+
+  /// No description provided for @sumDeleteReportBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This saved summary will be removed from this device.'**
+  String get sumDeleteReportBody;
+
+  /// No description provided for @sumReadAloud.
+  ///
+  /// In en, this message translates to:
+  /// **'Read aloud'**
+  String get sumReadAloud;
+
+  /// No description provided for @sumRemoveItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get sumRemoveItem;
 }
 
 class _AppLocalizationsDelegate

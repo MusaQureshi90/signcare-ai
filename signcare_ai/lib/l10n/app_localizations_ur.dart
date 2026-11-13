@@ -324,4 +324,121 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get ttsError => 'ابھی آواز نہیں چل سکی۔ براہ کرم دوبارہ کوشش کریں۔';
+
+  @override
+  String get sumTitle => 'میرا خلاصہ';
+
+  @override
+  String get sumHistory => 'تاریخچہ';
+
+  @override
+  String get sumEmptyTitle => 'ابھی کچھ شامل نہیں کیا';
+
+  @override
+  String get sumEmptyBody =>
+      'آپ جو کارڈز، علامات، جذبات اور پیغامات شامل کریں گے وہ یہاں ڈاکٹر کے لیے ایک واضح خلاصے کی صورت میں نظر آئیں گے۔';
+
+  @override
+  String get sumReportTitle => 'مریض کا خلاصہ';
+
+  @override
+  String get sumDisclaimer =>
+      'یہ معلومات مریض کی بتائی ہوئی ہیں۔ یہ طبی تشخیص نہیں ہے۔';
+
+  @override
+  String get sumCreatedWith => 'SignCare AI سے بنایا گیا';
+
+  @override
+  String sumCreated(String date) {
+    return 'بنایا گیا $date';
+  }
+
+  @override
+  String get catCards => 'مواصلاتی کارڈز';
+
+  @override
+  String get catTyped => 'لکھے ہوئے پیغامات';
+
+  @override
+  String get catSymptom => 'علامات اور درد';
+
+  @override
+  String get catBody => 'جسم کا نقشہ';
+
+  @override
+  String get catEmotion => 'جذبات';
+
+  @override
+  String get catEmergency => 'ہنگامی';
+
+  @override
+  String get catSpeech => 'گفتگو';
+
+  @override
+  String get catNote => 'نوٹس';
+
+  @override
+  String get catOther => 'دیگر';
+
+  @override
+  String get sumShowMode => 'ڈاکٹر کو دکھائیں';
+
+  @override
+  String get sumShare => 'شیئر کریں';
+
+  @override
+  String get sumShareImage => 'تصویر کی صورت میں شیئر کریں';
+
+  @override
+  String get sumShareText => 'تحریر کی صورت میں شیئر کریں';
+
+  @override
+  String get sumSaveHistory => 'تاریخچے میں محفوظ کریں';
+
+  @override
+  String get sumSaved => 'تاریخچے میں محفوظ ہو گیا';
+
+  @override
+  String get sumClear => 'سب صاف کریں';
+
+  @override
+  String get sumClearTitle => 'خلاصہ صاف کریں؟';
+
+  @override
+  String get sumClearBody => 'اس خلاصے کی تمام چیزیں ہٹا دی جائیں گی۔';
+
+  @override
+  String get sumAddNote => 'نوٹ شامل کریں';
+
+  @override
+  String get sumNoteHint => 'ڈاکٹر کے لیے نوٹ لکھیں...';
+
+  @override
+  String get sumShareFailed =>
+      'ابھی شیئر نہیں ہو سکا۔ براہ کرم دوبارہ کوشش کریں۔';
+
+  @override
+  String get sumHistoryTitle => 'محفوظ شدہ خلاصے';
+
+  @override
+  String get sumHistoryEmpty =>
+      'ابھی کوئی خلاصہ محفوظ نہیں۔ اپنے خلاصے پر تاریخچے میں محفوظ کریں دبائیں۔';
+
+  @override
+  String sumHistoryCount(int count) {
+    return '$count اندراجات';
+  }
+
+  @override
+  String get sumDeleteReportTitle => 'یہ خلاصہ حذف کریں؟';
+
+  @override
+  String get sumDeleteReportBody =>
+      'یہ محفوظ شدہ خلاصہ اس ڈیوائس سے ہٹا دیا جائے گا۔';
+
+  @override
+  String get sumReadAloud => 'بلند آواز میں سنیں';
+
+  @override
+  String get sumRemoveItem => 'ہٹائیں';
 }

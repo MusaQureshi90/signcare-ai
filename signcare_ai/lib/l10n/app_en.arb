@@ -128,5 +128,56 @@
   "typeAdded": "Added to your summary",
   "ttsVoiceMissingTitle": "Urdu voice not installed",
   "ttsVoiceMissingBody": "Your phone has no Urdu voice for text-to-speech. Open phone Settings, search for Text-to-speech output, choose Google Speech Services, and install the Urdu voice data. Then try again.",
-  "ttsError": "Could not speak right now. Please try again."
+  "ttsError": "Could not speak right now. Please try again.",
+
+  "sumTitle": "My summary",
+  "sumHistory": "History",
+  "sumEmptyTitle": "Nothing added yet",
+  "sumEmptyBody": "Cards, symptoms, emotions and messages you add will appear here as one clear summary for the doctor.",
+  "sumReportTitle": "Patient summary",
+  "sumDisclaimer": "Patient-reported information. Not a diagnosis.",
+  "sumCreatedWith": "Created with SignCare AI",
+  "sumCreated": "Created {date}",
+  "@sumCreated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "catCards": "Communication cards",
+  "catTyped": "Typed messages",
+  "catSymptom": "Symptoms and pain",
+  "catBody": "Body diagram",
+  "catEmotion": "Emotions",
+  "catEmergency": "Emergency",
+  "catSpeech": "Conversation",
+  "catNote": "Notes",
+  "catOther": "Other",
+  "sumShowMode": "Show to doctor",
+  "sumShare": "Share",
+  "sumShareImage": "Share as image",
+  "sumShareText": "Share as text",
+  "sumSaveHistory": "Save to history",
+  "sumSaved": "Saved to history",
+  "sumClear": "Clear all",
+  "sumClearTitle": "Clear summary?",
+  "sumClearBody": "All items in this summary will be removed.",
+  "sumAddNote": "Add a note",
+  "sumNoteHint": "Write a note for the doctor...",
+  "sumShareFailed": "Could not share right now. Please try again.",
+  "sumHistoryTitle": "Saved summaries",
+  "sumHistoryEmpty": "No saved summaries yet. Tap Save to history on your summary.",
+  "sumHistoryCount": "{count} items",
+  "@sumHistoryCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumDeleteReportTitle": "Delete this summary?",
+  "sumDeleteReportBody": "This saved summary will be removed from this device.",
+  "sumReadAloud": "Read aloud",
+  "sumRemoveItem": "Remove"
 }
