@@ -15,8 +15,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
-  
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   String? selectedGender;
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
@@ -32,8 +33,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              title: const Text('Select Date of Birth', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.teal)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: const Text(
+                'Select Date of Birth',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal,
+                ),
+              ),
               content: SizedBox(
                 width: 300,
                 child: Column(
@@ -42,12 +52,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Year:', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text(
+                          'Year:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         DropdownButton<int>(
                           value: selectedYear,
-                          items: List.generate(100, (index) => DateTime.now().year - index)
-                              .map((y) => DropdownMenuItem(value: y, child: Text(y.toString())))
-                              .toList(),
+                          items:
+                              List.generate(
+                                    100,
+                                    (index) => DateTime.now().year - index,
+                                  )
+                                  .map(
+                                    (y) => DropdownMenuItem(
+                                      value: y,
+                                      child: Text(y.toString()),
+                                    ),
+                                  )
+                                  .toList(),
                           onChanged: (val) {
                             setDialogState(() {
                               selectedYear = val!;
@@ -60,14 +82,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Month:', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text(
+                          'Month:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         DropdownButton<int>(
                           value: selectedMonth,
                           items: List.generate(12, (index) => index + 1)
-                              .map((m) => DropdownMenuItem(
-                                    value: m,
-                                    child: Text(_getMonthName(m)),
-                                  ))
+                              .map(
+                                (m) => DropdownMenuItem(
+                                  value: m,
+                                  child: Text(_getMonthName(m)),
+                                ),
+                              )
                               .toList(),
                           onChanged: (val) {
                             setDialogState(() {
@@ -81,12 +108,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Day:', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text(
+                          'Day:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         DropdownButton<int>(
-                          value: selectedDay > _daysInMonth(selectedYear, selectedMonth) ? _daysInMonth(selectedYear, selectedMonth) : selectedDay,
-                          items: List.generate(_daysInMonth(selectedYear, selectedMonth), (index) => index + 1)
-                              .map((d) => DropdownMenuItem(value: d, child: Text(d.toString())))
-                              .toList(),
+                          value:
+                              selectedDay >
+                                  _daysInMonth(selectedYear, selectedMonth)
+                              ? _daysInMonth(selectedYear, selectedMonth)
+                              : selectedDay,
+                          items:
+                              List.generate(
+                                    _daysInMonth(selectedYear, selectedMonth),
+                                    (index) => index + 1,
+                                  )
+                                  .map(
+                                    (d) => DropdownMenuItem(
+                                      value: d,
+                                      child: Text(d.toString()),
+                                    ),
+                                  )
+                                  .toList(),
                           onChanged: (val) {
                             setDialogState(() {
                               selectedDay = val!;
@@ -101,14 +144,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () {
                     int calculatedAge = DateTime.now().year - selectedYear;
                     setState(() {
-                      ageController.text = "$calculatedAge years (${selectedDay.toString().padLeft(2, '0')}/${selectedMonth.toString().padLeft(2, '0')}/$selectedYear)";
+                      ageController.text =
+                          "$calculatedAge years (${selectedDay.toString().padLeft(2, '0')}/${selectedMonth.toString().padLeft(2, '0')}/$selectedYear)";
                     });
                     Navigator.pop(context);
                   },
@@ -123,7 +173,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   String _getMonthName(int month) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     return months[month - 1];
   }
 
@@ -138,26 +201,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
 
-    if (name.isEmpty || phone.isEmpty || age.isEmpty || password.isEmpty || confirmPassword.isEmpty || selectedGender == null) {
+    if (name.isEmpty ||
+        phone.isEmpty ||
+        age.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty ||
+        selectedGender == null) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('All Fields Required'),
-          content: const Text('Please fill out all fields. Nothing can be left empty.'),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+          content: const Text(
+            'Please fill out all fields. Nothing can be left empty.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
       return;
     }
 
     final numericRegExp = RegExp(r'^[0-9]+$');
-    if (phone.length != 11 || !numericRegExp.hasMatch(phone) || !phone.startsWith('03')) {
+    if (phone.length != 11 ||
+        !numericRegExp.hasMatch(phone) ||
+        !phone.startsWith('03')) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Invalid Phone Number'),
-          content: const Text('Phone number must be strictly 11 numeric digits starting with 03 (no spaces or alphabets).'),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+          content: const Text(
+            'Phone number must be strictly 11 numeric digits starting with 03 (no spaces or alphabets).',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
       return;
@@ -169,7 +253,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         builder: (context) => AlertDialog(
           title: const Text('Weak Password'),
           content: const Text('Password must be at least 8 characters long.'),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
       return;
@@ -181,7 +270,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         builder: (context) => AlertDialog(
           title: const Text('Password Mismatch'),
           content: const Text('Password and Confirm Password do not match.'),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
       return;
@@ -194,12 +288,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Account Already Exists'),
-          content: const Text('This phone number is already registered. Please login instead.'),
+          content: const Text(
+            'This phone number is already registered. Please login instead.',
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
               },
               child: const Text('Go to Login'),
             ),
@@ -228,24 +327,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.teal[50],
-      appBar: AppBar(title: const Text('Register Account'), backgroundColor: Colors.teal, foregroundColor: Colors.white),
+      appBar: AppBar(
+        title: const Text('Register Account'),
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Card(
             elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text('Create Account', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.teal)),
+                  const Text(
+                    'Create Account',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal,
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   TextField(
                     controller: nameController,
-                    decoration: InputDecoration(labelText: 'Full Name *', border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+                    decoration: InputDecoration(
+                      labelText: 'Full Name *',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 15),
                   TextField(
@@ -255,7 +373,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                       labelText: 'Phone Number *',
                       hintText: 'e.g. 03001234567',
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -267,16 +387,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       labelText: 'Date of Birth / Age *',
                       hintText: 'Tap to select year, month & date',
                       suffixIcon: const Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 15),
                   DropdownButtonFormField<String>(
                     value: selectedGender,
                     hint: const Text('Choose Gender *'),
-                    items: ['Male', 'Female', 'Other'].map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
+                    items: ['Male', 'Female', 'Other']
+                        .map((g) => DropdownMenuItem(value: g, child: Text(g)))
+                        .toList(),
                     onChanged: (val) => setState(() => selectedGender = val),
-                    decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 15),
                   TextField(
@@ -284,10 +412,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       labelText: 'Password (Min 8 chars) *',
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       suffixIcon: IconButton(
-                        icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
-                        onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
                       ),
                     ),
                   ),
@@ -297,23 +433,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: _obscureConfirmPassword,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password *',
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       suffixIcon: IconButton(
-                        icon: Icon(_obscureConfirmPassword ? Icons.visibility_off : Icons.visibility),
-                        onPressed: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                        icon: Icon(
+                          _obscureConfirmPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () => setState(
+                          () => _obscureConfirmPassword =
+                              !_obscureConfirmPassword,
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: proceedToOtp,
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14)),
-                    child: const Text('Verify & Register', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: const Text(
+                      'Verify & Register',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 15),
                   TextButton(
-                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen())),
-                    child: const Text('Already have an account, login here.', style: TextStyle(color: Colors.teal)),
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    ),
+                    child: const Text(
+                      'Already have an account, login here.',
+                      style: TextStyle(color: Colors.teal),
+                    ),
                   ),
                 ],
               ),

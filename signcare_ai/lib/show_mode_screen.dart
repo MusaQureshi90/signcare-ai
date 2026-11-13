@@ -43,14 +43,16 @@ class ShowModeScreen extends StatelessWidget {
               if (profile.name.isNotEmpty)
                 Text(
                   profile.name,
-                  style: context.text.headlineMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                  style: context.text.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               if (info.isNotEmpty)
                 Text(
                   info,
-                  style: context.text.titleMedium
-                      ?.copyWith(color: colors.onSurfaceVariant),
+                  style: context.text.titleMedium?.copyWith(
+                    color: colors.onSurfaceVariant,
+                  ),
                 ),
               for (final code in codes) ...[
                 const SizedBox(height: 24),
@@ -59,8 +61,11 @@ class ShowModeScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 18,
                       backgroundColor: categoryColor(code).withAlpha(40),
-                      child: Icon(categoryIcon(code),
-                          color: categoryColor(code), size: 20),
+                      child: Icon(
+                        categoryIcon(code),
+                        color: categoryColor(code),
+                        size: 20,
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -79,20 +84,29 @@ class ShowModeScreen extends StatelessWidget {
                   Card(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 4, 12),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                        16,
+                        12,
+                        4,
+                        12,
+                      ),
                       child: Row(
                         children: [
                           Expanded(
                             child: Text(
                               item.text,
                               style: const TextStyle(
-                                  fontSize: 26, height: 1.35),
+                                fontSize: 26,
+                                height: 1.35,
+                              ),
                             ),
                           ),
                           IconButton(
                             tooltip: l10n.sumReadAloud,
-                            icon: Icon(Icons.volume_up_outlined,
-                                color: colors.primary),
+                            icon: Icon(
+                              Icons.volume_up_outlined,
+                              color: colors.primary,
+                            ),
                             onPressed: () => speakItem(context, item.text),
                           ),
                         ],

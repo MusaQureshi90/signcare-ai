@@ -77,8 +77,9 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 l10n.symPickHint,
-                style: context.text.bodyMedium
-                    ?.copyWith(color: colors.onSurfaceVariant),
+                style: context.text.bodyMedium?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
               ),
             ),
           ),

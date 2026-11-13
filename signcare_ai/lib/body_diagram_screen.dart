@@ -34,69 +34,105 @@ class _BodyDiagramScreenState extends State<BodyDiagramScreen> {
       'icon': Icons.psychology,
       'color': Colors.orange,
       'category': 'Upper Body',
-      'internal': ['Frontal Headache', 'Migraine / One-sided', 'Dizziness / Vertigo', 'Sinus Pressure']
+      'internal': [
+        'Frontal Headache',
+        'Migraine / One-sided',
+        'Dizziness / Vertigo',
+        'Sinus Pressure',
+      ],
     },
     {
       'name': 'Eyes & Vision',
       'icon': Icons.visibility,
       'color': Colors.blue,
       'category': 'Upper Body',
-      'internal': ['Blurred Vision', 'Eye Pain / Strain', 'Redness / Irritation']
+      'internal': [
+        'Blurred Vision',
+        'Eye Pain / Strain',
+        'Redness / Irritation',
+      ],
     },
     {
       'name': 'Neck & Throat',
       'icon': Icons.accessibility,
       'color': Colors.brown,
       'category': 'Upper Body',
-      'internal': ['Sore Throat', 'Difficulty Swallowing', 'Stiff Neck', 'Swollen Glands']
+      'internal': [
+        'Sore Throat',
+        'Difficulty Swallowing',
+        'Stiff Neck',
+        'Swollen Glands',
+      ],
     },
     {
       'name': 'Chest / Heart Area',
       'icon': Icons.favorite,
       'color': Colors.red,
       'category': 'Torso',
-      'internal': ['Heart Palpitations', 'Tightness / Pressure', 'Sharp Chest Pain', 'Rib Pain']
+      'internal': [
+        'Heart Palpitations',
+        'Tightness / Pressure',
+        'Sharp Chest Pain',
+        'Rib Pain',
+      ],
     },
     {
       'name': 'Lungs / Breathing',
       'icon': Icons.waves,
       'color': Colors.lightBlue,
       'category': 'Torso',
-      'internal': ['Shortness of Breath', 'Wheezing', 'Deep Cough Chest Pain']
+      'internal': ['Shortness of Breath', 'Wheezing', 'Deep Cough Chest Pain'],
     },
     {
       'name': 'Abdomen / Stomach',
       'icon': Icons.sick,
       'color': Colors.deepOrange,
       'category': 'Torso',
-      'internal': ['Stomach Ache / Acidity', 'Liver / Upper Right Pain', 'Lower Abdomen / Cramps', 'Bloating / Gas']
+      'internal': [
+        'Stomach Ache / Acidity',
+        'Liver / Upper Right Pain',
+        'Lower Abdomen / Cramps',
+        'Bloating / Gas',
+      ],
     },
     {
       'name': 'Lower Back & Spine',
       'icon': Icons.airline_seat_recline_normal,
       'color': Colors.purple,
       'category': 'Torso',
-      'internal': ['Lower Back Strain', 'Kidney Area Pain', 'Spine / Tailbone Pain']
+      'internal': [
+        'Lower Back Strain',
+        'Kidney Area Pain',
+        'Spine / Tailbone Pain',
+      ],
     },
     {
       'name': 'Arms & Limbs',
       'icon': Icons.back_hand,
       'color': Colors.pink,
       'category': 'Limbs',
-      'internal': ['Joint Pain / Arthritis', 'Muscle Fatigue / Weakness', 'Numbness / Tingling']
+      'internal': [
+        'Joint Pain / Arthritis',
+        'Muscle Fatigue / Weakness',
+        'Numbness / Tingling',
+      ],
     },
     {
       'name': 'Legs & Knees',
       'icon': Icons.sports,
       'color': Colors.green,
       'category': 'Lower Body',
-      'internal': ['Knee Joint Pain', 'Calf Cramps', 'Swelling in Ankles / Feet']
+      'internal': [
+        'Knee Joint Pain',
+        'Calf Cramps',
+        'Swelling in Ankles / Feet',
+      ],
     },
   ];
 
   void _showInternalOrganDialog(BuildContext context, dynamic part) {
     List internalList = part['internal'];
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -104,7 +140,9 @@ class _BodyDiagramScreenState extends State<BodyDiagramScreen> {
           children: [
             Icon(part['icon'], color: part['color']),
             const SizedBox(width: 10),
-            Expanded(child: Text(part['name'], style: const TextStyle(fontSize: 18))),
+            Expanded(
+              child: Text(part['name'], style: const TextStyle(fontSize: 18)),
+            ),
           ],
         ),
         content: SizedBox(
@@ -128,8 +166,13 @@ class _BodyDiagramScreenState extends State<BodyDiagramScreen> {
                       foregroundColor: Colors.teal[900],
                       elevation: 0,
                       alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: () {
                       ConsultationManager.addItem(
@@ -148,8 +191,15 @@ class _BodyDiagramScreenState extends State<BodyDiagramScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(subPart, style: const TextStyle(fontWeight: FontWeight.w600)),
-                        const Icon(Icons.add_circle_outline, size: 18, color: Colors.teal),
+                        Text(
+                          subPart,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        const Icon(
+                          Icons.add_circle_outline,
+                          size: 18,
+                          color: Colors.teal,
+                        ),
                       ],
                     ),
                   ),
@@ -203,8 +253,14 @@ class _BodyDiagramScreenState extends State<BodyDiagramScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        userGender == 'female' ? 'Female Body Anatomy View' : 'Male Body Anatomy View',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.teal),
+                        userGender == 'female'
+                            ? 'Female Body Anatomy View'
+                            : 'Male Body Anatomy View',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.teal,
+                        ),
                       ),
                       const Text(
                         'Tap any body region below to specify internal pain or symptoms.',
@@ -222,26 +278,38 @@ class _BodyDiagramScreenState extends State<BodyDiagramScreen> {
               itemCount: bodyParts.length,
               itemBuilder: (context, index) {
                 final part = bodyParts[index];
-                
+
                 return Card(
                   elevation: 1,
                   margin: const EdgeInsets.only(bottom: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     leading: CircleAvatar(
                       backgroundColor: part['color'].withAlpha(40),
                       child: Icon(part['icon'], color: part['color']),
                     ),
                     title: Text(
                       part['name'],
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                     subtitle: Text(
                       'Category: ${part['category']} • Tap to detail internal pain',
                       style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
                     onTap: () => _showInternalOrganDialog(context, part),
                   ),
                 );

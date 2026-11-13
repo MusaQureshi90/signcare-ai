@@ -24,9 +24,9 @@ class _SymptomDetailsScreenState extends State<SymptomDetailsScreen> {
   }
 
   List<String> _lines(String sep, bool isUrdu) => [
-        for (final s in widget.items)
-          symptomLine(s, _intensity[s.id], _durationFor(s.id), isUrdu, sep),
-      ];
+    for (final s in widget.items)
+      symptomLine(s, _intensity[s.id], _durationFor(s.id), isUrdu, sep),
+  ];
 
   void _speakAll() {
     final isUrdu = Localizations.localeOf(context).languageCode == 'ur';
@@ -72,21 +72,29 @@ class _SymptomDetailsScreenState extends State<SymptomDetailsScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(s.emoji, style: const TextStyle(fontSize: 30)),
+                              Text(
+                                s.emoji,
+                                style: const TextStyle(fontSize: 30),
+                              ),
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
                                   s.name(isUrdu),
                                   style: const TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 16),
-                          Text(l10n.symHowStrong,
-                              style: context.text.bodyMedium?.copyWith(
-                                  color: colors.onSurfaceVariant)),
+                          Text(
+                            l10n.symHowStrong,
+                            style: context.text.bodyMedium?.copyWith(
+                              color: colors.onSurfaceVariant,
+                            ),
+                          ),
                           const SizedBox(height: 8),
                           _ScaleRow(
                             value: _intensity[s.id],
@@ -100,15 +108,21 @@ class _SymptomDetailsScreenState extends State<SymptomDetailsScreen> {
                                 severity(_intensity[s.id]!),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Color.lerp(Colors.green, Colors.red,
-                                      _intensity[s.id]! / 10),
+                                  color: Color.lerp(
+                                    Colors.green,
+                                    Colors.red,
+                                    _intensity[s.id]! / 10,
+                                  ),
                                 ),
                               ),
                             ),
                           const SizedBox(height: 16),
-                          Text(l10n.symWhenStart,
-                              style: context.text.bodyMedium?.copyWith(
-                                  color: colors.onSurfaceVariant)),
+                          Text(
+                            l10n.symWhenStart,
+                            style: context.text.bodyMedium?.copyWith(
+                              color: colors.onSurfaceVariant,
+                            ),
+                          ),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
@@ -177,9 +191,7 @@ class _ScaleRow extends StatelessWidget {
       child: Wrap(
         spacing: 6,
         runSpacing: 6,
-        children: [
-          for (int i = 0; i <= 10; i++) _dot(i),
-        ],
+        children: [for (int i = 0; i <= 10; i++) _dot(i)],
       ),
     );
   }

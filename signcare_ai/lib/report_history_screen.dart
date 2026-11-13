@@ -45,8 +45,9 @@ class _ReportHistoryScreenState extends State<ReportHistoryScreen> {
                         Text(
                           l10n.sumHistoryEmpty,
                           textAlign: TextAlign.center,
-                          style: context.text.bodyLarge
-                              ?.copyWith(color: colors.onSurfaceVariant),
+                          style: context.text.bodyLarge?.copyWith(
+                            color: colors.onSurfaceVariant,
+                          ),
                         ),
                       ],
                     ),
@@ -61,19 +62,28 @@ class _ReportHistoryScreenState extends State<ReportHistoryScreen> {
                       margin: const EdgeInsets.only(bottom: 12),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         leading: CircleAvatar(
                           backgroundColor: colors.primaryContainer,
-                          child: Icon(Icons.assignment_outlined,
-                              color: colors.onPrimaryContainer),
+                          child: Icon(
+                            Icons.assignment_outlined,
+                            color: colors.onPrimaryContainer,
+                          ),
                         ),
                         title: Text(
                           formatDateTime(context, report.createdAt),
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle: Text(l10n.sumHistoryCount(report.items.length)),
-                        trailing: Icon(Icons.arrow_forward_ios,
-                            size: 16, color: colors.onSurfaceVariant),
+                        subtitle: Text(
+                          l10n.sumHistoryCount(report.items.length),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: colors.onSurfaceVariant,
+                        ),
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(

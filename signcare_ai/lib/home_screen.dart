@@ -54,8 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
         final colors = context.colors;
         final items = _menuItems(context);
         final bool isGrid = settings.homeLayout == 'Grid';
-        final String displayName =
-            profile.name.isNotEmpty ? profile.name : widget.userName;
+        final String displayName = profile.name.isNotEmpty
+            ? profile.name
+            : widget.userName;
 
         return PopScope(
           canPop: false,
@@ -88,14 +89,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     l10n.helloUser(displayName),
-                    style: context.text.headlineSmall
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: context.text.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     l10n.homeSubtitle,
-                    style: context.text.bodyMedium
-                        ?.copyWith(color: colors.onSurfaceVariant),
+                    style: context.text.bodyMedium?.copyWith(
+                      color: colors.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   _buildEmergencyBanner(context),
@@ -235,8 +238,10 @@ class _HomeScreenState extends State<HomeScreen> {
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           child: ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
             leading: CircleAvatar(
               backgroundColor: item.color.withAlpha(35),
               child: Icon(item.icon, color: item.color),
@@ -294,7 +299,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 13),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
                   ),
                 ],
               ),

@@ -5,8 +5,13 @@ class SymptomItem {
   final String ur;
   final bool custom;
 
-  const SymptomItem(this.id, this.emoji, this.en, this.ur,
-      {this.custom = false});
+  const SymptomItem(
+    this.id,
+    this.emoji,
+    this.en,
+    this.ur, {
+    this.custom = false,
+  });
 
   String name(bool isUrdu) => isUrdu ? ur : en;
 }
@@ -67,7 +72,9 @@ String symptomLine(
 ) {
   final parts = <String>[s.name(isUrdu)];
   if (intensity != null) {
-    parts.add(isUrdu ? 'شدت: 10 میں سے $intensity' : 'severity $intensity out of 10');
+    parts.add(
+      isUrdu ? 'شدت: 10 میں سے $intensity' : 'severity $intensity out of 10',
+    );
   }
   if (duration != null) {
     parts.add(isUrdu ? 'شروع ہوا: ${duration.ur}' : 'started ${duration.en}');

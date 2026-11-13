@@ -11,10 +11,7 @@ class ApiService {
       final response = await http.post(
         Uri.parse('$baseUrl/requests/'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'category': category,
-          'message': message,
-        }),
+        body: jsonEncode({'category': category, 'message': message}),
       );
       return response.statusCode == 201 || response.statusCode == 200;
     } catch (e) {
@@ -67,7 +64,9 @@ class ApiService {
 
   static Future<Map<String, dynamic>?> getPreferences(String phone) async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/preferences/$phone/'));
+      final response = await http.get(
+        Uri.parse('$baseUrl/preferences/$phone/'),
+      );
       if (response.statusCode == 200) {
         return jsonDecode(response.body) as Map<String, dynamic>;
       }

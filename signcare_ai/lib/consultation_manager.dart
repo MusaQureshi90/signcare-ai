@@ -7,7 +7,10 @@ import 'summary_store.dart';
 class ConsultationManager {
   static void addItem(String category, String description) {
     unawaited(
-      SummaryStore.instance.add(SummaryCategory.fromLegacy(category), description),
+      SummaryStore.instance.add(
+        SummaryCategory.fromLegacy(category),
+        description,
+      ),
     );
   }
 

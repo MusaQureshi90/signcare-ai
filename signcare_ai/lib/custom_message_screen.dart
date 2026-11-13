@@ -80,8 +80,9 @@ class _CustomMessageScreenState extends State<CustomMessageScreen> {
         children: [
           Text(
             l10n.typeInstruction,
-            style: context.text.bodyMedium
-                ?.copyWith(color: colors.onSurfaceVariant),
+            style: context.text.bodyMedium?.copyWith(
+              color: colors.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 12),
           TextField(

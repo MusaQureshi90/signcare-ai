@@ -66,7 +66,8 @@ class UserProfile extends ChangeNotifier {
       ageText = '';
       gender = '';
     } else {
-      name = prefs.getString('reg_name_$phone') ??
+      name =
+          prefs.getString('reg_name_$phone') ??
           prefs.getString('logged_name') ??
           '';
       ageText = prefs.getString('reg_age_$phone') ?? '';

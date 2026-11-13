@@ -69,8 +69,11 @@ class ReportPaper extends StatelessWidget {
             // ---------- Header ----------
             Row(
               children: [
-                const Icon(Icons.health_and_safety_outlined,
-                    color: _brand, size: 30),
+                const Icon(
+                  Icons.health_and_safety_outlined,
+                  color: _brand,
+                  size: 30,
+                ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
@@ -122,7 +125,11 @@ class ReportPaper extends StatelessWidget {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(categoryIcon(code), color: categoryColor(code), size: 22),
+                  Icon(
+                    categoryIcon(code),
+                    color: categoryColor(code),
+                    size: 22,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -143,7 +150,10 @@ class ReportPaper extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.only(
-                          top: 10, end: 10, start: 4),
+                        top: 10,
+                        end: 10,
+                        start: 4,
+                      ),
                       child: Container(
                         width: 7,
                         height: 7,
@@ -156,15 +166,21 @@ class ReportPaper extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text(item.text, style: const TextStyle(fontSize: 17)),
+                        child: Text(
+                          item.text,
+                          style: const TextStyle(fontSize: 17),
+                        ),
                       ),
                     ),
                     if (onSpeak != null)
                       IconButton(
                         tooltip: l10n.sumReadAloud,
                         visualDensity: VisualDensity.compact,
-                        icon: const Icon(Icons.volume_up_outlined,
-                            size: 20, color: _muted),
+                        icon: const Icon(
+                          Icons.volume_up_outlined,
+                          size: 20,
+                          color: _muted,
+                        ),
                         onPressed: () => onSpeak?.call(item),
                       ),
                     if (onRemove != null)

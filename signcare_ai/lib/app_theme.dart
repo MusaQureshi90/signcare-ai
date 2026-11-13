@@ -81,17 +81,13 @@ class AppTheme {
         color: scheme.surface,
         elevation: 1,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
 
       dialogTheme: DialogThemeData(
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -127,8 +123,10 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: scheme.surfaceContainerHighest.withAlpha(120),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: scheme.outlineVariant),
@@ -153,12 +151,11 @@ class AppTheme {
 
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        backgroundColor:
-            isDark ? const Color(0xFF3A4444) : const Color(0xFF263535),
+        backgroundColor: isDark
+            ? const Color(0xFF3A4444)
+            : const Color(0xFF263535),
         contentTextStyle: const TextStyle(color: Colors.white, fontSize: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
 
       dividerTheme: DividerThemeData(
@@ -166,9 +163,7 @@ class AppTheme {
         thickness: 1,
       ),
 
-      progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: scheme.primary,
-      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(color: scheme.primary),
     );
   }
 }

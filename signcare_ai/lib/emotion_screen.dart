@@ -13,8 +13,14 @@ class _Emotion {
   final String labelUr;
   final String sentenceEn;
   final String sentenceUr;
-  const _Emotion(this.id, this.emoji, this.labelEn, this.labelUr,
-      this.sentenceEn, this.sentenceUr);
+  const _Emotion(
+    this.id,
+    this.emoji,
+    this.labelEn,
+    this.labelUr,
+    this.sentenceEn,
+    this.sentenceUr,
+  );
 
   String label(bool isUrdu) => isUrdu ? labelUr : labelEn;
   String sentence(bool isUrdu) => isUrdu ? sentenceUr : sentenceEn;
@@ -24,22 +30,71 @@ const List<_Emotion> _emotions = [
   _Emotion('happy', '😊', 'Happy', 'خوش', 'I feel happy', 'میں خوش ہوں'),
   _Emotion('calm', '😌', 'Calm', 'پرسکون', 'I feel calm', 'میں پرسکون ہوں'),
   _Emotion('sad', '😢', 'Sad', 'اداس', 'I feel sad', 'میں اداس ہوں'),
-  _Emotion('anxious', '😟', 'Anxious', 'گھبراہٹ', 'I feel anxious',
-      'مجھے گھبراہٹ ہو رہی ہے'),
+  _Emotion(
+    'anxious',
+    '😟',
+    'Anxious',
+    'گھبراہٹ',
+    'I feel anxious',
+    'مجھے گھبراہٹ ہو رہی ہے',
+  ),
   _Emotion('angry', '😠', 'Angry', 'غصہ', 'I feel angry', 'مجھے غصہ آ رہا ہے'),
-  _Emotion('frustrated', '😤', 'Frustrated', 'جھنجھلاہٹ', 'I feel frustrated',
-      'مجھے جھنجھلاہٹ ہو رہی ہے'),
-  _Emotion('tired', '😴', 'Tired', 'تھکن', 'I feel tired',
-      'مجھے تھکن محسوس ہو رہی ہے'),
-  _Emotion('scared', '😨', 'Scared', 'ڈر', 'I feel scared', 'مجھے ڈر لگ رہا ہے'),
-  _Emotion('lonely', '🥺', 'Lonely', 'تنہائی', 'I feel lonely',
-      'مجھے تنہائی محسوس ہو رہی ہے'),
-  _Emotion('confused', '😕', 'Confused', 'الجھن', 'I feel confused',
-      'مجھے الجھن ہو رہی ہے'),
-  _Emotion('worried', '🏥', 'Health worry', 'صحت کی فکر',
-      'I am worried about my health', 'مجھے اپنی صحت کی فکر ہے'),
-  _Emotion('talk', '🤗', 'Need to talk', 'بات کرنی ہے',
-      'I need someone to talk to', 'مجھے کسی سے بات کرنی ہے'),
+  _Emotion(
+    'frustrated',
+    '😤',
+    'Frustrated',
+    'جھنجھلاہٹ',
+    'I feel frustrated',
+    'مجھے جھنجھلاہٹ ہو رہی ہے',
+  ),
+  _Emotion(
+    'tired',
+    '😴',
+    'Tired',
+    'تھکن',
+    'I feel tired',
+    'مجھے تھکن محسوس ہو رہی ہے',
+  ),
+  _Emotion(
+    'scared',
+    '😨',
+    'Scared',
+    'ڈر',
+    'I feel scared',
+    'مجھے ڈر لگ رہا ہے',
+  ),
+  _Emotion(
+    'lonely',
+    '🥺',
+    'Lonely',
+    'تنہائی',
+    'I feel lonely',
+    'مجھے تنہائی محسوس ہو رہی ہے',
+  ),
+  _Emotion(
+    'confused',
+    '😕',
+    'Confused',
+    'الجھن',
+    'I feel confused',
+    'مجھے الجھن ہو رہی ہے',
+  ),
+  _Emotion(
+    'worried',
+    '🏥',
+    'Health worry',
+    'صحت کی فکر',
+    'I am worried about my health',
+    'مجھے اپنی صحت کی فکر ہے',
+  ),
+  _Emotion(
+    'talk',
+    '🤗',
+    'Need to talk',
+    'بات کرنی ہے',
+    'I need someone to talk to',
+    'مجھے کسی سے بات کرنی ہے',
+  ),
 ];
 
 class _Level {
@@ -92,8 +147,9 @@ class _EmotionScreenState extends State<EmotionScreen> {
   void _add(bool isUrdu) {
     final l10n = context.l10n;
     ConsultationManager.addItem('Emotions', _fullText(isUrdu));
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(l10n.typeAdded)));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(l10n.typeAdded)));
   }
 
   Future<void> _toggleSpeak() async {
@@ -231,12 +287,15 @@ class _EmotionScreenState extends State<EmotionScreen> {
                     child: Text(
                       _fullText(isUrdu),
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   IconButton(
-                    tooltip: MaterialLocalizations.of(context)
-                        .closeButtonTooltip,
+                    tooltip: MaterialLocalizations.of(
+                      context,
+                    ).closeButtonTooltip,
                     icon: const Icon(Icons.close),
                     onPressed: () => setState(() {
                       _selected = null;
@@ -246,9 +305,12 @@ class _EmotionScreenState extends State<EmotionScreen> {
                 ],
               ),
               const SizedBox(height: 4),
-              Text(l10n.emoHowMuch,
-                  style: context.text.bodySmall
-                      ?.copyWith(color: colors.onSurfaceVariant)),
+              Text(
+                l10n.emoHowMuch,
+                style: context.text.bodySmall?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
+              ),
               const SizedBox(height: 4),
               Row(
                 children: [

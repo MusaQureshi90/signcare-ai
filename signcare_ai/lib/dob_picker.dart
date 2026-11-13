@@ -94,8 +94,9 @@ class _DobDialogState extends State<_DobDialog> {
                     DropdownMenuItem(
                       value: m,
                       child: Text(
-                        DateFormat.MMMM(languageCode)
-                            .format(DateTime(2000, m, 1)),
+                        DateFormat.MMMM(
+                          languageCode,
+                        ).format(DateTime(2000, m, 1)),
                       ),
                     ),
                 ],

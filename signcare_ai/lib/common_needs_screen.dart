@@ -10,7 +10,18 @@ import 'summary_store.dart';
 import 'tts_service.dart';
 
 const List<String> _emojiChoices = [
-  '💬', '🙂', '🍽️', '💊', '🚻', '🛏️', '📞', '❤️', '🙏', '🏠', '📖', '🚗',
+  '💬',
+  '🙂',
+  '🍽️',
+  '💊',
+  '🚻',
+  '🛏️',
+  '📞',
+  '❤️',
+  '🙏',
+  '🏠',
+  '📖',
+  '🚗',
 ];
 
 class CommonNeedsScreen extends StatefulWidget {
@@ -49,8 +60,9 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
     // Search karte waqt filter ignore, sab cards mein dhoondo
     if (query.isNotEmpty) {
       return all
-          .where((c) =>
-              c.en.toLowerCase().contains(query) || c.ur.contains(query))
+          .where(
+            (c) => c.en.toLowerCase().contains(query) || c.ur.contains(query),
+          )
           .toList();
     }
 
@@ -230,8 +242,10 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
                 height: 52,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   children: [
                     _chip('all', l10n.cardsAll),
                     _chip('fav', l10n.cardsFavourites),
@@ -248,8 +262,9 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
                   child: Text(
                     l10n.cardsHoldHint,
-                    style: context.text.bodySmall
-                        ?.copyWith(color: context.colors.onSurfaceVariant),
+                    style: context.text.bodySmall?.copyWith(
+                      color: context.colors.onSurfaceVariant,
+                    ),
                   ),
                 ),
 
@@ -263,7 +278,8 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
                             emptyText,
                             textAlign: TextAlign.center,
                             style: context.text.bodyLarge?.copyWith(
-                                color: context.colors.onSurfaceVariant),
+                              color: context.colors.onSurfaceVariant,
+                            ),
                           ),
                         ),
                       )
@@ -271,11 +287,11 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
                         padding: const EdgeInsets.all(16),
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          mainAxisExtent: 168,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                        ),
+                              maxCrossAxisExtent: 200,
+                              mainAxisExtent: 168,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
                         itemCount: visible.length,
                         itemBuilder: (context, i) =>
                             _buildCard(context, visible[i], isUrdu),
@@ -283,7 +299,8 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
               ),
 
               // ---------- Chuna hua card ----------
-              if (_selected != null) _buildSelectedPanel(context, _selected!, isUrdu),
+              if (_selected != null)
+                _buildSelectedPanel(context, _selected!, isUrdu),
             ],
           ),
         );
@@ -389,7 +406,9 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               IconButton(

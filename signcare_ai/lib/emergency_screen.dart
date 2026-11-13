@@ -19,16 +19,28 @@ class _Phrase {
 const List<_Phrase> _phrases = [
   _Phrase('I need an ambulance', 'مجھے ایمبولینس چاہیے', Icons.local_hospital),
   _Phrase('I cannot breathe', 'مجھے سانس لینے میں دشواری ہو رہی ہے', Icons.air),
-  _Phrase('I have severe chest pain', 'مجھے سینے میں شدید درد ہے',
-      Icons.favorite_border),
-  _Phrase('I am bleeding badly', 'میرا بہت خون بہہ رہا ہے',
-      Icons.water_drop_outlined),
+  _Phrase(
+    'I have severe chest pain',
+    'مجھے سینے میں شدید درد ہے',
+    Icons.favorite_border,
+  ),
+  _Phrase(
+    'I am bleeding badly',
+    'میرا بہت خون بہہ رہا ہے',
+    Icons.water_drop_outlined,
+  ),
   _Phrase('I feel very dizzy', 'مجھے شدید چکر آ رہے ہیں', Icons.rotate_right),
   _Phrase('I am having a seizure', 'مجھے دورہ پڑ رہا ہے', Icons.bolt),
-  _Phrase('I am having a severe allergic reaction',
-      'مجھے شدید الرجی کا ردعمل ہو رہا ہے', Icons.warning_amber_rounded),
-  _Phrase('Please call my family', 'براہ کرم میرے گھر والوں کو فون کریں',
-      Icons.family_restroom),
+  _Phrase(
+    'I am having a severe allergic reaction',
+    'مجھے شدید الرجی کا ردعمل ہو رہا ہے',
+    Icons.warning_amber_rounded,
+  ),
+  _Phrase(
+    'Please call my family',
+    'براہ کرم میرے گھر والوں کو فون کریں',
+    Icons.family_restroom,
+  ),
 ];
 
 class EmergencyScreen extends StatefulWidget {
@@ -171,14 +183,18 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const EmergencyAlertScreen()),
+                      builder: (_) => const EmergencyAlertScreen(),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(
                       children: [
-                        Icon(Icons.warning_amber_rounded,
-                            size: 48, color: colors.onError),
+                        Icon(
+                          Icons.warning_amber_rounded,
+                          size: 48,
+                          color: colors.onError,
+                        ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: Column(
@@ -196,13 +212,18 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                               Text(
                                 l10n.emHelpHint,
                                 style: TextStyle(
-                                    fontSize: 14, color: colors.onError),
+                                  fontSize: 14,
+                                  color: colors.onError,
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        Icon(Icons.arrow_forward_ios,
-                            size: 18, color: colors.onError),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 18,
+                          color: colors.onError,
+                        ),
                       ],
                     ),
                   ),
@@ -224,8 +245,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     padding: const EdgeInsets.all(20),
                     child: Text(
                       l10n.emNoContacts,
-                      style: context.text.bodyMedium
-                          ?.copyWith(color: colors.onSurfaceVariant),
+                      style: context.text.bodyMedium?.copyWith(
+                        color: colors.onSurfaceVariant,
+                      ),
                     ),
                   ),
                 )
@@ -238,25 +260,38 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 children: [
                   Expanded(
                     child: _numberCard(
-                        '1122', l10n.emRescue, Icons.local_hospital, Colors.red),
+                      '1122',
+                      l10n.emRescue,
+                      Icons.local_hospital,
+                      Colors.red,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: _numberCard(
-                        '15', l10n.emPolice, Icons.local_police, Colors.blue),
+                      '15',
+                      l10n.emPolice,
+                      Icons.local_police,
+                      Colors.blue,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _numberCard('16', l10n.emFire,
-                        Icons.local_fire_department, Colors.orange),
+                    child: _numberCard(
+                      '16',
+                      l10n.emFire,
+                      Icons.local_fire_department,
+                      Colors.orange,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
               Text(
                 l10n.emNumbersNote,
-                style: context.text.bodySmall
-                    ?.copyWith(color: colors.onSurfaceVariant),
+                style: context.text.bodySmall?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
               ),
 
               // ---------- Foran bolne wale jumle ----------
@@ -274,7 +309,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   Widget _buildContactTile(BuildContext context, EmergencyContact c) {
     final l10n = context.l10n;
     final colors = context.colors;
-    final initial = c.name.isEmpty ? '?' : c.name.characters.first.toUpperCase();
+    final initial = c.name.isEmpty
+        ? '?'
+        : c.name.characters.first.toUpperCase();
 
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
@@ -306,7 +343,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         Text(
                           c.name,
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Directionality(
                           textDirection: TextDirection.ltr,
@@ -315,8 +354,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         if (c.relation.isNotEmpty)
                           Text(
                             c.relation,
-                            style: context.text.bodySmall
-                                ?.copyWith(color: colors.onSurfaceVariant),
+                            style: context.text.bodySmall?.copyWith(
+                              color: colors.onSurfaceVariant,
+                            ),
                           ),
                       ],
                     ),
@@ -328,9 +368,13 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     },
                     itemBuilder: (_) => [
                       PopupMenuItem<String>(
-                          value: 'edit', child: Text(l10n.emEdit)),
+                        value: 'edit',
+                        child: Text(l10n.emEdit),
+                      ),
                       PopupMenuItem<String>(
-                          value: 'delete', child: Text(l10n.delete)),
+                        value: 'delete',
+                        child: Text(l10n.delete),
+                      ),
                     ],
                   ),
                 ],
@@ -343,19 +387,30 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: _actionButton(Icons.call, l10n.emCall, Colors.green,
-                      () => _call(c.number)),
+                  child: _actionButton(
+                    Icons.call,
+                    l10n.emCall,
+                    Colors.green,
+                    () => _call(c.number),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: _actionButton(Icons.sms_outlined, l10n.emSms,
-                      colors.primary, () => _sms(c)),
+                  child: _actionButton(
+                    Icons.sms_outlined,
+                    l10n.emSms,
+                    colors.primary,
+                    () => _sms(c),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: _actionButton(Icons.chat_bubble_outline,
-                      l10n.emWhatsApp, const Color(0xFF25D366),
-                      () => _whatsapp(c)),
+                  child: _actionButton(
+                    Icons.chat_bubble_outline,
+                    l10n.emWhatsApp,
+                    const Color(0xFF25D366),
+                    () => _whatsapp(c),
+                  ),
                 ),
               ],
             ),
@@ -366,7 +421,11 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   }
 
   Widget _actionButton(
-      IconData icon, String label, Color color, VoidCallback onTap) {
+    IconData icon,
+    String label,
+    Color color,
+    VoidCallback onTap,
+  ) {
     return OutlinedButton.icon(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
@@ -375,10 +434,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
       ),
       icon: Icon(icon, size: 18),
-      label: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Text(label),
-      ),
+      label: FittedBox(fit: BoxFit.scaleDown, child: Text(label)),
     );
   }
 
@@ -399,8 +455,10 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
               const SizedBox(height: 8),
               Text(
                 number,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 2),
               Text(
@@ -436,7 +494,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 child: Text(
                   text,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               IconButton(
@@ -502,12 +562,15 @@ class _ContactDialog extends StatefulWidget {
 }
 
 class _ContactDialogState extends State<_ContactDialog> {
-  late final TextEditingController _name =
-      TextEditingController(text: widget.initial?.name ?? '');
-  late final TextEditingController _number =
-      TextEditingController(text: widget.initial?.number ?? '');
-  late final TextEditingController _relation =
-      TextEditingController(text: widget.initial?.relation ?? '');
+  late final TextEditingController _name = TextEditingController(
+    text: widget.initial?.name ?? '',
+  );
+  late final TextEditingController _number = TextEditingController(
+    text: widget.initial?.number ?? '',
+  );
+  late final TextEditingController _relation = TextEditingController(
+    text: widget.initial?.relation ?? '',
+  );
 
   String? _nameError;
   String? _numberError;
@@ -541,9 +604,7 @@ class _ContactDialogState extends State<_ContactDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AlertDialog(
-      title: Text(
-        widget.initial == null ? l10n.emAddTitle : l10n.emEditTitle,
-      ),
+      title: Text(widget.initial == null ? l10n.emAddTitle : l10n.emEditTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

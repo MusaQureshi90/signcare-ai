@@ -160,8 +160,9 @@ class _ConsultationSummaryScreenState extends State<ConsultationSummaryScreen> {
                       age: _profile.age,
                       gender: _profile.gender,
                       createdAt: _openedAt,
-                      onRemove:
-                          _capturing ? null : (item) => _store.remove(item.id),
+                      onRemove: _capturing
+                          ? null
+                          : (item) => _store.remove(item.id),
                       onSpeak: _capturing
                           ? null
                           : (item) => speakItem(context, item.text),
@@ -226,15 +227,17 @@ class _ConsultationSummaryScreenState extends State<ConsultationSummaryScreen> {
             const SizedBox(height: 16),
             Text(
               l10n.sumEmptyTitle,
-              style: context.text.titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: context.text.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               l10n.sumEmptyBody,
               textAlign: TextAlign.center,
-              style: context.text.bodyMedium
-                  ?.copyWith(color: colors.onSurfaceVariant),
+              style: context.text.bodyMedium?.copyWith(
+                color: colors.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 20),
             OutlinedButton.icon(

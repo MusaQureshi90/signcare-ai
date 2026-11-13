@@ -17,11 +17,11 @@ class EmergencyContact {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'number': number,
-        'relation': relation,
-      };
+    'id': id,
+    'name': name,
+    'number': number,
+    'relation': relation,
+  };
 
   factory EmergencyContact.fromJson(Map<String, dynamic> json) =>
       EmergencyContact(
@@ -80,8 +80,10 @@ class EmergencyContactsStore extends ChangeNotifier {
           if (data is List) {
             _contacts = data
                 .whereType<Map>()
-                .map((e) =>
-                    EmergencyContact.fromJson(Map<String, dynamic>.from(e)))
+                .map(
+                  (e) =>
+                      EmergencyContact.fromJson(Map<String, dynamic>.from(e)),
+                )
                 .toList();
           }
         } catch (e) {
@@ -128,8 +130,7 @@ class EmergencyContactsStore extends ChangeNotifier {
   }
 
   Future<void> update(EmergencyContact updated) async {
-    _contacts =
-        _contacts.map((c) => c.id == updated.id ? updated : c).toList();
+    _contacts = _contacts.map((c) => c.id == updated.id ? updated : c).toList();
     notifyListeners();
     await _persist();
   }

@@ -35,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-                            // ---------------- Profile ----------------
+              // ---------------- Profile ----------------
               Card(
                 child: ListTile(
                   leading: Icon(Icons.person_outline, color: colors.primary),
@@ -158,7 +158,10 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      leading: Icon(Icons.email_outlined, color: colors.primary),
+                      leading: Icon(
+                        Icons.email_outlined,
+                        color: colors.primary,
+                      ),
                       title: Text(l10n.setContactTitle),
                       subtitle: const Text(_supportEmail),
                       onTap: () => _showContactDialog(context),
@@ -187,8 +190,10 @@ class SettingsScreen extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.health_and_safety_outlined,
-                          color: colors.onPrimaryContainer),
+                      Icon(
+                        Icons.health_and_safety_outlined,
+                        color: colors.onPrimaryContainer,
+                      ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(

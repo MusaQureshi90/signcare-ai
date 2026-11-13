@@ -58,11 +58,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final navigator = Navigator.of(context);
     final name = _nameController.text.trim();
 
-    final String? nameError =
-        name.length < 2 ? l10n.profileNameError : null;
+    final String? nameError = name.length < 2 ? l10n.profileNameError : null;
     final String? dobError = _dob == null ? l10n.profileDobError : null;
-    final String? genderError =
-        _gender.isEmpty ? l10n.profileGenderError : null;
+    final String? genderError = _gender.isEmpty
+        ? l10n.profileGenderError
+        : null;
 
     if (nameError != null || dobError != null || genderError != null) {
       setState(() {
@@ -74,11 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     setState(() => _saving = true);
-    await profile.save(
-      newName: name,
-      dob: _dob!,
-      newGender: _gender,
-    );
+    await profile.save(newName: name, dob: _dob!, newGender: _gender);
     if (!mounted) return;
     setState(() => _saving = false);
 
@@ -91,8 +87,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final l10n = context.l10n;
     final colors = context.colors;
     final currentName = _nameController.text.trim();
-    final initial =
-        currentName.isEmpty ? '?' : currentName.characters.first.toUpperCase();
+    final initial = currentName.isEmpty
+        ? '?'
+        : currentName.characters.first.toUpperCase();
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.profileTitle)),
@@ -116,11 +113,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(height: 12),
           Center(
             child: Directionality(
-              textDirection: TextDirection.ltr, // phone number hamesha left-to-right
+              textDirection:
+                  TextDirection.ltr, // phone number hamesha left-to-right
               child: Text(
                 profile.phone,
-                style: context.text.titleMedium
-                    ?.copyWith(color: colors.onSurfaceVariant),
+                style: context.text.titleMedium?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
               ),
             ),
           ),
@@ -128,8 +127,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Center(
             child: Text(
               l10n.profilePhoneNote,
-              style: context.text.bodySmall
-                  ?.copyWith(color: colors.onSurfaceVariant),
+              style: context.text.bodySmall?.copyWith(
+                color: colors.onSurfaceVariant,
+              ),
             ),
           ),
           const SizedBox(height: 24),
@@ -177,8 +177,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // ---------- Gender ----------
           Text(
             l10n.profileGender,
-            style: context.text.titleSmall
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: context.text.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 8),
           SegmentedButton<String>(
@@ -217,8 +218,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(height: 6),
           Text(
             l10n.profileGenderNote,
-            style: context.text.bodySmall
-                ?.copyWith(color: colors.onSurfaceVariant),
+            style: context.text.bodySmall?.copyWith(
+              color: colors.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 28),
 

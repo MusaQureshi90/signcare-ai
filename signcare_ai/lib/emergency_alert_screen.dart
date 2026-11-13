@@ -44,8 +44,7 @@ class _EmergencyAlertScreenState extends State<EmergencyAlertScreen>
     _speech = female ? l10n.emAlertSpeechFemale : l10n.emAlertSpeech;
 
     _speak();
-    _speechTimer =
-        Timer.periodic(const Duration(seconds: 6), (_) => _speak());
+    _speechTimer = Timer.periodic(const Duration(seconds: 6), (_) => _speak());
     _hapticTimer = Timer.periodic(
       const Duration(milliseconds: 1000),
       (_) => HapticFeedback.heavyImpact(),
@@ -100,8 +99,11 @@ class _EmergencyAlertScreenState extends State<EmergencyAlertScreen>
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.warning_amber_rounded,
-                      size: 96, color: Colors.white),
+                  const Icon(
+                    Icons.warning_amber_rounded,
+                    size: 96,
+                    color: Colors.white,
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     l10n.emAlertHeadline,
@@ -122,7 +124,9 @@ class _EmergencyAlertScreenState extends State<EmergencyAlertScreen>
                     const SizedBox(height: 16),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 18, vertical: 8),
+                        horizontal: 18,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white24,
                         borderRadius: BorderRadius.circular(24),

@@ -18,7 +18,15 @@ class SummaryCategory {
 
   /// Report mein dikhne ka tarteeb
   static const List<String> order = [
-    emergency, symptom, body, emotion, cards, typed, speech, note, other,
+    emergency,
+    symptom,
+    body,
+    emotion,
+    cards,
+    typed,
+    speech,
+    note,
+    other,
   ];
 
   /// Purani screens English naam bhejti hain ('Common Needs' waghera)
@@ -50,19 +58,20 @@ class SummaryItem {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'category': category,
-        'text': text,
-        'createdAt': createdAt.toIso8601String(),
-      };
+    'id': id,
+    'category': category,
+    'text': text,
+    'createdAt': createdAt.toIso8601String(),
+  };
 
   factory SummaryItem.fromJson(Map<String, dynamic> json) => SummaryItem(
-        id: json['id']?.toString() ?? '',
-        category: json['category']?.toString() ?? SummaryCategory.other,
-        text: json['text']?.toString() ?? '',
-        createdAt:
-            DateTime.tryParse(json['createdAt']?.toString() ?? '') ?? DateTime.now(),
-      );
+    id: json['id']?.toString() ?? '',
+    category: json['category']?.toString() ?? SummaryCategory.other,
+    text: json['text']?.toString() ?? '',
+    createdAt:
+        DateTime.tryParse(json['createdAt']?.toString() ?? '') ??
+        DateTime.now(),
+  );
 }
 
 class SavedReport {
@@ -83,28 +92,29 @@ class SavedReport {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'createdAt': createdAt.toIso8601String(),
-        'patientName': patientName,
-        'age': age,
-        'gender': gender,
-        'items': items.map((e) => e.toJson()).toList(),
-      };
+    'id': id,
+    'createdAt': createdAt.toIso8601String(),
+    'patientName': patientName,
+    'age': age,
+    'gender': gender,
+    'items': items.map((e) => e.toJson()).toList(),
+  };
 
   factory SavedReport.fromJson(Map<String, dynamic> json) {
     final rawItems = json['items'];
     return SavedReport(
       id: json['id']?.toString() ?? '',
       createdAt:
-          DateTime.tryParse(json['createdAt']?.toString() ?? '') ?? DateTime.now(),
+          DateTime.tryParse(json['createdAt']?.toString() ?? '') ??
+          DateTime.now(),
       patientName: json['patientName']?.toString() ?? '',
       age: json['age'] is int ? json['age'] as int : null,
       gender: json['gender']?.toString() ?? '',
       items: rawItems is List
           ? rawItems
-              .whereType<Map>()
-              .map((e) => SummaryItem.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map((e) => SummaryItem.fromJson(Map<String, dynamic>.from(e)))
+                .toList()
           : <SummaryItem>[],
     );
   }
