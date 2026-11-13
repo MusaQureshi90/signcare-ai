@@ -635,4 +635,106 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get cardsAddSummary => 'خلاصے میں شامل کریں';
+
+  @override
+  String get symTitle => 'علامات';
+
+  @override
+  String get symPickHint => 'جو کچھ محسوس ہو رہا ہے سب پر دبائیں۔';
+
+  @override
+  String get symOther => 'کچھ اور';
+
+  @override
+  String get symOtherTitle => 'دوسری علامت';
+
+  @override
+  String get symOtherLabel => 'بیان کریں';
+
+  @override
+  String symNext(int count) {
+    return 'آگے ($count)';
+  }
+
+  @override
+  String get symDetailsTitle => 'تفصیل';
+
+  @override
+  String get symHowStrong => 'کتنی شدید ہے؟ (0 = بالکل نہیں، 10 = سب سے زیادہ)';
+
+  @override
+  String get symWhenStart => 'یہ کب شروع ہوا؟';
+
+  @override
+  String get symSave => 'خلاصے میں محفوظ کریں';
+
+  @override
+  String get symSaved => 'علامات خلاصے میں شامل ہو گئیں۔';
+
+  @override
+  String get symMild => 'ہلکی';
+
+  @override
+  String get symModerate => 'درمیانی';
+
+  @override
+  String get symSevere => 'شدید';
+
+  @override
+  String get symWorst => 'انتہائی شدید';
+
+  @override
+  String get emoTitle => 'جذبات کے کارڈ';
+
+  @override
+  String get emoQuestion => 'آپ اس وقت کیسا محسوس کر رہے ہیں؟';
+
+  @override
+  String get emoHowMuch => 'کتنا؟';
+
+  @override
+  String get speechTitle => 'سنیں (آواز سے تحریر)';
+
+  @override
+  String get speechIdle =>
+      'مائیک دبائیں۔ لوگ جو کہیں گے وہ یہاں تحریر کی شکل میں نظر آئے گا۔';
+
+  @override
+  String get speechListening => 'سنا جا رہا ہے...';
+
+  @override
+  String get speechStart => 'سننا شروع کریں';
+
+  @override
+  String get speechStop => 'بند کریں';
+
+  @override
+  String get speechEarlier => 'پہلے کی باتیں';
+
+  @override
+  String get speechNoLocale =>
+      'اس فون میں اس زبان کے لیے آواز پہچاننے کی سہولت نہیں۔ دوسری زبان آزمائیں۔';
+
+  @override
+  String get speechPermission =>
+      'مائیک کی اجازت درکار ہے۔ براہ کرم فون کی سیٹنگز میں اجازت دیں۔';
+
+  @override
+  String get speechUnavailable =>
+      'اس فون میں آواز پہچاننے کی سہولت دستیاب نہیں۔';
+
+  @override
+  String get speechCopy => 'کاپی';
+
+  @override
+  String get speechCopied => 'کاپی ہو گیا۔';
+
+  @override
+  String get speechClear => 'صاف کریں';
+
+  @override
+  String get speechBigger => 'بڑا متن';
+
+  @override
+  String get speechSmaller => 'چھوٹا متن';
 }

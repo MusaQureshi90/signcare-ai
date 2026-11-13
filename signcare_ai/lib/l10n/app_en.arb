@@ -256,5 +256,47 @@
   "cardsSpeakOn": "Cards will speak when tapped.",
   "cardsSpeakOff": "Cards will stay silent when tapped.",
   "cardsSpeakTooltip": "Speak when tapped",
-  "cardsAddSummary": "Add to summary"
+  "cardsAddSummary": "Add to summary",
+
+  "symTitle": "Symptoms",
+  "symPickHint": "Tap everything you are feeling.",
+  "symOther": "Other",
+  "symOtherTitle": "Other symptom",
+  "symOtherLabel": "Describe it",
+  "symNext": "Next ({count})",
+  "@symNext": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "symDetailsTitle": "Details",
+  "symHowStrong": "How strong is it? (0 = none, 10 = worst)",
+  "symWhenStart": "When did it start?",
+  "symSave": "Save to summary",
+  "symSaved": "Symptoms added to summary.",
+  "symMild": "Mild",
+  "symModerate": "Moderate",
+  "symSevere": "Severe",
+  "symWorst": "Worst possible",
+
+  "emoTitle": "Emotion Cards",
+  "emoQuestion": "How are you feeling now?",
+  "emoHowMuch": "How much?",
+
+  "speechTitle": "Listen (Speech to Text)",
+  "speechIdle": "Tap the mic. What people say will appear here as text.",
+  "speechListening": "Listening...",
+  "speechStart": "Start listening",
+  "speechStop": "Stop",
+  "speechEarlier": "Earlier",
+  "speechNoLocale": "This phone has no speech recognition for this language. Try the other language.",
+  "speechPermission": "Microphone permission is needed. Please allow it in phone settings.",
+  "speechUnavailable": "Speech recognition is not available on this phone.",
+  "speechCopy": "Copy",
+  "speechCopied": "Copied.",
+  "speechClear": "Clear",
+  "speechBigger": "Bigger text",
+  "speechSmaller": "Smaller text"
 }

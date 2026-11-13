@@ -1285,6 +1285,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add to summary'**
   String get cardsAddSummary;
+
+  /// No description provided for @symTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get symTitle;
+
+  /// No description provided for @symPickHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap everything you are feeling.'**
+  String get symPickHint;
+
+  /// No description provided for @symOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get symOther;
+
+  /// No description provided for @symOtherTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Other symptom'**
+  String get symOtherTitle;
+
+  /// No description provided for @symOtherLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe it'**
+  String get symOtherLabel;
+
+  /// No description provided for @symNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next ({count})'**
+  String symNext(int count);
+
+  /// No description provided for @symDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get symDetailsTitle;
+
+  /// No description provided for @symHowStrong.
+  ///
+  /// In en, this message translates to:
+  /// **'How strong is it? (0 = none, 10 = worst)'**
+  String get symHowStrong;
+
+  /// No description provided for @symWhenStart.
+  ///
+  /// In en, this message translates to:
+  /// **'When did it start?'**
+  String get symWhenStart;
+
+  /// No description provided for @symSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to summary'**
+  String get symSave;
+
+  /// No description provided for @symSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms added to summary.'**
+  String get symSaved;
+
+  /// No description provided for @symMild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild'**
+  String get symMild;
+
+  /// No description provided for @symModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get symModerate;
+
+  /// No description provided for @symSevere.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe'**
+  String get symSevere;
+
+  /// No description provided for @symWorst.
+  ///
+  /// In en, this message translates to:
+  /// **'Worst possible'**
+  String get symWorst;
+
+  /// No description provided for @emoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emotion Cards'**
+  String get emoTitle;
+
+  /// No description provided for @emoQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How are you feeling now?'**
+  String get emoQuestion;
+
+  /// No description provided for @emoHowMuch.
+  ///
+  /// In en, this message translates to:
+  /// **'How much?'**
+  String get emoHowMuch;
+
+  /// No description provided for @speechTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen (Speech to Text)'**
+  String get speechTitle;
+
+  /// No description provided for @speechIdle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the mic. What people say will appear here as text.'**
+  String get speechIdle;
+
+  /// No description provided for @speechListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening...'**
+  String get speechListening;
+
+  /// No description provided for @speechStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start listening'**
+  String get speechStart;
+
+  /// No description provided for @speechStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get speechStop;
+
+  /// No description provided for @speechEarlier.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier'**
+  String get speechEarlier;
+
+  /// No description provided for @speechNoLocale.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone has no speech recognition for this language. Try the other language.'**
+  String get speechNoLocale;
+
+  /// No description provided for @speechPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone permission is needed. Please allow it in phone settings.'**
+  String get speechPermission;
+
+  /// No description provided for @speechUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Speech recognition is not available on this phone.'**
+  String get speechUnavailable;
+
+  /// No description provided for @speechCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get speechCopy;
+
+  /// No description provided for @speechCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied.'**
+  String get speechCopied;
+
+  /// No description provided for @speechClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get speechClear;
+
+  /// No description provided for @speechBigger.
+  ///
+  /// In en, this message translates to:
+  /// **'Bigger text'**
+  String get speechBigger;
+
+  /// No description provided for @speechSmaller.
+  ///
+  /// In en, this message translates to:
+  /// **'Smaller text'**
+  String get speechSmaller;
 }
 
 class _AppLocalizationsDelegate

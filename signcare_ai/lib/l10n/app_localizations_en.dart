@@ -633,4 +633,106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cardsAddSummary => 'Add to summary';
+
+  @override
+  String get symTitle => 'Symptoms';
+
+  @override
+  String get symPickHint => 'Tap everything you are feeling.';
+
+  @override
+  String get symOther => 'Other';
+
+  @override
+  String get symOtherTitle => 'Other symptom';
+
+  @override
+  String get symOtherLabel => 'Describe it';
+
+  @override
+  String symNext(int count) {
+    return 'Next ($count)';
+  }
+
+  @override
+  String get symDetailsTitle => 'Details';
+
+  @override
+  String get symHowStrong => 'How strong is it? (0 = none, 10 = worst)';
+
+  @override
+  String get symWhenStart => 'When did it start?';
+
+  @override
+  String get symSave => 'Save to summary';
+
+  @override
+  String get symSaved => 'Symptoms added to summary.';
+
+  @override
+  String get symMild => 'Mild';
+
+  @override
+  String get symModerate => 'Moderate';
+
+  @override
+  String get symSevere => 'Severe';
+
+  @override
+  String get symWorst => 'Worst possible';
+
+  @override
+  String get emoTitle => 'Emotion Cards';
+
+  @override
+  String get emoQuestion => 'How are you feeling now?';
+
+  @override
+  String get emoHowMuch => 'How much?';
+
+  @override
+  String get speechTitle => 'Listen (Speech to Text)';
+
+  @override
+  String get speechIdle =>
+      'Tap the mic. What people say will appear here as text.';
+
+  @override
+  String get speechListening => 'Listening...';
+
+  @override
+  String get speechStart => 'Start listening';
+
+  @override
+  String get speechStop => 'Stop';
+
+  @override
+  String get speechEarlier => 'Earlier';
+
+  @override
+  String get speechNoLocale =>
+      'This phone has no speech recognition for this language. Try the other language.';
+
+  @override
+  String get speechPermission =>
+      'Microphone permission is needed. Please allow it in phone settings.';
+
+  @override
+  String get speechUnavailable =>
+      'Speech recognition is not available on this phone.';
+
+  @override
+  String get speechCopy => 'Copy';
+
+  @override
+  String get speechCopied => 'Copied.';
+
+  @override
+  String get speechClear => 'Clear';
+
+  @override
+  String get speechBigger => 'Bigger text';
+
+  @override
+  String get speechSmaller => 'Smaller text';
 }
