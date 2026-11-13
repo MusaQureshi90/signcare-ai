@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'cards_store.dart';
 import 'emergency_contacts_store.dart';
 import 'summary_store.dart';
 
@@ -14,5 +15,6 @@ class ConsultationManager {
   static void clear() {
     SummaryStore.instance.unload();
     EmergencyContactsStore.instance.unload();
+    CardsStore.instance.unload();
   }
 }

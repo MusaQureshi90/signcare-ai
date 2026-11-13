@@ -558,4 +558,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emCallRescue => 'Call 1122';
+
+  @override
+  String get emWhatsApp => 'WhatsApp';
+
+  @override
+  String get emAppFailed => 'Could not open the app. Please check the number.';
+
+  @override
+  String get cardsTitle => 'Quick Cards';
+
+  @override
+  String get cardsSearchHint => 'Search cards';
+
+  @override
+  String get cardsAll => 'All';
+
+  @override
+  String get cardsFavourites => 'Favourites';
+
+  @override
+  String get cardsRecent => 'Recent';
+
+  @override
+  String get cardsMine => 'My cards';
+
+  @override
+  String get cardsEmpty => 'No cards here yet.';
+
+  @override
+  String get cardsEmptyFav => 'Tap the star on a card to save it here.';
+
+  @override
+  String get cardsEmptyRecent => 'Cards you use will appear here.';
+
+  @override
+  String get cardsEmptyMine => 'Add your own cards with the + button.';
+
+  @override
+  String get cardsNoResults => 'No cards match your search.';
+
+  @override
+  String get cardsAddOwn => 'Add my own card';
+
+  @override
+  String get cardsNewTitle => 'New card';
+
+  @override
+  String get cardsTextLabel => 'What should it say?';
+
+  @override
+  String get cardsTextError => 'Please type something.';
+
+  @override
+  String get cardsPickEmoji => 'Pick a picture';
+
+  @override
+  String get cardsMaxCustom => 'You can save up to 30 of your own cards.';
+
+  @override
+  String get cardsDeleteTitle => 'Delete this card?';
+
+  @override
+  String get cardsHoldHint => 'Press and hold one of your cards to delete it.';
+
+  @override
+  String get cardsSpeakOn => 'Cards will speak when tapped.';
+
+  @override
+  String get cardsSpeakOff => 'Cards will stay silent when tapped.';
+
+  @override
+  String get cardsSpeakTooltip => 'Speak when tapped';
+
+  @override
+  String get cardsAddSummary => 'Add to summary';
 }

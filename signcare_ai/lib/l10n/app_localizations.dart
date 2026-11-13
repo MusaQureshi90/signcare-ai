@@ -1135,6 +1135,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call 1122'**
   String get emCallRescue;
+
+  /// No description provided for @emWhatsApp.
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp'**
+  String get emWhatsApp;
+
+  /// No description provided for @emAppFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the app. Please check the number.'**
+  String get emAppFailed;
+
+  /// No description provided for @cardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Cards'**
+  String get cardsTitle;
+
+  /// No description provided for @cardsSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search cards'**
+  String get cardsSearchHint;
+
+  /// No description provided for @cardsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get cardsAll;
+
+  /// No description provided for @cardsFavourites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favourites'**
+  String get cardsFavourites;
+
+  /// No description provided for @cardsRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get cardsRecent;
+
+  /// No description provided for @cardsMine.
+  ///
+  /// In en, this message translates to:
+  /// **'My cards'**
+  String get cardsMine;
+
+  /// No description provided for @cardsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No cards here yet.'**
+  String get cardsEmpty;
+
+  /// No description provided for @cardsEmptyFav.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the star on a card to save it here.'**
+  String get cardsEmptyFav;
+
+  /// No description provided for @cardsEmptyRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards you use will appear here.'**
+  String get cardsEmptyRecent;
+
+  /// No description provided for @cardsEmptyMine.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your own cards with the + button.'**
+  String get cardsEmptyMine;
+
+  /// No description provided for @cardsNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No cards match your search.'**
+  String get cardsNoResults;
+
+  /// No description provided for @cardsAddOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'Add my own card'**
+  String get cardsAddOwn;
+
+  /// No description provided for @cardsNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New card'**
+  String get cardsNewTitle;
+
+  /// No description provided for @cardsTextLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What should it say?'**
+  String get cardsTextLabel;
+
+  /// No description provided for @cardsTextError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please type something.'**
+  String get cardsTextError;
+
+  /// No description provided for @cardsPickEmoji.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a picture'**
+  String get cardsPickEmoji;
+
+  /// No description provided for @cardsMaxCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'You can save up to 30 of your own cards.'**
+  String get cardsMaxCustom;
+
+  /// No description provided for @cardsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this card?'**
+  String get cardsDeleteTitle;
+
+  /// No description provided for @cardsHoldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Press and hold one of your cards to delete it.'**
+  String get cardsHoldHint;
+
+  /// No description provided for @cardsSpeakOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards will speak when tapped.'**
+  String get cardsSpeakOn;
+
+  /// No description provided for @cardsSpeakOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards will stay silent when tapped.'**
+  String get cardsSpeakOff;
+
+  /// No description provided for @cardsSpeakTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak when tapped'**
+  String get cardsSpeakTooltip;
+
+  /// No description provided for @cardsAddSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to summary'**
+  String get cardsAddSummary;
 }
 
 class _AppLocalizationsDelegate

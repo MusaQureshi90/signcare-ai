@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'app_theme.dart';
 import 'emergency_alert_screen.dart';
 import 'emergency_contacts_store.dart';
@@ -58,14 +59,27 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
     }
   }
 
+  String _alertBody() {
+    final l10n = context.l10n;
+    final name = _profile.name;
+    return name.isEmpty ? l10n.emSmsBodyNoName : l10n.emSmsBody(name);
+  }
+
   Future<void> _sms(EmergencyContact contact) async {
     final l10n = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
-    final name = _profile.name;
-    final body = name.isEmpty ? l10n.emSmsBodyNoName : l10n.emSmsBody(name);
-    final ok = await openSms(contact.number, body);
+    final ok = await openSms(contact.number, _alertBody());
     if (!ok) {
-      messenger.showSnackBar(SnackBar(content: Text(l10n.emCallFailed)));
+      messenger.showSnackBar(SnackBar(content: Text(l10n.emAppFailed)));
+    }
+  }
+
+  Future<void> _whatsapp(EmergencyContact contact) async {
+    final l10n = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    final ok = await openWhatsApp(contact.number, _alertBody());
+    if (!ok) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.emAppFailed)));
     }
   }
 
@@ -264,56 +278,106 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        contentPadding: const EdgeInsetsDirectional.only(start: 16, end: 4),
-        leading: CircleAvatar(
-          backgroundColor: colors.primaryContainer,
-          child: Text(
-            initial,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: colors.onPrimaryContainer,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        children: [
+          // Upar wala hissa: tap karne par seedha dialer
+          InkWell(
+            onTap: () => _call(c.number),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 4, 8),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: colors.primaryContainer,
+                    child: Text(
+                      initial,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colors.onPrimaryContainer,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          c.name,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: Text(c.number),
+                        ),
+                        if (c.relation.isNotEmpty)
+                          Text(
+                            c.relation,
+                            style: context.text.bodySmall
+                                ?.copyWith(color: colors.onSurfaceVariant),
+                          ),
+                      ],
+                    ),
+                  ),
+                  PopupMenuButton<String>(
+                    onSelected: (value) {
+                      if (value == 'edit') _editContact(c);
+                      if (value == 'delete') _confirmDelete(c);
+                    },
+                    itemBuilder: (_) => [
+                      PopupMenuItem<String>(
+                          value: 'edit', child: Text(l10n.emEdit)),
+                      PopupMenuItem<String>(
+                          value: 'delete', child: Text(l10n.delete)),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        title: Text(c.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: Text(c.number),
-            ),
-            if (c.relation.isNotEmpty) Text(c.relation),
-          ],
-        ),
-        onTap: () => _call(c.number),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              tooltip: l10n.emCall,
-              icon: const Icon(Icons.call, color: Colors.green),
-              onPressed: () => _call(c.number),
-            ),
-            IconButton(
-              tooltip: l10n.emSms,
-              icon: Icon(Icons.sms_outlined, color: colors.primary),
-              onPressed: () => _sms(c),
-            ),
-            PopupMenuButton<String>(
-              onSelected: (value) {
-                if (value == 'edit') _editContact(c);
-                if (value == 'delete') _confirmDelete(c);
-              },
-              itemBuilder: (_) => [
-                PopupMenuItem<String>(value: 'edit', child: Text(l10n.emEdit)),
-                PopupMenuItem<String>(
-                    value: 'delete', child: Text(l10n.delete)),
+          // Neeche: Call / SMS / WhatsApp
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: _actionButton(Icons.call, l10n.emCall, Colors.green,
+                      () => _call(c.number)),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _actionButton(Icons.sms_outlined, l10n.emSms,
+                      colors.primary, () => _sms(c)),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _actionButton(Icons.chat_bubble_outline,
+                      l10n.emWhatsApp, const Color(0xFF25D366),
+                      () => _whatsapp(c)),
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _actionButton(
+      IconData icon, String label, Color color, VoidCallback onTap) {
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: color,
+        side: BorderSide(color: color.withAlpha(120)),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+      ),
+      icon: Icon(icon, size: 18),
+      label: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(label),
       ),
     );
   }
@@ -414,7 +478,7 @@ class _SectionHeader extends StatelessWidget {
               ),
             ),
           ),
-          if (trailing != null) trailing!,
+          ?trailing,
         ],
       ),
     );
@@ -487,27 +551,32 @@ class _ContactDialogState extends State<_ContactDialog> {
             TextField(
               controller: _name,
               textCapitalization: TextCapitalization.words,
-              maxLength: 40,
+              inputFormatters: [LengthLimitingTextInputFormatter(40)],
               decoration: InputDecoration(
                 labelText: l10n.emContactName,
                 errorText: _nameError,
               ),
               onChanged: (_) => setState(() => _nameError = null),
             ),
+            const SizedBox(height: 8),
             TextField(
               controller: _number,
               keyboardType: TextInputType.phone,
               textDirection: TextDirection.ltr,
-              maxLength: 20,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9+\-\s()]')),
+                LengthLimitingTextInputFormatter(20),
+              ],
               decoration: InputDecoration(
                 labelText: l10n.emContactPhone,
                 errorText: _numberError,
               ),
               onChanged: (_) => setState(() => _numberError = null),
             ),
+            const SizedBox(height: 8),
             TextField(
               controller: _relation,
-              maxLength: 30,
+              inputFormatters: [LengthLimitingTextInputFormatter(30)],
               decoration: InputDecoration(labelText: l10n.emContactRelation),
             ),
           ],

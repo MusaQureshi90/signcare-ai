@@ -558,4 +558,81 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get emCallRescue => '1122 پر کال کریں';
+
+  @override
+  String get emWhatsApp => 'واٹس ایپ';
+
+  @override
+  String get emAppFailed => 'ایپ نہیں کھل سکی۔ براہ کرم نمبر چیک کریں۔';
+
+  @override
+  String get cardsTitle => 'فوری کارڈز';
+
+  @override
+  String get cardsSearchHint => 'کارڈ تلاش کریں';
+
+  @override
+  String get cardsAll => 'تمام';
+
+  @override
+  String get cardsFavourites => 'پسندیدہ';
+
+  @override
+  String get cardsRecent => 'حالیہ';
+
+  @override
+  String get cardsMine => 'میرے کارڈز';
+
+  @override
+  String get cardsEmpty => 'یہاں ابھی کوئی کارڈ نہیں۔';
+
+  @override
+  String get cardsEmptyFav =>
+      'کارڈ کو یہاں محفوظ کرنے کے لیے اس کے ستارے پر دبائیں۔';
+
+  @override
+  String get cardsEmptyRecent => 'آپ کے استعمال کیے گئے کارڈ یہاں نظر آئیں گے۔';
+
+  @override
+  String get cardsEmptyMine => 'پلس بٹن سے اپنے کارڈ شامل کریں۔';
+
+  @override
+  String get cardsNoResults => 'تلاش سے کوئی کارڈ نہیں ملا۔';
+
+  @override
+  String get cardsAddOwn => 'اپنا کارڈ شامل کریں';
+
+  @override
+  String get cardsNewTitle => 'نیا کارڈ';
+
+  @override
+  String get cardsTextLabel => 'اس پر کیا لکھا ہو؟';
+
+  @override
+  String get cardsTextError => 'براہ کرم کچھ لکھیں۔';
+
+  @override
+  String get cardsPickEmoji => 'تصویر چنیں';
+
+  @override
+  String get cardsMaxCustom =>
+      'آپ اپنے زیادہ سے زیادہ 30 کارڈ محفوظ کر سکتے ہیں۔';
+
+  @override
+  String get cardsDeleteTitle => 'یہ کارڈ ہٹائیں؟';
+
+  @override
+  String get cardsHoldHint => 'اپنا کارڈ ہٹانے کے لیے اس پر دیر تک دبائیں۔';
+
+  @override
+  String get cardsSpeakOn => 'کارڈ دبانے پر بولیں گے۔';
+
+  @override
+  String get cardsSpeakOff => 'کارڈ دبانے پر خاموش رہیں گے۔';
+
+  @override
+  String get cardsSpeakTooltip => 'دبانے پر بولیں';
+
+  @override
+  String get cardsAddSummary => 'خلاصے میں شامل کریں';
 }
