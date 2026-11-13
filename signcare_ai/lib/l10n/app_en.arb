@@ -179,5 +179,56 @@
   "sumDeleteReportTitle": "Delete this summary?",
   "sumDeleteReportBody": "This saved summary will be removed from this device.",
   "sumReadAloud": "Read aloud",
-  "sumRemoveItem": "Remove"
+  "sumRemoveItem": "Remove",
+
+  "emTitle": "Emergency Help",
+  "emHelpButton": "I NEED HELP NOW",
+  "emHelpHint": "Flashes the screen and speaks for you",
+  "emContactsSection": "My emergency contacts",
+  "emAddContact": "Add contact",
+  "emNoContacts": "No contacts yet. Add the people who should be called in an emergency.",
+  "emAddTitle": "Add emergency contact",
+  "emEditTitle": "Edit contact",
+  "emContactName": "Name",
+  "emContactPhone": "Phone number",
+  "emContactRelation": "Relationship (optional)",
+  "emNameError": "Please enter a name.",
+  "emPhoneError": "Please enter a valid phone number.",
+  "emMaxContacts": "You can save up to 5 contacts.",
+  "emCall": "Call",
+  "emSms": "Send SMS",
+  "emEdit": "Edit",
+  "emDeleteContactTitle": "Remove this contact?",
+  "emDeleteContactBody": "{name} will be removed from your emergency contacts.",
+  "@emDeleteContactBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "emNumbersSection": "Emergency numbers",
+  "emRescue": "Rescue / Ambulance",
+  "emPolice": "Police",
+  "emFire": "Fire brigade",
+  "emNumbersNote": "Numbers for Pakistan. Tap one to open the phone dialer.",
+  "emPhrasesSection": "Say it quickly",
+  "emAddToSummary": "Add to summary",
+  "emCallFailed": "Could not open the phone dialer.",
+  "emSmsBody": "EMERGENCY: {name} needs urgent help. Please call or come immediately. Sent from SignCare AI.",
+  "@emSmsBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "emSmsBodyNoName": "EMERGENCY: I need urgent help. Please call or come immediately. Sent from SignCare AI.",
+  "emAlertHeadline": "I NEED URGENT HELP",
+  "emAlertSub": "I cannot speak. Please help me.",
+  "emAlertSubFemale": "I cannot speak. Please help me.",
+  "emAlertSpeech": "I need urgent medical help. I cannot speak. Please help me.",
+  "emAlertSpeechFemale": "I need urgent medical help. I cannot speak. Please help me.",
+  "emStopAlert": "Stop alert",
+  "emCallRescue": "Call 1122"
 }

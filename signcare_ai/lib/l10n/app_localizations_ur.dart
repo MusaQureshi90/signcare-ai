@@ -441,4 +441,121 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get sumRemoveItem => 'ہٹائیں';
+
+  @override
+  String get emTitle => 'ہنگامی مدد';
+
+  @override
+  String get emHelpButton => 'مجھے فوری مدد چاہیے';
+
+  @override
+  String get emHelpHint => 'اسکرین چمکتی ہے اور آپ کی جگہ بولتی ہے';
+
+  @override
+  String get emContactsSection => 'میرے ہنگامی رابطے';
+
+  @override
+  String get emAddContact => 'رابطہ شامل کریں';
+
+  @override
+  String get emNoContacts =>
+      'ابھی کوئی رابطہ نہیں۔ ان لوگوں کو شامل کریں جنہیں ہنگامی صورت میں فون کیا جائے۔';
+
+  @override
+  String get emAddTitle => 'ہنگامی رابطہ شامل کریں';
+
+  @override
+  String get emEditTitle => 'رابطہ تبدیل کریں';
+
+  @override
+  String get emContactName => 'نام';
+
+  @override
+  String get emContactPhone => 'فون نمبر';
+
+  @override
+  String get emContactRelation => 'رشتہ (اختیاری)';
+
+  @override
+  String get emNameError => 'براہ کرم نام لکھیں۔';
+
+  @override
+  String get emPhoneError => 'براہ کرم درست فون نمبر لکھیں۔';
+
+  @override
+  String get emMaxContacts => 'آپ زیادہ سے زیادہ 5 رابطے محفوظ کر سکتے ہیں۔';
+
+  @override
+  String get emCall => 'کال کریں';
+
+  @override
+  String get emSms => 'ایس ایم ایس بھیجیں';
+
+  @override
+  String get emEdit => 'تبدیل کریں';
+
+  @override
+  String get emDeleteContactTitle => 'یہ رابطہ ہٹائیں؟';
+
+  @override
+  String emDeleteContactBody(String name) {
+    return '$name آپ کے ہنگامی رابطوں سے ہٹا دیا جائے گا۔';
+  }
+
+  @override
+  String get emNumbersSection => 'ہنگامی نمبر';
+
+  @override
+  String get emRescue => 'ریسکیو / ایمبولینس';
+
+  @override
+  String get emPolice => 'پولیس';
+
+  @override
+  String get emFire => 'فائر بریگیڈ';
+
+  @override
+  String get emNumbersNote =>
+      'یہ پاکستان کے نمبر ہیں۔ فون ڈائلر کھولنے کے لیے کسی پر دبائیں۔';
+
+  @override
+  String get emPhrasesSection => 'فوری بات کہیں';
+
+  @override
+  String get emAddToSummary => 'خلاصے میں شامل کریں';
+
+  @override
+  String get emCallFailed => 'فون ڈائلر نہیں کھل سکا۔';
+
+  @override
+  String emSmsBody(String name) {
+    return 'ہنگامی صورتحال: $name کو فوری مدد چاہیے۔ براہ کرم فوراً فون کریں یا آ جائیں۔ SignCare AI سے بھیجا گیا۔';
+  }
+
+  @override
+  String get emSmsBodyNoName =>
+      'ہنگامی صورتحال: مجھے فوری مدد چاہیے۔ براہ کرم فوراً فون کریں یا آ جائیں۔ SignCare AI سے بھیجا گیا۔';
+
+  @override
+  String get emAlertHeadline => 'مجھے فوری مدد چاہیے';
+
+  @override
+  String get emAlertSub => 'میں بول نہیں سکتا۔ براہ کرم میری مدد کریں۔';
+
+  @override
+  String get emAlertSubFemale => 'میں بول نہیں سکتی۔ براہ کرم میری مدد کریں۔';
+
+  @override
+  String get emAlertSpeech =>
+      'مجھے فوری طبی مدد چاہیے۔ میں بول نہیں سکتا۔ براہ کرم میری مدد کریں۔';
+
+  @override
+  String get emAlertSpeechFemale =>
+      'مجھے فوری طبی مدد چاہیے۔ میں بول نہیں سکتی۔ براہ کرم میری مدد کریں۔';
+
+  @override
+  String get emStopAlert => 'الرٹ بند کریں';
+
+  @override
+  String get emCallRescue => '1122 پر کال کریں';
 }

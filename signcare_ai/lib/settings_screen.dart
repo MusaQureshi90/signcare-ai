@@ -11,7 +11,7 @@ import 'l10n_ext.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
 
-const String _supportEmail = 'mformusa11@gmail.com';
+const String _supportEmail = 'aiisshaaa24@gmail.com';
 const String _portfolioUrl = 'https://musaqureshi.pythonanywhere.com';
 
 // pubspec.yaml ke version se match rakho. Baad mein package_info_plus lagayenge.
@@ -167,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
                     ListTile(
                       leading: Icon(Icons.language, color: colors.primary),
                       title: Text(l10n.setPortfolioTitle),
-                      subtitle: const Text('musaqureshi.pythonanywhere.com'),
+                      subtitle: const Text('Profile'),
                       onTap: () => _showPortfolioDialog(context),
                     ),
                     const Divider(height: 1),

@@ -441,4 +441,121 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sumRemoveItem => 'Remove';
+
+  @override
+  String get emTitle => 'Emergency Help';
+
+  @override
+  String get emHelpButton => 'I NEED HELP NOW';
+
+  @override
+  String get emHelpHint => 'Flashes the screen and speaks for you';
+
+  @override
+  String get emContactsSection => 'My emergency contacts';
+
+  @override
+  String get emAddContact => 'Add contact';
+
+  @override
+  String get emNoContacts =>
+      'No contacts yet. Add the people who should be called in an emergency.';
+
+  @override
+  String get emAddTitle => 'Add emergency contact';
+
+  @override
+  String get emEditTitle => 'Edit contact';
+
+  @override
+  String get emContactName => 'Name';
+
+  @override
+  String get emContactPhone => 'Phone number';
+
+  @override
+  String get emContactRelation => 'Relationship (optional)';
+
+  @override
+  String get emNameError => 'Please enter a name.';
+
+  @override
+  String get emPhoneError => 'Please enter a valid phone number.';
+
+  @override
+  String get emMaxContacts => 'You can save up to 5 contacts.';
+
+  @override
+  String get emCall => 'Call';
+
+  @override
+  String get emSms => 'Send SMS';
+
+  @override
+  String get emEdit => 'Edit';
+
+  @override
+  String get emDeleteContactTitle => 'Remove this contact?';
+
+  @override
+  String emDeleteContactBody(String name) {
+    return '$name will be removed from your emergency contacts.';
+  }
+
+  @override
+  String get emNumbersSection => 'Emergency numbers';
+
+  @override
+  String get emRescue => 'Rescue / Ambulance';
+
+  @override
+  String get emPolice => 'Police';
+
+  @override
+  String get emFire => 'Fire brigade';
+
+  @override
+  String get emNumbersNote =>
+      'Numbers for Pakistan. Tap one to open the phone dialer.';
+
+  @override
+  String get emPhrasesSection => 'Say it quickly';
+
+  @override
+  String get emAddToSummary => 'Add to summary';
+
+  @override
+  String get emCallFailed => 'Could not open the phone dialer.';
+
+  @override
+  String emSmsBody(String name) {
+    return 'EMERGENCY: $name needs urgent help. Please call or come immediately. Sent from SignCare AI.';
+  }
+
+  @override
+  String get emSmsBodyNoName =>
+      'EMERGENCY: I need urgent help. Please call or come immediately. Sent from SignCare AI.';
+
+  @override
+  String get emAlertHeadline => 'I NEED URGENT HELP';
+
+  @override
+  String get emAlertSub => 'I cannot speak. Please help me.';
+
+  @override
+  String get emAlertSubFemale => 'I cannot speak. Please help me.';
+
+  @override
+  String get emAlertSpeech =>
+      'I need urgent medical help. I cannot speak. Please help me.';
+
+  @override
+  String get emAlertSpeechFemale =>
+      'I need urgent medical help. I cannot speak. Please help me.';
+
+  @override
+  String get emStopAlert => 'Stop alert';
+
+  @override
+  String get emCallRescue => 'Call 1122';
 }

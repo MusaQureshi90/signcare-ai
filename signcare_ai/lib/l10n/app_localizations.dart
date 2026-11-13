@@ -919,6 +919,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remove'**
   String get sumRemoveItem;
+
+  /// No description provided for @emTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Help'**
+  String get emTitle;
+
+  /// No description provided for @emHelpButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I NEED HELP NOW'**
+  String get emHelpButton;
+
+  /// No description provided for @emHelpHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Flashes the screen and speaks for you'**
+  String get emHelpHint;
+
+  /// No description provided for @emContactsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'My emergency contacts'**
+  String get emContactsSection;
+
+  /// No description provided for @emAddContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Add contact'**
+  String get emAddContact;
+
+  /// No description provided for @emNoContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'No contacts yet. Add the people who should be called in an emergency.'**
+  String get emNoContacts;
+
+  /// No description provided for @emAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add emergency contact'**
+  String get emAddTitle;
+
+  /// No description provided for @emEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit contact'**
+  String get emEditTitle;
+
+  /// No description provided for @emContactName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get emContactName;
+
+  /// No description provided for @emContactPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get emContactPhone;
+
+  /// No description provided for @emContactRelation.
+  ///
+  /// In en, this message translates to:
+  /// **'Relationship (optional)'**
+  String get emContactRelation;
+
+  /// No description provided for @emNameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name.'**
+  String get emNameError;
+
+  /// No description provided for @emPhoneError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get emPhoneError;
+
+  /// No description provided for @emMaxContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'You can save up to 5 contacts.'**
+  String get emMaxContacts;
+
+  /// No description provided for @emCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get emCall;
+
+  /// No description provided for @emSms.
+  ///
+  /// In en, this message translates to:
+  /// **'Send SMS'**
+  String get emSms;
+
+  /// No description provided for @emEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get emEdit;
+
+  /// No description provided for @emDeleteContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove this contact?'**
+  String get emDeleteContactTitle;
+
+  /// No description provided for @emDeleteContactBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will be removed from your emergency contacts.'**
+  String emDeleteContactBody(String name);
+
+  /// No description provided for @emNumbersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency numbers'**
+  String get emNumbersSection;
+
+  /// No description provided for @emRescue.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescue / Ambulance'**
+  String get emRescue;
+
+  /// No description provided for @emPolice.
+  ///
+  /// In en, this message translates to:
+  /// **'Police'**
+  String get emPolice;
+
+  /// No description provided for @emFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire brigade'**
+  String get emFire;
+
+  /// No description provided for @emNumbersNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbers for Pakistan. Tap one to open the phone dialer.'**
+  String get emNumbersNote;
+
+  /// No description provided for @emPhrasesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Say it quickly'**
+  String get emPhrasesSection;
+
+  /// No description provided for @emAddToSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to summary'**
+  String get emAddToSummary;
+
+  /// No description provided for @emCallFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the phone dialer.'**
+  String get emCallFailed;
+
+  /// No description provided for @emSmsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'EMERGENCY: {name} needs urgent help. Please call or come immediately. Sent from SignCare AI.'**
+  String emSmsBody(String name);
+
+  /// No description provided for @emSmsBodyNoName.
+  ///
+  /// In en, this message translates to:
+  /// **'EMERGENCY: I need urgent help. Please call or come immediately. Sent from SignCare AI.'**
+  String get emSmsBodyNoName;
+
+  /// No description provided for @emAlertHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'I NEED URGENT HELP'**
+  String get emAlertHeadline;
+
+  /// No description provided for @emAlertSub.
+  ///
+  /// In en, this message translates to:
+  /// **'I cannot speak. Please help me.'**
+  String get emAlertSub;
+
+  /// No description provided for @emAlertSubFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'I cannot speak. Please help me.'**
+  String get emAlertSubFemale;
+
+  /// No description provided for @emAlertSpeech.
+  ///
+  /// In en, this message translates to:
+  /// **'I need urgent medical help. I cannot speak. Please help me.'**
+  String get emAlertSpeech;
+
+  /// No description provided for @emAlertSpeechFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'I need urgent medical help. I cannot speak. Please help me.'**
+  String get emAlertSpeechFemale;
+
+  /// No description provided for @emStopAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop alert'**
+  String get emStopAlert;
+
+  /// No description provided for @emCallRescue.
+  ///
+  /// In en, this message translates to:
+  /// **'Call 1122'**
+  String get emCallRescue;
 }
 
 class _AppLocalizationsDelegate

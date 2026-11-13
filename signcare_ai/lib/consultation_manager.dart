@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'emergency_contacts_store.dart';
 import 'summary_store.dart';
 
 /// Purani screens ke liye bridge. Naya code seedha SummaryStore use kare.
@@ -12,5 +13,6 @@ class ConsultationManager {
   /// Logout par memory saaf (saved data phone mein rehta hai)
   static void clear() {
     SummaryStore.instance.unload();
+    EmergencyContactsStore.instance.unload();
   }
 }
