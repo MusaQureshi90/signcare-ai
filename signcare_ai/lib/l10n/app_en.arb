@@ -291,12 +291,30 @@
   "speechStart": "Start listening",
   "speechStop": "Stop",
   "speechEarlier": "Earlier",
-  "speechNoLocale": "This phone has no speech recognition for this language. Try the other language.",
+  "speechNoLocale": "This phone cannot recognise this language yet. In phone settings, choose Google as the voice input service and download the language, or try the other language.",
   "speechPermission": "Microphone permission is needed. Please allow it in phone settings.",
   "speechUnavailable": "Speech recognition is not available on this phone.",
   "speechCopy": "Copy",
   "speechCopied": "Copied.",
   "speechClear": "Clear",
   "speechBigger": "Bigger text",
-  "speechSmaller": "Smaller text"
+  "speechSmaller": "Smaller text",
+
+  "bodyTitle": "Body Diagram",
+  "bodyFront": "Front",
+  "bodyBack": "Back",
+  "bodyMale": "Male",
+  "bodyFemale": "Female",
+  "bodyOtherHint": "Choose the body shape to show:",
+  "bodyTapHint": "Tap the body part that hurts",
+  "bodyWhatFeel": "What are you feeling here?",
+  "bodyListView": "List view",
+  "bodyDiagramView": "Body view",
+
+  "msgTitle": "Type & Speak",
+  "msgHint": "Type what you want to say...",
+  "msgEmpty": "Please type something first.",
+  "msgShow": "Show big",
+  "msgQuick": "Quick starters",
+  "msgRecent": "Recent messages"
 }

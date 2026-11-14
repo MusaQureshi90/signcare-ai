@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'app_theme.dart';
 import 'consultation_manager.dart';
 import 'l10n_ext.dart';
@@ -36,9 +36,8 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
     super.didChangeDependencies();
     if (!_langInit) {
       _langInit = true;
-      _lang = Localizations.localeOf(context).languageCode == 'ur'
-          ? 'ur'
-          : 'en';
+      _lang =
+          Localizations.localeOf(context).languageCode == 'ur' ? 'ur' : 'en';
     }
   }
 
@@ -53,7 +52,10 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
   Future<bool> _ensureReady() async {
     if (_ready) return true;
     try {
-      _ready = await _speech.initialize(onStatus: _onStatus, onError: _onError);
+      _ready = await _speech.initialize(
+        onStatus: _onStatus,
+        onError: _onError,
+      );
     } catch (e) {
       debugPrint('speech init error: $e');
       _ready = false;
@@ -61,20 +63,28 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
     return _ready;
   }
 
-  Future<String?> _resolveLocale(String lang) async {
-    final locales = await _speech.locales();
-    String norm(String id) => id.toLowerCase().replaceAll('-', '_');
+  /// Phone ki list mein zabaan mile to wahi, warna seedha ur_PK / en_US try karta hai
+  /// (Android ki list aksar adhoori hoti hai, isliye usper bharosa nahi)
+  Future<String> _resolveLocale(String lang) async {
+    final fallback = lang == 'ur' ? 'ur_PK' : 'en_US';
+    try {
+      final locales = await _speech.locales();
+      String norm(String id) => id.toLowerCase().replaceAll('-', '_');
 
-    final matches = locales
-        .where((l) => norm(l.localeId).startsWith('${lang}_'))
-        .toList();
-    if (matches.isEmpty) return null;
+      final matches = locales
+          .where((l) => norm(l.localeId).startsWith('${lang}_'))
+          .toList();
+      if (matches.isEmpty) return fallback;
 
-    final preferred = lang == 'ur' ? 'ur_pk' : 'en_us';
-    for (final l in matches) {
-      if (norm(l.localeId) == preferred) return l.localeId;
+      final preferred = lang == 'ur' ? 'ur_pk' : 'en_us';
+      for (final l in matches) {
+        if (norm(l.localeId) == preferred) return l.localeId;
+      }
+      return matches.first.localeId;
+    } catch (e) {
+      debugPrint('speech locales error: $e');
+      return fallback;
     }
-    return matches.first.localeId;
   }
 
   Future<void> _start() async {
@@ -86,10 +96,6 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
     }
     final locale = await _resolveLocale(_lang);
     if (!mounted) return;
-    if (locale == null) {
-      setState(() => _message = l10n.speechNoLocale);
-      return;
-    }
     setState(() {
       _localeId = locale;
       _message = null;
@@ -106,9 +112,14 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
     try {
       await _speech.listen(
         onResult: _onResult,
-        localeId: _localeId,
-        listenFor: const Duration(seconds: 60),
-        pauseFor: const Duration(seconds: 5),
+        listenOptions: stt.SpeechListenOptions(
+          partialResults: true,
+          cancelOnError: false,
+        ).copyWith(
+          listenFor: const Duration(seconds: 60),
+          pauseFor: const Duration(seconds: 5),
+          localeId: _localeId,
+        ),
       );
       if (mounted) setState(() => _listening = true);
     } catch (e) {
@@ -148,17 +159,25 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
   void _onError(SpeechRecognitionError e) {
     debugPrint('speech error: ${e.errorMsg} permanent=${e.permanent}');
     if (!mounted) return;
-    final noPermission = e.errorMsg.toLowerCase().contains('permission');
-    if (e.permanent || noPermission) {
+    final msg = e.errorMsg.toLowerCase();
+    final noPermission = msg.contains('permission');
+    final langProblem = msg.contains('language');
+
+    if (e.permanent || noPermission || langProblem) {
       final l10n = context.l10n;
       setState(() {
         _wantListening = false;
         _listening = false;
-        _message = noPermission
-            ? l10n.speechPermission
-            : l10n.speechUnavailable;
+        if (noPermission) {
+          _message = l10n.speechPermission;
+        } else if (langProblem) {
+          _message = l10n.speechNoLocale;
+        } else {
+          _message = l10n.speechUnavailable;
+        }
       });
     }
+    // Baqi errors (jaise khamoshi) par status handler khud dobara shuru karta hai
   }
 
   Future<void> _stop() async {
@@ -200,9 +219,8 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
   void _addToSummary(String text) {
     final l10n = context.l10n;
     ConsultationManager.addItem('Speech', text);
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(l10n.typeAdded)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(l10n.typeAdded)));
   }
 
   void _resize(double delta) {
@@ -215,9 +233,8 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
     final l10n = context.l10n;
     final colors = context.colors;
 
-    final bigText = _live.isNotEmpty
-        ? _live
-        : (_lines.isNotEmpty ? _lines.first : '');
+    final bigText =
+        _live.isNotEmpty ? _live : (_lines.isNotEmpty ? _lines.first : '');
     final history = _live.isNotEmpty ? _lines : _lines.skip(1).toList();
 
     return Scaffold(
@@ -281,8 +298,8 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
                         color: _message != null
                             ? colors.error
                             : (bigText.isEmpty
-                                  ? colors.onSurfaceVariant
-                                  : colors.onSurface),
+                                ? colors.onSurfaceVariant
+                                : colors.onSurface),
                       ),
                     ),
                   ),
@@ -298,12 +315,9 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
                 children: [
                   const LinearProgressIndicator(),
                   const SizedBox(height: 4),
-                  Text(
-                    l10n.speechListening,
-                    style: context.text.bodySmall?.copyWith(
-                      color: colors.onSurfaceVariant,
-                    ),
-                  ),
+                  Text(l10n.speechListening,
+                      style: context.text.bodySmall
+                          ?.copyWith(color: colors.onSurfaceVariant)),
                 ],
               ),
             ),
@@ -333,19 +347,12 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
                   return Card(
                     margin: const EdgeInsets.only(bottom: 8),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                        14,
-                        4,
-                        0,
-                        4,
-                      ),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(14, 4, 0, 4),
                       child: Row(
                         children: [
                           Expanded(
-                            child: Text(
-                              t,
-                              style: const TextStyle(fontSize: 16),
-                            ),
+                            child: Text(t, style: const TextStyle(fontSize: 16)),
                           ),
                           IconButton(
                             tooltip: l10n.speechCopy,
@@ -354,11 +361,8 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
                           ),
                           IconButton(
                             tooltip: l10n.cardsAddSummary,
-                            icon: Icon(
-                              Icons.assignment_add,
-                              size: 22,
-                              color: colors.primary,
-                            ),
+                            icon: Icon(Icons.assignment_add,
+                                size: 22, color: colors.primary),
                             onPressed: () => _addToSummary(t),
                           ),
                         ],

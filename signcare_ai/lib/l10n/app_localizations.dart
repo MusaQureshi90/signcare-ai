@@ -1433,7 +1433,7 @@ abstract class AppLocalizations {
   /// No description provided for @speechNoLocale.
   ///
   /// In en, this message translates to:
-  /// **'This phone has no speech recognition for this language. Try the other language.'**
+  /// **'This phone cannot recognise this language yet. In phone settings, choose Google as the voice input service and download the language, or try the other language.'**
   String get speechNoLocale;
 
   /// No description provided for @speechPermission.
@@ -1477,6 +1477,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Smaller text'**
   String get speechSmaller;
+
+  /// No description provided for @bodyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Diagram'**
+  String get bodyTitle;
+
+  /// No description provided for @bodyFront.
+  ///
+  /// In en, this message translates to:
+  /// **'Front'**
+  String get bodyFront;
+
+  /// No description provided for @bodyBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get bodyBack;
+
+  /// No description provided for @bodyMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get bodyMale;
+
+  /// No description provided for @bodyFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get bodyFemale;
+
+  /// No description provided for @bodyOtherHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the body shape to show:'**
+  String get bodyOtherHint;
+
+  /// No description provided for @bodyTapHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the body part that hurts'**
+  String get bodyTapHint;
+
+  /// No description provided for @bodyWhatFeel.
+  ///
+  /// In en, this message translates to:
+  /// **'What are you feeling here?'**
+  String get bodyWhatFeel;
+
+  /// No description provided for @bodyListView.
+  ///
+  /// In en, this message translates to:
+  /// **'List view'**
+  String get bodyListView;
+
+  /// No description provided for @bodyDiagramView.
+  ///
+  /// In en, this message translates to:
+  /// **'Body view'**
+  String get bodyDiagramView;
+
+  /// No description provided for @msgTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Type & Speak'**
+  String get msgTitle;
+
+  /// No description provided for @msgHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type what you want to say...'**
+  String get msgHint;
+
+  /// No description provided for @msgEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Please type something first.'**
+  String get msgEmpty;
+
+  /// No description provided for @msgShow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show big'**
+  String get msgShow;
+
+  /// No description provided for @msgQuick.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick starters'**
+  String get msgQuick;
+
+  /// No description provided for @msgRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent messages'**
+  String get msgRecent;
 }
 
 class _AppLocalizationsDelegate

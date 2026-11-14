@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_theme.dart';
 import 'cards_data.dart';
+import 'cards_search.dart';
 import 'cards_store.dart';
 import 'l10n_ext.dart';
 import 'summary_labels.dart';
@@ -54,16 +55,11 @@ class _CommonNeedsScreenState extends State<CommonNeedsScreen> {
 
   // ---------------- Data ----------------
   List<CardItem> _visible() {
-    final all = <CardItem>[..._store.custom, ...builtInCards];
-    final query = _search.text.trim().toLowerCase();
+        final all = <CardItem>[..._store.custom, ...builtInCards];
 
     // Search karte waqt filter ignore, sab cards mein dhoondo
-    if (query.isNotEmpty) {
-      return all
-          .where(
-            (c) => c.en.toLowerCase().contains(query) || c.ur.contains(query),
-          )
-          .toList();
+    if (_search.text.trim().isNotEmpty) {
+      return searchCards(all, _search.text);
     }
 
     switch (_filter) {

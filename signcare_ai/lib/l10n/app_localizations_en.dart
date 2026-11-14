@@ -711,7 +711,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get speechNoLocale =>
-      'This phone has no speech recognition for this language. Try the other language.';
+      'This phone cannot recognise this language yet. In phone settings, choose Google as the voice input service and download the language, or try the other language.';
 
   @override
   String get speechPermission =>
@@ -735,4 +735,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get speechSmaller => 'Smaller text';
+
+  @override
+  String get bodyTitle => 'Body Diagram';
+
+  @override
+  String get bodyFront => 'Front';
+
+  @override
+  String get bodyBack => 'Back';
+
+  @override
+  String get bodyMale => 'Male';
+
+  @override
+  String get bodyFemale => 'Female';
+
+  @override
+  String get bodyOtherHint => 'Choose the body shape to show:';
+
+  @override
+  String get bodyTapHint => 'Tap the body part that hurts';
+
+  @override
+  String get bodyWhatFeel => 'What are you feeling here?';
+
+  @override
+  String get bodyListView => 'List view';
+
+  @override
+  String get bodyDiagramView => 'Body view';
+
+  @override
+  String get msgTitle => 'Type & Speak';
+
+  @override
+  String get msgHint => 'Type what you want to say...';
+
+  @override
+  String get msgEmpty => 'Please type something first.';
+
+  @override
+  String get msgShow => 'Show big';
+
+  @override
+  String get msgQuick => 'Quick starters';
+
+  @override
+  String get msgRecent => 'Recent messages';
 }

@@ -713,7 +713,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get speechNoLocale =>
-      'اس فون میں اس زبان کے لیے آواز پہچاننے کی سہولت نہیں۔ دوسری زبان آزمائیں۔';
+      'یہ فون ابھی اس زبان کو نہیں پہچان سکتا۔ فون کی سیٹنگز میں وائس ان پٹ کے لیے گوگل منتخب کریں اور زبان ڈاؤن لوڈ کریں، یا دوسری زبان آزمائیں۔';
 
   @override
   String get speechPermission =>
@@ -737,4 +737,52 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get speechSmaller => 'چھوٹا متن';
+
+  @override
+  String get bodyTitle => 'جسم کا خاکہ';
+
+  @override
+  String get bodyFront => 'سامنے';
+
+  @override
+  String get bodyBack => 'پیچھے';
+
+  @override
+  String get bodyMale => 'مرد';
+
+  @override
+  String get bodyFemale => 'عورت';
+
+  @override
+  String get bodyOtherHint => 'دکھانے کے لیے جسم کی شکل چنیں:';
+
+  @override
+  String get bodyTapHint => 'جسم کے جس حصے میں تکلیف ہے اس پر دبائیں';
+
+  @override
+  String get bodyWhatFeel => 'یہاں آپ کو کیا محسوس ہو رہا ہے؟';
+
+  @override
+  String get bodyListView => 'فہرست';
+
+  @override
+  String get bodyDiagramView => 'جسم کا خاکہ';
+
+  @override
+  String get msgTitle => 'لکھیں اور بولیں';
+
+  @override
+  String get msgHint => 'جو کہنا چاہتے ہیں یہاں لکھیں...';
+
+  @override
+  String get msgEmpty => 'براہ کرم پہلے کچھ لکھیں۔';
+
+  @override
+  String get msgShow => 'بڑا دکھائیں';
+
+  @override
+  String get msgQuick => 'جلدی کے جملے';
+
+  @override
+  String get msgRecent => 'حالیہ پیغامات';
 }
