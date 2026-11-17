@@ -1,16 +1,20 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+
+import 'api_client.dart';
 import 'app_settings.dart';
 import 'app_theme.dart';
+import 'auth_session.dart';
 import 'l10n/app_localizations.dart';
 import 'splash_screen.dart';
-
-// Purani files (splash / login / otp) HomeScreen ko 'main.dart' se import karti hain.
-// Jab tak wo files rewrite nahi hotin, ye line unhe chalati rakhti hai.
-export 'home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppSettings.instance.load();
+  await AuthSession.instance.restore();
+  // Render ka server so raha ho to app khulte hi jaga do.
+  unawaited(ApiClient.instance.wakeUp());
   runApp(const SignCareApp());
 }
 
@@ -33,12 +37,7 @@ class SignCareApp extends StatelessWidget {
           locale: settings.locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: SplashScreen(
-            currentLang: settings.languageName,
-            onLocaleChange: (locale, langName) {
-              settings.setLanguageName(langName);
-            },
-          ),
+          home: const SplashScreen(),
         );
       },
     );

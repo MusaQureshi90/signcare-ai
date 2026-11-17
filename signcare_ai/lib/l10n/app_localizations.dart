@@ -1573,6 +1573,318 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent messages'**
   String get msgRecent;
+
+  /// No description provided for @authLoginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get authLoginTitle;
+
+  /// No description provided for @authLoginSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to continue'**
+  String get authLoginSubtitle;
+
+  /// No description provided for @authPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get authPhone;
+
+  /// No description provided for @authPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPassword;
+
+  /// No description provided for @authNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authNewPassword;
+
+  /// No description provided for @authConfirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get authConfirmPassword;
+
+  /// No description provided for @authRememberMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get authRememberMe;
+
+  /// No description provided for @authLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in'**
+  String get authLogin;
+
+  /// No description provided for @authForgot.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get authForgot;
+
+  /// No description provided for @authNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account yet?'**
+  String get authNoAccount;
+
+  /// No description provided for @authRegisterNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get authRegisterNow;
+
+  /// No description provided for @authHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get authHaveAccount;
+
+  /// No description provided for @authRegisterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get authRegisterTitle;
+
+  /// No description provided for @authRegisterSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your details help the doctor understand you'**
+  String get authRegisterSubtitle;
+
+  /// No description provided for @authRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get authRegister;
+
+  /// No description provided for @authPhoneError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid mobile number like 03XXXXXXXXX'**
+  String get authPhoneError;
+
+  /// No description provided for @authPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get authPasswordError;
+
+  /// No description provided for @authPasswordEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get authPasswordEmpty;
+
+  /// No description provided for @authPasswordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get authPasswordMismatch;
+
+  /// No description provided for @authShowPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get authShowPassword;
+
+  /// No description provided for @authHidePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get authHidePassword;
+
+  /// No description provided for @authConnecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to the server. The first time can take up to a minute.'**
+  String get authConnecting;
+
+  /// No description provided for @authForgotTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get authForgotTitle;
+
+  /// No description provided for @authForgotSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number, the recovery code you saved when you registered, and a new password.'**
+  String get authForgotSubtitle;
+
+  /// No description provided for @authRecoveryCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery code'**
+  String get authRecoveryCode;
+
+  /// No description provided for @authRecoveryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your 12-character recovery code'**
+  String get authRecoveryError;
+
+  /// No description provided for @authReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get authReset;
+
+  /// No description provided for @errInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong phone number or password.'**
+  String get errInvalidCredentials;
+
+  /// No description provided for @errInvalidRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number or recovery code is wrong.'**
+  String get errInvalidRecovery;
+
+  /// No description provided for @errWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'The current password is wrong.'**
+  String get errWrongPassword;
+
+  /// No description provided for @errPhoneExists.
+  ///
+  /// In en, this message translates to:
+  /// **'This number is already registered. Please log in.'**
+  String get errPhoneExists;
+
+  /// No description provided for @errLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many wrong attempts. Try again in 15 minutes.'**
+  String get errLocked;
+
+  /// No description provided for @errThrottled.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests. Please wait a minute.'**
+  String get errThrottled;
+
+  /// No description provided for @errNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Please check and try again.'**
+  String get errNetwork;
+
+  /// No description provided for @errTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'The server is taking too long, it may be waking up. Please try again.'**
+  String get errTimeout;
+
+  /// No description provided for @errServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Server problem. Please try again later.'**
+  String get errServer;
+
+  /// No description provided for @errValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your details and try again.'**
+  String get errValidation;
+
+  /// No description provided for @errSessionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Please log in again.'**
+  String get errSessionExpired;
+
+  /// No description provided for @errUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get errUnknown;
+
+  /// No description provided for @recTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your recovery code'**
+  String get recTitle;
+
+  /// No description provided for @recBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If you forget your password, this code is the only way to get your account back. Write it down or take a screenshot and keep it safe.'**
+  String get recBody;
+
+  /// No description provided for @recShownOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'This code is shown only once.'**
+  String get recShownOnce;
+
+  /// No description provided for @recCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy code'**
+  String get recCopy;
+
+  /// No description provided for @recCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied'**
+  String get recCopied;
+
+  /// No description provided for @recSavedCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'I have saved my recovery code'**
+  String get recSavedCheck;
+
+  /// No description provided for @recContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get recContinue;
+
+  /// No description provided for @menuSignTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign to Text'**
+  String get menuSignTitle;
+
+  /// No description provided for @menuSignSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera reads sign language (coming soon)'**
+  String get menuSignSubtitle;
+
+  /// No description provided for @menuSoonBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon'**
+  String get menuSoonBadge;
+
+  /// No description provided for @signSoonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Under construction'**
+  String get signSoonTitle;
+
+  /// No description provided for @signSoonBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Our little builders are working on a camera that will read sign language and turn it into text. It is not ready yet.'**
+  String get signSoonBody;
+
+  /// No description provided for @signSoonNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Until then, please use Communication Cards, Type Message or Speech to Text to talk with your doctor.'**
+  String get signSoonNote;
 }
 
 class _AppLocalizationsDelegate

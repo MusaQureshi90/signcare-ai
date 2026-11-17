@@ -783,4 +783,170 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgRecent => 'Recent messages';
+
+  @override
+  String get authLoginTitle => 'Welcome back';
+
+  @override
+  String get authLoginSubtitle => 'Log in to continue';
+
+  @override
+  String get authPhone => 'Phone number';
+
+  @override
+  String get authPassword => 'Password';
+
+  @override
+  String get authNewPassword => 'New password';
+
+  @override
+  String get authConfirmPassword => 'Confirm password';
+
+  @override
+  String get authRememberMe => 'Remember me';
+
+  @override
+  String get authLogin => 'Log in';
+
+  @override
+  String get authForgot => 'Forgot password?';
+
+  @override
+  String get authNoAccount => 'No account yet?';
+
+  @override
+  String get authRegisterNow => 'Register';
+
+  @override
+  String get authHaveAccount => 'Already have an account?';
+
+  @override
+  String get authRegisterTitle => 'Create account';
+
+  @override
+  String get authRegisterSubtitle =>
+      'Your details help the doctor understand you';
+
+  @override
+  String get authRegister => 'Create account';
+
+  @override
+  String get authPhoneError => 'Enter a valid mobile number like 03XXXXXXXXX';
+
+  @override
+  String get authPasswordError => 'Password must be at least 6 characters';
+
+  @override
+  String get authPasswordEmpty => 'Enter your password';
+
+  @override
+  String get authPasswordMismatch => 'Passwords do not match';
+
+  @override
+  String get authShowPassword => 'Show password';
+
+  @override
+  String get authHidePassword => 'Hide password';
+
+  @override
+  String get authConnecting =>
+      'Connecting to the server. The first time can take up to a minute.';
+
+  @override
+  String get authForgotTitle => 'Reset password';
+
+  @override
+  String get authForgotSubtitle =>
+      'Enter your phone number, the recovery code you saved when you registered, and a new password.';
+
+  @override
+  String get authRecoveryCode => 'Recovery code';
+
+  @override
+  String get authRecoveryError => 'Enter your 12-character recovery code';
+
+  @override
+  String get authReset => 'Reset password';
+
+  @override
+  String get errInvalidCredentials => 'Wrong phone number or password.';
+
+  @override
+  String get errInvalidRecovery => 'Phone number or recovery code is wrong.';
+
+  @override
+  String get errWrongPassword => 'The current password is wrong.';
+
+  @override
+  String get errPhoneExists =>
+      'This number is already registered. Please log in.';
+
+  @override
+  String get errLocked => 'Too many wrong attempts. Try again in 15 minutes.';
+
+  @override
+  String get errThrottled => 'Too many requests. Please wait a minute.';
+
+  @override
+  String get errNetwork =>
+      'No internet connection. Please check and try again.';
+
+  @override
+  String get errTimeout =>
+      'The server is taking too long, it may be waking up. Please try again.';
+
+  @override
+  String get errServer => 'Server problem. Please try again later.';
+
+  @override
+  String get errValidation => 'Please check your details and try again.';
+
+  @override
+  String get errSessionExpired =>
+      'Your session has expired. Please log in again.';
+
+  @override
+  String get errUnknown => 'Something went wrong. Please try again.';
+
+  @override
+  String get recTitle => 'Save your recovery code';
+
+  @override
+  String get recBody =>
+      'If you forget your password, this code is the only way to get your account back. Write it down or take a screenshot and keep it safe.';
+
+  @override
+  String get recShownOnce => 'This code is shown only once.';
+
+  @override
+  String get recCopy => 'Copy code';
+
+  @override
+  String get recCopied => 'Code copied';
+
+  @override
+  String get recSavedCheck => 'I have saved my recovery code';
+
+  @override
+  String get recContinue => 'Continue';
+
+  @override
+  String get menuSignTitle => 'Sign to Text';
+
+  @override
+  String get menuSignSubtitle => 'Camera reads sign language (coming soon)';
+
+  @override
+  String get menuSoonBadge => 'Soon';
+
+  @override
+  String get signSoonTitle => 'Under construction';
+
+  @override
+  String get signSoonBody =>
+      'Our little builders are working on a camera that will read sign language and turn it into text. It is not ready yet.';
+
+  @override
+  String get signSoonNote =>
+      'Until then, please use Communication Cards, Type Message or Speech to Text to talk with your doctor.';
 }

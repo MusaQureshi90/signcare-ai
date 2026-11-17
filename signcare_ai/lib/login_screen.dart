@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'register_screen.dart';
+
+import 'auth_session.dart';
+import 'auth_widgets.dart';
 import 'forgot_password_screen.dart';
-import 'api_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'home_screen.dart';
+import 'l10n_ext.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,290 +15,138 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool rememberMe = true;
-  bool _obscurePassword = true;
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
-  void loginUser() async {
-    String phone = phoneController.text.trim();
-    String password = passwordController.text.trim();
-    final numericRegExp = RegExp(r'^[0-9]+$');
+  bool _remember = true;
+  bool _loading = false;
+  String? _phoneError;
+  String? _passwordError;
+  String? _error;
 
-    if (phone.length != 11 ||
-        !numericRegExp.hasMatch(phone) ||
-        !phone.startsWith('03')) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Invalid Number'),
-          content: const Text(
-            'Please enter a valid 11-digit numeric phone number (e.g., 03001234567).',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+  @override
+  void dispose() {
+    _phone.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    if (_loading) return;
+    final l10n = context.l10n;
+    final navigator = Navigator.of(context);
+    final phone = _phone.text.trim();
+    final password = _password.text;
+
+    final phoneError = isValidPhone(phone) ? null : l10n.authPhoneError;
+    final passwordError = password.isEmpty ? l10n.authPasswordEmpty : null;
+    if (phoneError != null || passwordError != null) {
+      setState(() {
+        _phoneError = phoneError;
+        _passwordError = passwordError;
+        _error = null;
+      });
       return;
     }
 
-    // 1. Pehle Render Backend se check karein
-    final backendPrefs = await ApiService.getPreferences(phone);
+    setState(() {
+      _loading = true;
+      _phoneError = null;
+      _passwordError = null;
+      _error = null;
+    });
 
-    if (backendPrefs != null) {
-      String serverPassword = backendPrefs['password'] ?? '';
-      String serverName = backendPrefs['name'] ?? 'User';
-
-      if (serverPassword == password) {
-        // Backend se password match ho gaya! Local storage mein save kar lein taake offline bhi chale
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('reg_pass_$phone', password);
-        await prefs.setString('reg_name_$phone', serverName);
-        await prefs.setBool('is_logged_in', true);
-        await prefs.setString('logged_phone', phone);
-        await prefs.setString('logged_name', serverName);
-
-        if (!mounted) return;
-        String savedLang = prefs.getString('app_language') ?? 'English';
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeScreen(
-              userName: serverName,
-              currentLang: savedLang,
-              onLocaleChange: (locale, langName) {},
-            ),
-          ),
-        );
-        return;
-      } else {
-        if (!mounted) return;
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Incorrect Password'),
-            content: const Text(
-              'The password you entered is incorrect. Please try again.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-        return;
-      }
-    }
-
-    // 2. Agar backend par na mile, toh offline local storage check karein (Fallback)
-    final prefs = await SharedPreferences.getInstance();
-    String? savedPass = prefs.getString('reg_pass_$phone');
-    String? savedName = prefs.getString('reg_name_$phone');
-
-    if (savedPass == null) {
-      if (!mounted) return;
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Account Not Found'),
-          content: const Text(
-            'This phone number is not registered on server or device. Please register first.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterScreen(),
-                  ),
-                );
-              },
-              child: const Text('Register Now'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
-
-    if (savedPass != password) {
-      if (!mounted) return;
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Incorrect Password'),
-          content: const Text(
-            'The password you entered is incorrect. Please try again.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
-
-    await prefs.setBool('is_logged_in', true);
-    await prefs.setString('logged_phone', phone);
-    await prefs.setString('logged_name', savedName ?? 'User');
-
-    if (!mounted) return;
-    String savedLang = prefs.getString('app_language') ?? 'English';
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomeScreen(
-          userName: savedName ?? 'User',
-          currentLang: savedLang,
-          onLocaleChange: (locale, langName) {},
-        ),
-      ),
+    final res = await AuthSession.instance.login(
+      phone: phone,
+      password: password,
+      remember: _remember,
     );
+    if (!mounted) return;
+
+    if (res.ok) {
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (_) => HomeScreen(userName: AuthSession.instance.name),
+        ),
+        (route) => false,
+      );
+      return;
+    }
+    setState(() {
+      _loading = false;
+      _error = authErrorText(l10n, res.error!);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.teal[50],
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Icon(
-                    Icons.medical_services,
-                    size: 60,
-                    color: Colors.teal,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'SignCare AI',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
+    final l10n = context.l10n;
+    return AuthScaffold(
+      title: l10n.authLoginTitle,
+      subtitle: l10n.authLoginSubtitle,
+      children: [
+        PhoneField(
+          controller: _phone,
+          errorText: _phoneError,
+          enabled: !_loading,
+        ),
+        const SizedBox(height: 14),
+        PasswordField(
+          controller: _password,
+          label: l10n.authPassword,
+          errorText: _passwordError,
+          enabled: !_loading,
+          textInputAction: TextInputAction.done,
+          onSubmitted: (_) => _submit(),
+        ),
+        const SizedBox(height: 4),
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          title: Text(l10n.authRememberMe),
+          value: _remember,
+          onChanged: _loading
+              ? null
+              : (value) => setState(() => _remember = value ?? true),
+        ),
+        if (_error != null) ...[
+          const SizedBox(height: 4),
+          ErrorBanner(_error!),
+          const SizedBox(height: 12),
+        ],
+        AuthButton(label: l10n.authLogin, onPressed: _submit, loading: _loading),
+        if (_loading) const ConnectingNote(),
+        const SizedBox(height: 8),
+        TextButton(
+          onPressed: _loading
+              ? null
+              : () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ForgotPasswordScreen(),
                     ),
                   ),
-                  const Text(
-                    'Login to Continue',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 25),
-                  TextField(
-                    controller: phoneController,
-                    keyboardType: TextInputType.number,
-                    maxLength: 11,
-                    decoration: InputDecoration(
-                      labelText: 'Phone Number',
-                      hintText: 'e.g. 03001234567',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: passwordController,
-                    obscureText: _obscurePassword,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () => setState(
-                          () => _obscurePassword = !_obscurePassword,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () => Navigator.push(
+          child: Text(l10n.authForgot),
+        ),
+        Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(l10n.authNoAccount),
+            TextButton(
+              onPressed: _loading
+                  ? null
+                  : () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordScreen(),
+                          builder: (_) => const RegisterScreen(),
                         ),
                       ),
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.teal),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: rememberMe,
-                        onChanged: (val) => setState(() => rememberMe = val!),
-                      ),
-                      const Text('Remember me'),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: loginUser,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegisterScreen(),
-                      ),
-                    ),
-                    child: const Text(
-                      'New here? Register now.',
-                      style: TextStyle(color: Colors.teal),
-                    ),
-                  ),
-                ],
-              ),
+              child: Text(l10n.authRegisterNow),
             ),
-          ),
+          ],
         ),
-      ),
+      ],
     );
   }
 }

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'login_screen.dart';
+import 'package:flutter/services.dart';
 
+import 'auth_session.dart';
+import 'auth_widgets.dart';
+import 'l10n_ext.dart';
+import 'login_screen.dart';
+import 'recovery_code_screen.dart';
+
+/// Password bhoolne par: phone number + register ke waqt mila recovery code.
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
@@ -10,357 +16,157 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController otpController = TextEditingController();
-  final TextEditingController newPassController = TextEditingController();
-  final TextEditingController confirmNewPassController =
-      TextEditingController();
+  final TextEditingController _phone = TextEditingController();
+  final TextEditingController _code = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirm = TextEditingController();
 
-  int step = 1;
-  String verifiedPhone = '';
-  bool _obscureNewPass = true;
-  bool _obscureConfirmPass = true;
+  bool _loading = false;
+  String? _phoneError;
+  String? _codeError;
+  String? _passwordError;
+  String? _confirmError;
+  String? _error;
 
-  void sendOtp() async {
-    String phone = phoneController.text.trim();
-    final numericRegExp = RegExp(r'^[0-9]+$');
+  @override
+  void dispose() {
+    _phone.dispose();
+    _code.dispose();
+    _password.dispose();
+    _confirm.dispose();
+    super.dispose();
+  }
 
-    if (phone.length != 11 ||
-        !numericRegExp.hasMatch(phone) ||
-        !phone.startsWith('03')) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Invalid Number'),
-          content: const Text(
-            'Please enter a valid 11-digit numeric phone number (e.g., 03001234567).',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
+  Future<void> _submit() async {
+    if (_loading) return;
+    final l10n = context.l10n;
+    final navigator = Navigator.of(context);
+    final phone = _phone.text.trim();
+    final code = _code.text.trim();
+    final password = _password.text;
 
-    final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('reg_pass_$phone')) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Not Registered'),
-          content: const Text(
-            'This phone number does not exist in our database.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+    // Code mein harf/ankon ke ilawa jo bhi (jaise '-') ho, ginti mein nahi.
+    final codeLength = code.replaceAll(RegExp(r'[^A-Za-z0-9]'), '').length;
+
+    final phoneError = isValidPhone(phone) ? null : l10n.authPhoneError;
+    final codeError = codeLength == 12 ? null : l10n.authRecoveryError;
+    final passwordError =
+        password.length < 6 ? l10n.authPasswordError : null;
+    final confirmError =
+        _confirm.text != password ? l10n.authPasswordMismatch : null;
+
+    if (phoneError != null ||
+        codeError != null ||
+        passwordError != null ||
+        confirmError != null) {
+      setState(() {
+        _phoneError = phoneError;
+        _codeError = codeError;
+        _passwordError = passwordError;
+        _confirmError = confirmError;
+        _error = null;
+      });
       return;
     }
 
     setState(() {
-      verifiedPhone = phone;
-      step = 2;
+      _loading = true;
+      _phoneError = null;
+      _codeError = null;
+      _passwordError = null;
+      _confirmError = null;
+      _error = null;
     });
-  }
 
-  void verifyOtp() {
-    if (otpController.text.trim() == "1234") {
-      setState(() {
-        step = 3;
-      });
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Invalid OTP'),
-          content: const Text('Please enter correct OTP (Demo OTP: 1234).'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
-  void resetPassword() async {
-    String newPass = newPassController.text.trim();
-    String confirmPass = confirmNewPassController.text.trim();
-
-    if (newPass.length < 8) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Weak Password'),
-          content: const Text('Password must be at least 8 characters long.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
-
-    if (newPass != confirmPass) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Mismatch'),
-          content: const Text('Passwords do not match.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
-
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('reg_pass_$verifiedPhone', newPass);
-
+    final res = await AuthSession.instance.resetPassword(
+      phone: phone,
+      recoveryCode: code,
+      newPassword: password,
+    );
     if (!mounted) return;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Success'),
-        content: const Text(
-          'Password reset successfully! Please login with your new password.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-              );
-            },
-            child: const Text('Login'),
-          ),
-        ],
+
+    if (!res.ok) {
+      setState(() {
+        _loading = false;
+        _error = authErrorText(l10n, res.error!);
+      });
+      return;
+    }
+
+    final newCode = res.recoveryCode;
+    navigator.pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (_) => newCode == null
+            ? const LoginScreen()
+            : RecoveryCodeScreen(
+                code: newCode,
+                nextBuilder: () => const LoginScreen(),
+              ),
       ),
+      (route) => false,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.teal[50],
-      appBar: AppBar(
-        title: const Text('Forgot Password'),
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: step == 1
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          'Reset Password',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.teal,
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        const Text(
-                          'Enter your registered 11-digit phone number:',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const SizedBox(height: 20),
-                        TextField(
-                          controller: phoneController,
-                          keyboardType: TextInputType.number,
-                          maxLength: 11,
-                          decoration: InputDecoration(
-                            labelText: 'Phone Number',
-                            hintText: 'e.g. 03001234567',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: sendOtp,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          child: const Text(
-                            'Send OTP',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : step == 2
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          'Enter OTP',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.teal,
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        const Text(
-                          'Enter 4-digit code (Demo code: 1234)',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const SizedBox(height: 20),
-                        TextField(
-                          controller: otpController,
-                          keyboardType: TextInputType.number,
-                          maxLength: 4,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            letterSpacing: 8,
-                          ),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: verifyOtp,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          child: const Text(
-                            'Verify OTP',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          'New Password',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.teal,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        TextField(
-                          controller: newPassController,
-                          obscureText: _obscureNewPass,
-                          decoration: InputDecoration(
-                            labelText: 'New Password (Min 8 chars)',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureNewPass
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                              onPressed: () => setState(
-                                () => _obscureNewPass = !_obscureNewPass,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        TextField(
-                          controller: confirmNewPassController,
-                          obscureText: _obscureConfirmPass,
-                          decoration: InputDecoration(
-                            labelText: 'Confirm New Password',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureConfirmPass
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                              onPressed: () => setState(
-                                () =>
-                                    _obscureConfirmPass = !_obscureConfirmPass,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: resetPassword,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          child: const Text(
-                            'Update Password',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
+    final l10n = context.l10n;
+
+    return AuthScaffold(
+      showBack: true,
+      title: l10n.authForgotTitle,
+      subtitle: l10n.authForgotSubtitle,
+      children: [
+        PhoneField(
+          controller: _phone,
+          errorText: _phoneError,
+          enabled: !_loading,
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: _code,
+          enabled: !_loading,
+          textInputAction: TextInputAction.next,
+          textCapitalization: TextCapitalization.characters,
+          textDirection: TextDirection.ltr,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9\- ]')),
+            LengthLimitingTextInputFormatter(20),
+          ],
+          decoration: InputDecoration(
+            labelText: l10n.authRecoveryCode,
+            hintText: 'XXXX-XXXX-XXXX',
+            prefixIcon: const Icon(Icons.key_outlined),
+            errorText: _codeError,
           ),
         ),
-      ),
+        const SizedBox(height: 14),
+        PasswordField(
+          controller: _password,
+          label: l10n.authNewPassword,
+          errorText: _passwordError,
+          enabled: !_loading,
+        ),
+        const SizedBox(height: 14),
+        PasswordField(
+          controller: _confirm,
+          label: l10n.authConfirmPassword,
+          errorText: _confirmError,
+          enabled: !_loading,
+          textInputAction: TextInputAction.done,
+          onSubmitted: (_) => _submit(),
+        ),
+        const SizedBox(height: 18),
+        if (_error != null) ...[
+          ErrorBanner(_error!),
+          const SizedBox(height: 12),
+        ],
+        AuthButton(
+          label: l10n.authReset,
+          onPressed: _submit,
+          loading: _loading,
+        ),
+        if (_loading) const ConnectingNote(),
+      ],
     );
   }
 }

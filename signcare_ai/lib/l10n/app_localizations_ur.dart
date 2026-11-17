@@ -785,4 +785,169 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get msgRecent => 'حالیہ پیغامات';
+
+  @override
+  String get authLoginTitle => 'خوش آمدید';
+
+  @override
+  String get authLoginSubtitle => 'جاری رکھنے کے لیے لاگ اِن کریں';
+
+  @override
+  String get authPhone => 'فون نمبر';
+
+  @override
+  String get authPassword => 'پاس ورڈ';
+
+  @override
+  String get authNewPassword => 'نیا پاس ورڈ';
+
+  @override
+  String get authConfirmPassword => 'پاس ورڈ دوبارہ لکھیں';
+
+  @override
+  String get authRememberMe => 'مجھے یاد رکھیں';
+
+  @override
+  String get authLogin => 'لاگ اِن';
+
+  @override
+  String get authForgot => 'پاس ورڈ بھول گئے؟';
+
+  @override
+  String get authNoAccount => 'اکاؤنٹ نہیں ہے؟';
+
+  @override
+  String get authRegisterNow => 'رجسٹر کریں';
+
+  @override
+  String get authHaveAccount => 'پہلے سے اکاؤنٹ ہے؟';
+
+  @override
+  String get authRegisterTitle => 'اکاؤنٹ بنائیں';
+
+  @override
+  String get authRegisterSubtitle =>
+      'آپ کی معلومات ڈاکٹر کو آپ کو سمجھنے میں مدد دیتی ہیں';
+
+  @override
+  String get authRegister => 'اکاؤنٹ بنائیں';
+
+  @override
+  String get authPhoneError => 'درست موبائل نمبر لکھیں، جیسے 03XXXXXXXXX';
+
+  @override
+  String get authPasswordError => 'پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے';
+
+  @override
+  String get authPasswordEmpty => 'اپنا پاس ورڈ لکھیں';
+
+  @override
+  String get authPasswordMismatch => 'دونوں پاس ورڈ ایک جیسے نہیں ہیں';
+
+  @override
+  String get authShowPassword => 'پاس ورڈ دکھائیں';
+
+  @override
+  String get authHidePassword => 'پاس ورڈ چھپائیں';
+
+  @override
+  String get authConnecting =>
+      'سرور سے رابطہ ہو رہا ہے۔ پہلی بار ایک منٹ تک لگ سکتا ہے۔';
+
+  @override
+  String get authForgotTitle => 'پاس ورڈ ری سیٹ کریں';
+
+  @override
+  String get authForgotSubtitle =>
+      'اپنا فون نمبر، رجسٹر کرتے وقت محفوظ کیا ہوا ریکوری کوڈ اور نیا پاس ورڈ لکھیں۔';
+
+  @override
+  String get authRecoveryCode => 'ریکوری کوڈ';
+
+  @override
+  String get authRecoveryError => 'اپنا 12 حروف کا ریکوری کوڈ لکھیں';
+
+  @override
+  String get authReset => 'پاس ورڈ ری سیٹ کریں';
+
+  @override
+  String get errInvalidCredentials => 'فون نمبر یا پاس ورڈ غلط ہے۔';
+
+  @override
+  String get errInvalidRecovery => 'فون نمبر یا ریکوری کوڈ غلط ہے۔';
+
+  @override
+  String get errWrongPassword => 'موجودہ پاس ورڈ غلط ہے۔';
+
+  @override
+  String get errPhoneExists =>
+      'یہ نمبر پہلے سے رجسٹر ہے۔ براہِ کرم لاگ اِن کریں۔';
+
+  @override
+  String get errLocked => 'بہت زیادہ غلط کوششیں۔ 15 منٹ بعد دوبارہ کوشش کریں۔';
+
+  @override
+  String get errThrottled => 'بہت زیادہ درخواستیں۔ ایک منٹ انتظار کریں۔';
+
+  @override
+  String get errNetwork => 'انٹرنیٹ نہیں ہے۔ چیک کر کے دوبارہ کوشش کریں۔';
+
+  @override
+  String get errTimeout =>
+      'سرور جواب دینے میں دیر کر رہا ہے، شاید جاگ رہا ہے۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get errServer => 'سرور میں مسئلہ ہے۔ کچھ دیر بعد کوشش کریں۔';
+
+  @override
+  String get errValidation => 'معلومات چیک کر کے دوبارہ کوشش کریں۔';
+
+  @override
+  String get errSessionExpired => 'آپ کا سیشن ختم ہو گیا۔ دوبارہ لاگ اِن کریں۔';
+
+  @override
+  String get errUnknown => 'کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get recTitle => 'ریکوری کوڈ محفوظ کریں';
+
+  @override
+  String get recBody =>
+      'اگر آپ پاس ورڈ بھول جائیں تو اکاؤنٹ واپس لینے کا واحد ذریعہ یہی کوڈ ہے۔ اسے لکھ لیں یا اسکرین شاٹ لے کر محفوظ رکھیں۔';
+
+  @override
+  String get recShownOnce => 'یہ کوڈ صرف ایک بار دکھایا جاتا ہے۔';
+
+  @override
+  String get recCopy => 'کوڈ کاپی کریں';
+
+  @override
+  String get recCopied => 'کوڈ کاپی ہو گیا';
+
+  @override
+  String get recSavedCheck => 'میں نے ریکوری کوڈ محفوظ کر لیا ہے';
+
+  @override
+  String get recContinue => 'آگے بڑھیں';
+
+  @override
+  String get menuSignTitle => 'اشارے سے تحریر';
+
+  @override
+  String get menuSignSubtitle =>
+      'کیمرہ اشاروں کو تحریر میں بدلے گا (جلد آ رہا ہے)';
+
+  @override
+  String get menuSoonBadge => 'جلد';
+
+  @override
+  String get signSoonTitle => 'زیرِ تعمیر';
+
+  @override
+  String get signSoonBody =>
+      'ہمارے چھوٹے کاریگر ایک ایسا کیمرہ بنا رہے ہیں جو اشاروں کی زبان کو تحریر میں بدلے گا۔ ابھی یہ تیار نہیں ہے۔';
+
+  @override
+  String get signSoonNote =>
+      'تب تک ڈاکٹر سے بات کرنے کے لیے مواصلاتی کارڈز، پیغام لکھیں یا آواز سے تحریر استعمال کریں۔';
 }

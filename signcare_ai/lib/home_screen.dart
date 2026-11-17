@@ -13,6 +13,7 @@ import 'emergency_screen.dart';
 import 'speech_to_text_screen.dart';
 import 'body_diagram_screen.dart';
 import 'settings_screen.dart';
+import 'sign_to_text_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String userName;
@@ -198,6 +199,14 @@ class _HomeScreenState extends State<HomeScreen> {
         screen: const SpeechToTextScreen(),
       ),
       _MenuItem(
+        title: l10n.menuSignTitle,
+        subtitle: l10n.menuSignSubtitle,
+        icon: Icons.pan_tool_alt_outlined,
+        color: Colors.indigo,
+        screen: const SignToTextScreen(),
+        badge: l10n.menuSoonBadge,
+      ),
+      _MenuItem(
         title: l10n.menuSymptomsTitle,
         subtitle: l10n.menuSymptomsSubtitle,
         icon: Icons.sick_outlined,
@@ -254,11 +263,13 @@ class _HomeScreenState extends State<HomeScreen> {
               item.subtitle,
               style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
             ),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              size: 16,
-              color: colors.onSurfaceVariant,
-            ),
+            trailing: item.badge != null
+                ? _SoonBadge(item.badge!)
+                : Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: colors.onSurfaceVariant,
+                  ),
             onTap: () => _open(context, item.screen),
           ),
         );
@@ -303,6 +314,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 13,
                     ),
                   ),
+                  if (item.badge != null) ...[
+                    const SizedBox(height: 6),
+                    _SoonBadge(item.badge!),
+                  ],
                 ],
               ),
             ),
@@ -351,6 +366,7 @@ class _MenuItem {
   final IconData icon;
   final Color color;
   final Widget screen;
+  final String? badge; // jaise "Soon"
 
   const _MenuItem({
     required this.title,
@@ -358,5 +374,32 @@ class _MenuItem {
     required this.icon,
     required this.color,
     required this.screen,
+    this.badge,
   });
+}
+
+/// Chhota "Soon / جلد" label.
+class _SoonBadge extends StatelessWidget {
+  final String text;
+  const _SoonBadge(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: colors.tertiaryContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          color: colors.onTertiaryContainer,
+        ),
+      ),
+    );
+  }
 }
