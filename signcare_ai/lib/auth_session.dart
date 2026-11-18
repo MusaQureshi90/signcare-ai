@@ -16,12 +16,14 @@ import 'user_profile.dart';
 /// Token FlutterSecureStorage mein rehta hai. Baqi purani screens/stores
 /// 'logged_phone' wagera SharedPreferences se parhti hain, isliye yahan se
 /// wo keys bhi sath sath likhi/mitayi jati hain (password KABHI nahi).
-class AuthSession extends ChangeNotifier {
+class AuthSession extends ChangeNotifier with WidgetsBindingObserver {
   AuthSession._();
   static final AuthSession instance = AuthSession._();
 
   static const String _kToken = 'auth_token';
   static const String _kProfile = 'auth_profile';
+  // true = phone ki settings server tak nahi pahunchi (net band tha)
+  static const String _kSettingsDirty = 'settings_dirty';
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
@@ -31,6 +33,8 @@ class AuthSession extends ChangeNotifier {
   Map<String, dynamic> _profile = {};
   bool _remember = true;
   bool _restored = false;
+  bool _observing = false;
+  DateTime? _lastRefresh;
 
   bool get isRestored => _restored;
   bool get isLoggedIn => _token != null;
@@ -81,15 +85,93 @@ class AuthSession extends ChangeNotifier {
     }
 
     _restored = true;
+    if (!_observing) {
+      WidgetsBinding.instance.addObserver(this);
+      _observing = true;
+    }
     notifyListeners();
     if (_token != null) unawaited(refreshProfile());
   }
 
+  /// App background se wapas aaye to server se taaza data (30 second mein ek baar).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed || _token == null) return;
+    final last = _lastRefresh;
+    if (last != null &&
+        DateTime.now().difference(last) < const Duration(seconds: 30)) {
+      return;
+    }
+    unawaited(refreshProfile());
+  }
+
   /// Server se taaza profile. Internet na ho to chupchap chhod deta hai.
+  ///
+  /// Agar phone ki settings abhi server tak nahi pahunchi thin to pehle wo
+  /// bhejta hai (phone jeetta hai). Warna server ki settings phone par lagata hai.
   Future<void> refreshProfile() async {
+    if (_token == null) return;
+    _lastRefresh = DateTime.now();
+    if (await _isSettingsDirty()) {
+      await syncSettings();
+      return;
+    }
     final res = await _authed((t) => _api.get('/me/', token: t));
     final p = res.profile;
-    if (res.ok && p != null) await _adoptProfile(p);
+    if (res.ok && p != null) {
+      await _adoptProfile(p);
+      await _applyServerSettings();
+    }
+  }
+
+  Future<bool> _isSettingsDirty() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getBool(_kSettingsDirty) ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<void> _setSettingsDirty(bool value) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (value) {
+        await prefs.setBool(_kSettingsDirty, true);
+      } else {
+        await prefs.remove(_kSettingsDirty);
+      }
+    } catch (e) {
+      debugPrint('AuthSession dirty flag error: $e');
+    }
+  }
+
+  /// Language / theme / layout server par bhejta hai. Fail ho jaye to flag
+  /// rehta hai aur agli dafa (app kholne par) dobara koshish hoti hai.
+  Future<ApiResult> syncSettings() async {
+    if (_token == null) {
+      return const ApiResult(status: 401, error: ApiError.unauthorized);
+    }
+    await _setSettingsDirty(true);
+    final s = AppSettings.instance;
+    final res = await updateProfile({
+      'language': s.languageName,
+      'theme_mode': _themeName(s.themeMode),
+      'home_layout': s.homeLayout,
+    });
+    if (res.ok) await _setSettingsDirty(false);
+    return res;
+  }
+
+  static String _themeName(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.dark:
+        return 'dark';
+      case ThemeMode.system:
+        return 'system';
+      case ThemeMode.light:
+        return 'light';
+    }
   }
 
   // ---------------- register / login ----------------
@@ -189,7 +271,19 @@ class AuthSession extends ChangeNotifier {
     final res = await _authed(
       (t) => _api.post('/me/delete/', body: {'password': password}, token: t),
     );
-    if (res.ok) await _clear();
+    if (res.ok) {
+      // Is phone ka user data bhi hatao (language/theme/layout bacha ke)
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        const keep = {'app_language', 'app_theme', 'home_layout'};
+        for (final key in prefs.getKeys().toList()) {
+          if (!keep.contains(key)) await prefs.remove(key);
+        }
+      } catch (e) {
+        debugPrint('AuthSession wipe error: $e');
+      }
+      await _clear();
+    }
     return res;
   }
 
@@ -215,6 +309,7 @@ class AuthSession extends ChangeNotifier {
     required bool applySettings,
   }) async {
     ConsultationManager.clear(); // pichle user ka data memory se hatao
+    await _setSettingsDirty(false); // pichle user ka pending flag
     _token = res.token;
     _profile = res.profile ?? {};
     _remember = remember;
@@ -303,6 +398,7 @@ class AuthSession extends ChangeNotifier {
       await prefs.remove('logged_phone');
       await prefs.remove('logged_name');
       await prefs.remove('is_logged_in');
+      await prefs.remove(_kSettingsDirty);
     } catch (e) {
       debugPrint('AuthSession clear error: $e');
     }

@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'api_service.dart';
+import 'api_client.dart';
 import 'app_settings.dart';
 import 'app_theme.dart';
-import 'consultation_manager.dart';
+import 'auth_session.dart';
+import 'auth_widgets.dart';
 import 'l10n_ext.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
@@ -127,6 +127,16 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
+                      leading: Icon(Icons.lock_outline, color: colors.primary),
+                      title: Text(
+                        l10n.setChangePassword,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(l10n.setChangePasswordSubtitle),
+                      onTap: () => _changePassword(context),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
                       leading: const Icon(Icons.logout, color: Colors.orange),
                       title: Text(
                         l10n.setLogout,
@@ -229,65 +239,20 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  // ---------------- Badlav (turant apply) ----------------
+  // ---------------- Badlav (phone par turant, server par background mein) ----------------
   Future<void> _changeLanguage(String name) async {
     await AppSettings.instance.setLanguageName(name);
-    unawaited(_syncToBackend());
+    unawaited(AuthSession.instance.syncSettings());
   }
 
   Future<void> _changeTheme(ThemeMode mode) async {
     await AppSettings.instance.setThemeMode(mode);
-    unawaited(_syncToBackend());
+    unawaited(AuthSession.instance.syncSettings());
   }
 
   Future<void> _changeLayout(String layout) async {
     await AppSettings.instance.setHomeLayout(layout);
-    unawaited(_syncToBackend());
-  }
-
-  static String _themeName(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.dark:
-        return 'dark';
-      case ThemeMode.system:
-        return 'system';
-      case ThemeMode.light:
-        return 'light';
-    }
-  }
-
-  /// Server par settings bhejta hai. Server ka purana data khali string se
-  /// overwrite NAHI hone deta (doosre device wala bug).
-  Future<void> _syncToBackend() async {
-    final prefs = await SharedPreferences.getInstance();
-    final phone = prefs.getString('logged_phone') ?? '';
-    if (phone.isEmpty) return;
-
-    // Server se parh ne mein fail ho to sync mat karo (warna khali data likh dega)
-    final server = await ApiService.getPreferences(phone);
-    if (server == null) return;
-
-    Future<String> pick(String localKey, String serverKey) async {
-      final local = prefs.getString(localKey) ?? '';
-      if (local.isNotEmpty) return local;
-      final fromServer = server[serverKey]?.toString() ?? '';
-      if (fromServer.isNotEmpty) {
-        await prefs.setString(localKey, fromServer); // is device pe bhi save
-      }
-      return fromServer;
-    }
-
-    final settings = AppSettings.instance;
-    await ApiService.savePreferences(
-      phone,
-      await pick('reg_name_$phone', 'name'),
-      await pick('reg_age_$phone', 'age'),
-      await pick('reg_gender_$phone', 'gender'),
-      await pick('reg_pass_$phone', 'password'),
-      settings.languageName,
-      _themeName(settings.themeMode),
-      settings.homeLayout,
-    );
+    unawaited(AuthSession.instance.syncSettings());
   }
 
   // ---------------- Logout ----------------
@@ -315,11 +280,7 @@ class SettingsScreen extends StatelessWidget {
     );
     if (confirmed != true) return;
 
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('is_logged_in', false);
-    await prefs.remove('logged_phone');
-    await prefs.remove('logged_name');
-    ConsultationManager.clear(); // agla user pichle ka data na dekhe
+    await AuthSession.instance.logout();
 
     if (!context.mounted) return;
     Navigator.pushAndRemoveUntil(
@@ -329,41 +290,28 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  // ---------------- Delete (sirf is device ka data) ----------------
-  Future<void> _confirmDelete(BuildContext context) async {
+  // ---------------- Change password ----------------
+  Future<void> _changePassword(BuildContext context) async {
+    final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
-    final bool? confirmed = await showDialog<bool>(
+    final ok = await showDialog<bool>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.setDeleteConfirmTitle),
-        content: Text(l10n.setDeleteConfirmMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, false),
-            child: Text(l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, true),
-            child: Text(
-              l10n.delete,
-              style: TextStyle(color: dialogContext.colors.error),
-            ),
-          ),
-        ],
-      ),
+      barrierDismissible: false,
+      builder: (_) => const _ChangePasswordDialog(),
     );
-    if (confirmed != true) return;
-
-    final prefs = await SharedPreferences.getInstance();
-    // Language / theme / layout bacha ke baqi sab user data hata do
-    const keep = {'app_language', 'app_theme', 'home_layout'};
-    for (final key in prefs.getKeys().toList()) {
-      if (!keep.contains(key)) {
-        await prefs.remove(key);
-      }
+    if (ok == true) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.setPasswordChanged)));
     }
-    ConsultationManager.clear();
+  }
 
+  // ---------------- Delete account (server + is phone ka data) ----------------
+  Future<void> _confirmDelete(BuildContext context) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const _DeleteAccountDialog(),
+    );
+    if (ok != true) return;
     if (!context.mounted) return;
     Navigator.pushAndRemoveUntil(
       context,
@@ -502,6 +450,236 @@ class _ChoiceTile extends StatelessWidget {
         color: selected ? colors.primary : colors.outline,
       ),
       onTap: onTap,
+    );
+  }
+}
+
+/// Password badalne ka dialog (purana + naya + dobara naya)
+class _ChangePasswordDialog extends StatefulWidget {
+  const _ChangePasswordDialog();
+
+  @override
+  State<_ChangePasswordDialog> createState() => _ChangePasswordDialogState();
+}
+
+class _ChangePasswordDialogState extends State<_ChangePasswordDialog> {
+  final _old = TextEditingController();
+  final _new = TextEditingController();
+  final _confirm = TextEditingController();
+  String? _oldError;
+  String? _newError;
+  String? _confirmError;
+  String? _bannerError;
+  bool _busy = false;
+
+  @override
+  void dispose() {
+    _old.dispose();
+    _new.dispose();
+    _confirm.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    final l10n = context.l10n;
+    final oldPw = _old.text;
+    final newPw = _new.text;
+
+    final oldErr = oldPw.isEmpty ? l10n.authPasswordEmpty : null;
+    final newErr = newPw.length < 6 ? l10n.authPasswordError : null;
+    final confirmErr = _confirm.text != newPw ? l10n.authPasswordMismatch : null;
+    if (oldErr != null || newErr != null || confirmErr != null) {
+      setState(() {
+        _oldError = oldErr;
+        _newError = newErr;
+        _confirmError = confirmErr;
+      });
+      return;
+    }
+
+    setState(() {
+      _busy = true;
+      _bannerError = null;
+    });
+    final res = await AuthSession.instance.changePassword(
+      oldPassword: oldPw,
+      newPassword: newPw,
+    );
+    if (!mounted) return;
+    if (res.ok) {
+      Navigator.pop(context, true);
+      return;
+    }
+    final error = res.error;
+    setState(() {
+      _busy = false;
+      _bannerError =
+          error == null ? l10n.errUnknown : authErrorText(l10n, error);
+    });
+    // Session khatam ho gaya to login par bhej do
+    if (error == ApiError.unauthorized) {
+      Navigator.pop(context, false);
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        (route) => false,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.setChangePassword),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (_bannerError != null) ...[
+              ErrorBanner(_bannerError!),
+              const SizedBox(height: 12),
+            ],
+            PasswordField(
+              controller: _old,
+              label: l10n.setCurrentPassword,
+              errorText: _oldError,
+              enabled: !_busy,
+              onChanged: (_) => setState(() => _oldError = null),
+            ),
+            const SizedBox(height: 12),
+            PasswordField(
+              controller: _new,
+              label: l10n.authNewPassword,
+              errorText: _newError,
+              enabled: !_busy,
+              onChanged: (_) => setState(() => _newError = null),
+            ),
+            const SizedBox(height: 12),
+            PasswordField(
+              controller: _confirm,
+              label: l10n.authConfirmPassword,
+              errorText: _confirmError,
+              enabled: !_busy,
+              textInputAction: TextInputAction.done,
+              onChanged: (_) => setState(() => _confirmError = null),
+              onSubmitted: (_) => _submit(),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: _busy ? null : () => Navigator.pop(context, false),
+          child: Text(l10n.cancel),
+        ),
+        FilledButton(
+          onPressed: _busy ? null : _submit,
+          child: _busy
+              ? const SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2.5),
+                )
+              : Text(l10n.setChangePassword),
+        ),
+      ],
+    );
+  }
+}
+
+/// Account delete: password dekar tasdeeq
+class _DeleteAccountDialog extends StatefulWidget {
+  const _DeleteAccountDialog();
+
+  @override
+  State<_DeleteAccountDialog> createState() => _DeleteAccountDialogState();
+}
+
+class _DeleteAccountDialogState extends State<_DeleteAccountDialog> {
+  final _password = TextEditingController();
+  String? _fieldError;
+  String? _bannerError;
+  bool _busy = false;
+
+  @override
+  void dispose() {
+    _password.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    final l10n = context.l10n;
+    if (_password.text.isEmpty) {
+      setState(() => _fieldError = l10n.authPasswordEmpty);
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _bannerError = null;
+    });
+    final res = await AuthSession.instance.deleteAccount(
+      password: _password.text,
+    );
+    if (!mounted) return;
+    if (res.ok || res.error == ApiError.unauthorized) {
+      // Ya account gaya, ya session pehle hi khatam: dono mein bahar
+      Navigator.pop(context, true);
+      return;
+    }
+    final error = res.error;
+    setState(() {
+      _busy = false;
+      _bannerError =
+          error == null ? l10n.errUnknown : authErrorText(l10n, error);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colors = context.colors;
+    return AlertDialog(
+      title: Text(l10n.setDeleteConfirmTitle),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.setDeleteConfirmMessage),
+            const SizedBox(height: 16),
+            if (_bannerError != null) ...[
+              ErrorBanner(_bannerError!),
+              const SizedBox(height: 12),
+            ],
+            PasswordField(
+              controller: _password,
+              label: l10n.authPassword,
+              errorText: _fieldError,
+              enabled: !_busy,
+              textInputAction: TextInputAction.done,
+              onChanged: (_) => setState(() => _fieldError = null),
+              onSubmitted: (_) => _submit(),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: _busy ? null : () => Navigator.pop(context, false),
+          child: Text(l10n.cancel),
+        ),
+        TextButton(
+          onPressed: _busy ? null : _submit,
+          child: _busy
+              ? const SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2.5),
+                )
+              : Text(l10n.delete, style: TextStyle(color: colors.error)),
+        ),
+      ],
     );
   }
 }

@@ -1,18 +1,21 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'api_service.dart';
-import 'app_settings.dart';
+
+import 'api_client.dart';
+import 'auth_session.dart';
 
 /// Login hue user ka profile data (naam, umar, gender) ek hi jagah.
 /// Kahin se bhi:   UserProfile.instance.name
+///
+/// Asal data server par hai. Yahan phone ki local copy hai jo
+/// AuthSession ke zariye server se sync hoti hai.
 class UserProfile extends ChangeNotifier {
   UserProfile._();
   static final UserProfile instance = UserProfile._();
 
   String phone = '';
   String name = '';
-  String ageText = ''; // purana format: "26 years (14/03/2000)"
+  String ageText = ''; // format: "26 years (14/03/2000)"
   String gender = ''; // 'Male' / 'Female' / 'Other' ya khali
 
   /// ageText ke andar (dd/mm/yyyy) se tareekh nikalta hai
@@ -57,7 +60,7 @@ class UserProfile extends ChangeNotifier {
     }
   }
 
-  /// Phone ki saved details parhta hai
+  /// Phone ki saved details parhta hai (AuthSession inhe server se likhta hai)
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     phone = prefs.getString('logged_phone') ?? '';
@@ -76,56 +79,23 @@ class UserProfile extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Pehle is device par save (foran). Server par bhejna background mein hota
-  /// hai, isliye ye function kabhi atakta nahi.
-  Future<void> save({
+  /// Pehle server par save hota hai. Kamyab ho to hi phone ki copy badalti hai,
+  /// taake server aur phone kabhi alag na hon. Nakaam ho to result.error mein
+  /// wajah hoti hai (jaise internet nahi).
+  Future<ApiResult> save({
     required String newName,
     required DateTime dob,
     required String newGender,
   }) async {
-    if (phone.isEmpty) return;
-
     final dd = dob.day.toString().padLeft(2, '0');
     final mm = dob.month.toString().padLeft(2, '0');
+    final newAge = '${ageFromDate(dob)} years ($dd/$mm/${dob.year})';
 
-    name = newName.trim();
-    ageText = '${ageFromDate(dob)} years ($dd/$mm/${dob.year})';
-    gender = newGender;
-
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('reg_name_$phone', name);
-    await prefs.setString('logged_name', name);
-    await prefs.setString('reg_age_$phone', ageText);
-    await prefs.setString('reg_gender_$phone', gender);
-    notifyListeners();
-
-    unawaited(_syncToServer(prefs));
-  }
-
-  Future<void> _syncToServer(SharedPreferences prefs) async {
-    // Pehle server se parho. Na parh sako to khali data likhne se bacho.
-    final server = await ApiService.getPreferences(phone);
-    if (server == null) return;
-
-    String password = prefs.getString('reg_pass_$phone') ?? '';
-    if (password.isEmpty) {
-      password = server['password']?.toString() ?? '';
-    }
-
-    final s = AppSettings.instance;
-    final themeName = s.themeMode == ThemeMode.dark
-        ? 'dark'
-        : (s.themeMode == ThemeMode.system ? 'system' : 'light');
-
-    await ApiService.savePreferences(
-      phone,
-      name,
-      ageText,
-      gender,
-      password,
-      s.languageName,
-      themeName,
-      s.homeLayout,
-    );
+    // AuthSession kamyabi par khud phone ki copy aur UserProfile.load() karta hai
+    return AuthSession.instance.updateProfile({
+      'name': newName.trim(),
+      'age': newAge,
+      'gender': newGender,
+    });
   }
 }

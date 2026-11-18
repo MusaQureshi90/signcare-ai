@@ -167,17 +167,18 @@ class AppLocalizationsUr extends AppLocalizations {
       'کیا آپ واقعی اپنے اکاؤنٹ سے لاگ آؤٹ کرنا چاہتے ہیں؟';
 
   @override
-  String get setDeleteAccount => 'اکاؤنٹ ڈیٹا حذف کریں';
+  String get setDeleteAccount => 'اکاؤنٹ حذف کریں';
 
   @override
-  String get setDeleteSubtitle => 'اس ڈیوائس سے اپنا اکاؤنٹ ڈیٹا ہٹائیں';
+  String get setDeleteSubtitle =>
+      'اپنا اکاؤنٹ اور تمام ڈیٹا مستقل طور پر حذف کریں';
 
   @override
-  String get setDeleteConfirmTitle => 'اکاؤنٹ ڈیٹا حذف کریں؟';
+  String get setDeleteConfirmTitle => 'اکاؤنٹ حذف کریں؟';
 
   @override
   String get setDeleteConfirmMessage =>
-      'اس ڈیوائس پر آپ کا تمام ڈیٹا مستقل طور پر ہٹا دیا جائے گا۔ یہ عمل واپس نہیں ہو سکتا۔';
+      'آپ کا اکاؤنٹ اور اس ڈیوائس کا تمام ڈیٹا مستقل طور پر حذف ہو جائے گا۔ یہ عمل واپس نہیں ہو سکتا۔ تصدیق کے لیے اپنا پاس ورڈ لکھیں۔';
 
   @override
   String get setAboutSection => 'معلومات اور معاونت';
@@ -950,4 +951,16 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get signSoonNote =>
       'تب تک ڈاکٹر سے بات کرنے کے لیے مواصلاتی کارڈز، پیغام لکھیں یا آواز سے تحریر استعمال کریں۔';
+
+  @override
+  String get setChangePassword => 'پاس ورڈ تبدیل کریں';
+
+  @override
+  String get setChangePasswordSubtitle => 'اپنے اکاؤنٹ کا نیا پاس ورڈ رکھیں';
+
+  @override
+  String get setCurrentPassword => 'موجودہ پاس ورڈ';
+
+  @override
+  String get setPasswordChanged => 'پاس ورڈ تبدیل ہو گیا';
 }

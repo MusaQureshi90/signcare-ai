@@ -15,12 +15,10 @@
   "navHome": "ہوم",
   "navMessages": "پیغامات",
   "navProfile": "پروفائل",
-
   "settings": "سیٹنگز",
   "welcomeUser": "خوش آمدید، {name}",
   "helloUser": "ہیلو، {name} 👋",
   "homeSubtitle": "آج ہم آپ کی کیا مدد کر سکتے ہیں؟",
-
   "menuCardsTitle": "مواصلاتی کارڈز",
   "menuCardsSubtitle": "پیغام بنانے کے لیے کارڈز منتخب کریں",
   "menuTypeTitle": "پیغام لکھیں",
@@ -37,11 +35,9 @@
   "menuSpeechSubtitle": "بولے گئے الفاظ کو تحریر میں بدلیں",
   "menuBodyTitle": "جسم کا نقشہ",
   "menuBodySubtitle": "بتائیں کہ درد کہاں ہے",
-
   "exitTitle": "ایپ بند کریں",
   "exitMessage": "کیا آپ واقعی SignCare AI بند کرنا چاہتے ہیں؟",
   "exitAction": "بند کریں",
-
   "setLanguageSection": "زبان",
   "setAppearanceSection": "ظاہری شکل",
   "setThemeSystem": "سسٹم کے مطابق",
@@ -55,10 +51,10 @@
   "setLogoutSubtitle": "اس ڈیوائس سے سائن آؤٹ کریں",
   "setLogoutConfirmTitle": "لاگ آؤٹ کریں؟",
   "setLogoutConfirmMessage": "کیا آپ واقعی اپنے اکاؤنٹ سے لاگ آؤٹ کرنا چاہتے ہیں؟",
-  "setDeleteAccount": "اکاؤنٹ ڈیٹا حذف کریں",
-  "setDeleteSubtitle": "اس ڈیوائس سے اپنا اکاؤنٹ ڈیٹا ہٹائیں",
-  "setDeleteConfirmTitle": "اکاؤنٹ ڈیٹا حذف کریں؟",
-  "setDeleteConfirmMessage": "اس ڈیوائس پر آپ کا تمام ڈیٹا مستقل طور پر ہٹا دیا جائے گا۔ یہ عمل واپس نہیں ہو سکتا۔",
+  "setDeleteAccount": "اکاؤنٹ حذف کریں",
+  "setDeleteSubtitle": "اپنا اکاؤنٹ اور تمام ڈیٹا مستقل طور پر حذف کریں",
+  "setDeleteConfirmTitle": "اکاؤنٹ حذف کریں؟",
+  "setDeleteConfirmMessage": "آپ کا اکاؤنٹ اور اس ڈیوائس کا تمام ڈیٹا مستقل طور پر حذف ہو جائے گا۔ یہ عمل واپس نہیں ہو سکتا۔ تصدیق کے لیے اپنا پاس ورڈ لکھیں۔",
   "setAboutSection": "معلومات اور معاونت",
   "setContactTitle": "معاونت سے رابطہ",
   "setContactMessage": "خرابیوں، رائے یا مدد کے لیے ہمیں اس پتے پر لکھیں:",
@@ -70,7 +66,6 @@
   "setVersion": "ایپ ورژن",
   "setNoteTitle": "اہم نوٹ",
   "setNoteBody": "SignCare AI آپ کو بات چیت میں مدد دیتی ہے۔ یہ طبی مشورہ نہیں دیتی اور نہ ہی ڈاکٹر یا ہنگامی خدمات کا متبادل ہے۔",
-
   "profileTitle": "میری پروفائل",
   "profileEditHint": "اپنا نام، تاریخ پیدائش اور جنس تبدیل کریں",
   "profileName": "پورا نام",
@@ -89,13 +84,11 @@
   "profileNameError": "براہ کرم اپنا نام لکھیں (کم از کم 2 حروف)۔",
   "profileDobError": "براہ کرم تاریخ پیدائش منتخب کریں۔",
   "profileGenderError": "براہ کرم اپنی جنس منتخب کریں۔",
-
   "dobDialogTitle": "تاریخ پیدائش منتخب کریں",
   "dobYear": "سال",
   "dobMonth": "مہینہ",
   "dobDay": "دن",
   "dobConfirm": "تصدیق کریں",
-
   "typeTitle": "لکھیں اور سنائیں",
   "typeInstruction": "جو بات ڈاکٹر یا مددگار کو بتانی ہے وہ لکھیں:",
   "typeHint": "اپنا پیغام یہاں لکھیں...",
@@ -108,7 +101,6 @@
   "ttsVoiceMissingTitle": "اردو آواز انسٹال نہیں ہے",
   "ttsVoiceMissingBody": "آپ کے فون میں ٹیکسٹ ٹو اسپیچ کے لیے اردو آواز موجود نہیں۔ فون کی سیٹنگز میں Text-to-speech output تلاش کریں، Google Speech Services چنیں اور اردو وائس ڈیٹا انسٹال کریں۔ پھر دوبارہ کوشش کریں۔",
   "ttsError": "ابھی آواز نہیں چل سکی۔ براہ کرم دوبارہ کوشش کریں۔",
-
   "sumTitle": "میرا خلاصہ",
   "sumHistory": "تاریخچہ",
   "sumEmptyTitle": "ابھی کچھ شامل نہیں کیا",
@@ -145,7 +137,6 @@
   "sumDeleteReportBody": "یہ محفوظ شدہ خلاصہ اس ڈیوائس سے ہٹا دیا جائے گا۔",
   "sumReadAloud": "بلند آواز میں سنیں",
   "sumRemoveItem": "ہٹائیں",
-
   "emTitle": "ہنگامی مدد",
   "emHelpButton": "مجھے فوری مدد چاہیے",
   "emHelpHint": "اسکرین چمکتی ہے اور آپ کی جگہ بولتی ہے",
@@ -184,7 +175,6 @@
   "emCallRescue": "1122 پر کال کریں",
   "emWhatsApp": "واٹس ایپ",
   "emAppFailed": "ایپ نہیں کھل سکی۔ براہ کرم نمبر چیک کریں۔",
-
   "cardsTitle": "فوری کارڈز",
   "cardsSearchHint": "کارڈ تلاش کریں",
   "cardsAll": "تمام",
@@ -208,7 +198,6 @@
   "cardsSpeakOff": "کارڈ دبانے پر خاموش رہیں گے۔",
   "cardsSpeakTooltip": "دبانے پر بولیں",
   "cardsAddSummary": "خلاصے میں شامل کریں",
-
   "symTitle": "علامات",
   "symPickHint": "جو کچھ محسوس ہو رہا ہے سب پر دبائیں۔",
   "symOther": "کچھ اور",
@@ -224,11 +213,9 @@
   "symModerate": "درمیانی",
   "symSevere": "شدید",
   "symWorst": "انتہائی شدید",
-
   "emoTitle": "جذبات کے کارڈ",
   "emoQuestion": "آپ اس وقت کیسا محسوس کر رہے ہیں؟",
   "emoHowMuch": "کتنا؟",
-
   "speechTitle": "سنیں (آواز سے تحریر)",
   "speechIdle": "مائیک دبائیں۔ لوگ جو کہیں گے وہ یہاں تحریر کی شکل میں نظر آئے گا۔",
   "speechListening": "سنا جا رہا ہے...",
@@ -243,7 +230,6 @@
   "speechClear": "صاف کریں",
   "speechBigger": "بڑا متن",
   "speechSmaller": "چھوٹا متن",
-
   "bodyTitle": "جسم کا خاکہ",
   "bodyFront": "سامنے",
   "bodyBack": "پیچھے",
@@ -254,7 +240,6 @@
   "bodyWhatFeel": "یہاں آپ کو کیا محسوس ہو رہا ہے؟",
   "bodyListView": "فہرست",
   "bodyDiagramView": "جسم کا خاکہ",
-
   "msgTitle": "لکھیں اور بولیں",
   "msgHint": "جو کہنا چاہتے ہیں یہاں لکھیں...",
   "msgEmpty": "براہ کرم پہلے کچھ لکھیں۔",
@@ -312,5 +297,9 @@
   "menuSoonBadge": "جلد",
   "signSoonTitle": "زیرِ تعمیر",
   "signSoonBody": "ہمارے چھوٹے کاریگر ایک ایسا کیمرہ بنا رہے ہیں جو اشاروں کی زبان کو تحریر میں بدلے گا۔ ابھی یہ تیار نہیں ہے۔",
-  "signSoonNote": "تب تک ڈاکٹر سے بات کرنے کے لیے مواصلاتی کارڈز، پیغام لکھیں یا آواز سے تحریر استعمال کریں۔"
+  "signSoonNote": "تب تک ڈاکٹر سے بات کرنے کے لیے مواصلاتی کارڈز، پیغام لکھیں یا آواز سے تحریر استعمال کریں۔",
+  "setChangePassword": "پاس ورڈ تبدیل کریں",
+  "setChangePasswordSubtitle": "اپنے اکاؤنٹ کا نیا پاس ورڈ رکھیں",
+  "setCurrentPassword": "موجودہ پاس ورڈ",
+  "setPasswordChanged": "پاس ورڈ تبدیل ہو گیا"
 }

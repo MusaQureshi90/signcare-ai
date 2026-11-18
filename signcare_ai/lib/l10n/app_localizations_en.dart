@@ -169,17 +169,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Are you sure you want to log out of your account?';
 
   @override
-  String get setDeleteAccount => 'Delete account data';
+  String get setDeleteAccount => 'Delete account';
 
   @override
-  String get setDeleteSubtitle => 'Remove your account data from this device';
+  String get setDeleteSubtitle =>
+      'Permanently delete your account and all your data';
 
   @override
-  String get setDeleteConfirmTitle => 'Delete account data?';
+  String get setDeleteConfirmTitle => 'Delete account?';
 
   @override
   String get setDeleteConfirmMessage =>
-      'All your data on this device will be removed permanently. This cannot be undone.';
+      'Your account and all data on this device will be deleted permanently. This cannot be undone. Enter your password to confirm.';
 
   @override
   String get setAboutSection => 'About & support';
@@ -949,4 +950,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get signSoonNote =>
       'Until then, please use Communication Cards, Type Message or Speech to Text to talk with your doctor.';
+
+  @override
+  String get setChangePassword => 'Change password';
+
+  @override
+  String get setChangePasswordSubtitle => 'Set a new password for your account';
+
+  @override
+  String get setCurrentPassword => 'Current password';
+
+  @override
+  String get setPasswordChanged => 'Password changed';
 }

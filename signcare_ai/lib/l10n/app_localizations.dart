@@ -407,25 +407,25 @@ abstract class AppLocalizations {
   /// No description provided for @setDeleteAccount.
   ///
   /// In en, this message translates to:
-  /// **'Delete account data'**
+  /// **'Delete account'**
   String get setDeleteAccount;
 
   /// No description provided for @setDeleteSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Remove your account data from this device'**
+  /// **'Permanently delete your account and all your data'**
   String get setDeleteSubtitle;
 
   /// No description provided for @setDeleteConfirmTitle.
   ///
   /// In en, this message translates to:
-  /// **'Delete account data?'**
+  /// **'Delete account?'**
   String get setDeleteConfirmTitle;
 
   /// No description provided for @setDeleteConfirmMessage.
   ///
   /// In en, this message translates to:
-  /// **'All your data on this device will be removed permanently. This cannot be undone.'**
+  /// **'Your account and all data on this device will be deleted permanently. This cannot be undone. Enter your password to confirm.'**
   String get setDeleteConfirmMessage;
 
   /// No description provided for @setAboutSection.
@@ -1885,6 +1885,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Until then, please use Communication Cards, Type Message or Speech to Text to talk with your doctor.'**
   String get signSoonNote;
+
+  /// No description provided for @setChangePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get setChangePassword;
+
+  /// No description provided for @setChangePasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a new password for your account'**
+  String get setChangePasswordSubtitle;
+
+  /// No description provided for @setCurrentPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current password'**
+  String get setCurrentPassword;
+
+  /// No description provided for @setPasswordChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed'**
+  String get setPasswordChanged;
 }
 
 class _AppLocalizationsDelegate

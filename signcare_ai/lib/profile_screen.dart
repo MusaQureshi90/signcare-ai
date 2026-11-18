@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_theme.dart';
+import 'auth_widgets.dart';
 import 'dob_picker.dart';
 import 'l10n_ext.dart';
 import 'user_profile.dart';
@@ -74,9 +75,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     setState(() => _saving = true);
-    await profile.save(newName: name, dob: _dob!, newGender: _gender);
+    final res = await profile.save(
+      newName: name,
+      dob: _dob!,
+      newGender: _gender,
+    );
     if (!mounted) return;
     setState(() => _saving = false);
+
+    if (!res.ok) {
+      // Server par save nahi hua, isliye kuch bhi nahi badla
+      final error = res.error;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            error == null ? l10n.errUnknown : authErrorText(l10n, error),
+          ),
+        ),
+      );
+      return;
+    }
 
     messenger.showSnackBar(SnackBar(content: Text(l10n.profileSaved)));
     navigator.pop();

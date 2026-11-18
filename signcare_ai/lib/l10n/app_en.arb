@@ -15,7 +15,6 @@
   "navHome": "Home",
   "navMessages": "Messages",
   "navProfile": "Profile",
-
   "settings": "Settings",
   "welcomeUser": "Welcome, {name}",
   "@welcomeUser": {
@@ -34,7 +33,6 @@
     }
   },
   "homeSubtitle": "How can we help you today?",
-
   "menuCardsTitle": "Communication Cards",
   "menuCardsSubtitle": "Select cards to create a message",
   "menuTypeTitle": "Type Message",
@@ -51,11 +49,9 @@
   "menuSpeechSubtitle": "Turn spoken words into text",
   "menuBodyTitle": "Body Diagram",
   "menuBodySubtitle": "Point to where it hurts",
-
   "exitTitle": "Exit App",
   "exitMessage": "Are you sure you want to exit SignCare AI?",
   "exitAction": "Exit",
-
   "setLanguageSection": "Language",
   "setAppearanceSection": "Appearance",
   "setThemeSystem": "Follow system",
@@ -69,10 +65,10 @@
   "setLogoutSubtitle": "Sign out from this device",
   "setLogoutConfirmTitle": "Log out?",
   "setLogoutConfirmMessage": "Are you sure you want to log out of your account?",
-  "setDeleteAccount": "Delete account data",
-  "setDeleteSubtitle": "Remove your account data from this device",
-  "setDeleteConfirmTitle": "Delete account data?",
-  "setDeleteConfirmMessage": "All your data on this device will be removed permanently. This cannot be undone.",
+  "setDeleteAccount": "Delete account",
+  "setDeleteSubtitle": "Permanently delete your account and all your data",
+  "setDeleteConfirmTitle": "Delete account?",
+  "setDeleteConfirmMessage": "Your account and all data on this device will be deleted permanently. This cannot be undone. Enter your password to confirm.",
   "setAboutSection": "About & support",
   "setContactTitle": "Contact support",
   "setContactMessage": "For bugs, feedback or support, write to us at:",
@@ -84,7 +80,6 @@
   "setVersion": "App version",
   "setNoteTitle": "Important note",
   "setNoteBody": "SignCare AI helps you communicate. It does not give medical advice and does not replace a doctor or emergency services.",
-
   "profileTitle": "My profile",
   "profileEditHint": "Edit your name, date of birth and gender",
   "profileName": "Full name",
@@ -110,13 +105,11 @@
   "profileNameError": "Please enter your name (at least 2 letters).",
   "profileDobError": "Please select your date of birth.",
   "profileGenderError": "Please select your gender.",
-
   "dobDialogTitle": "Select date of birth",
   "dobYear": "Year",
   "dobMonth": "Month",
   "dobDay": "Day",
   "dobConfirm": "Confirm",
-
   "typeTitle": "Type & Speak",
   "typeInstruction": "Type what you want to tell the doctor or helper:",
   "typeHint": "Type your message here...",
@@ -129,7 +122,6 @@
   "ttsVoiceMissingTitle": "Urdu voice not installed",
   "ttsVoiceMissingBody": "Your phone has no Urdu voice for text-to-speech. Open phone Settings, search for Text-to-speech output, choose Google Speech Services, and install the Urdu voice data. Then try again.",
   "ttsError": "Could not speak right now. Please try again.",
-
   "sumTitle": "My summary",
   "sumHistory": "History",
   "sumEmptyTitle": "Nothing added yet",
@@ -180,7 +172,6 @@
   "sumDeleteReportBody": "This saved summary will be removed from this device.",
   "sumReadAloud": "Read aloud",
   "sumRemoveItem": "Remove",
-
   "emTitle": "Emergency Help",
   "emHelpButton": "I NEED HELP NOW",
   "emHelpHint": "Flashes the screen and speaks for you",
@@ -233,7 +224,6 @@
   "emCallRescue": "Call 1122",
   "emWhatsApp": "WhatsApp",
   "emAppFailed": "Could not open the app. Please check the number.",
-
   "cardsTitle": "Quick Cards",
   "cardsSearchHint": "Search cards",
   "cardsAll": "All",
@@ -257,7 +247,6 @@
   "cardsSpeakOff": "Cards will stay silent when tapped.",
   "cardsSpeakTooltip": "Speak when tapped",
   "cardsAddSummary": "Add to summary",
-
   "symTitle": "Symptoms",
   "symPickHint": "Tap everything you are feeling.",
   "symOther": "Other",
@@ -280,11 +269,9 @@
   "symModerate": "Moderate",
   "symSevere": "Severe",
   "symWorst": "Worst possible",
-
   "emoTitle": "Emotion Cards",
   "emoQuestion": "How are you feeling now?",
   "emoHowMuch": "How much?",
-
   "speechTitle": "Listen (Speech to Text)",
   "speechIdle": "Tap the mic. What people say will appear here as text.",
   "speechListening": "Listening...",
@@ -299,7 +286,6 @@
   "speechClear": "Clear",
   "speechBigger": "Bigger text",
   "speechSmaller": "Smaller text",
-
   "bodyTitle": "Body Diagram",
   "bodyFront": "Front",
   "bodyBack": "Back",
@@ -310,7 +296,6 @@
   "bodyWhatFeel": "What are you feeling here?",
   "bodyListView": "List view",
   "bodyDiagramView": "Body view",
-
   "msgTitle": "Type & Speak",
   "msgHint": "Type what you want to say...",
   "msgEmpty": "Please type something first.",
@@ -368,5 +353,9 @@
   "menuSoonBadge": "Soon",
   "signSoonTitle": "Under construction",
   "signSoonBody": "Our little builders are working on a camera that will read sign language and turn it into text. It is not ready yet.",
-  "signSoonNote": "Until then, please use Communication Cards, Type Message or Speech to Text to talk with your doctor."
+  "signSoonNote": "Until then, please use Communication Cards, Type Message or Speech to Text to talk with your doctor.",
+  "setChangePassword": "Change password",
+  "setChangePasswordSubtitle": "Set a new password for your account",
+  "setCurrentPassword": "Current password",
+  "setPasswordChanged": "Password changed"
 }
